@@ -62,8 +62,8 @@
                     </div>
                     <button class="btn btn-primary btn-xs hide" @click="changeAvatar()">更换头像</button>
                 </div>
-                <div class="reply-reply-box">
-                    <div class="col-sm-11 col-xs-10">
+                <div class="reply-reply-box clearfix">
+                    <div class="form col-sm-11 col-xs-10">
                         <div class="form-group clearfix">
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" placeholder="您的名称" v-model="replyObj.name">
@@ -80,7 +80,7 @@
                             </textarea>
                         </div>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="form col-sm-12 clearfix">
                         <div class="submit-warp col-sm-6 text-right pull-right">
                             <button class="btn btn-success" @click="replySubmit()">提交</button>
                         </div>
@@ -92,7 +92,7 @@
                 <hr>
             </div>
             <!-- 回复列表 -->
-            <div class="col-sm-12">
+            <div class="reply-list col-sm-12">
                 <div class="reply-box" v-for="(item,index) in replyList" :key="index">
                     <!-- 回复人信息 -->
                     <div class="user-info">
@@ -546,6 +546,7 @@ export default {
          */
         toggleReplytBox(item){
             this.$set(item, "boxShow", !item.boxShow);
+            this.$forceUpdate();
         },
         /**
          * 楼中楼回复提交
@@ -684,6 +685,7 @@ export default {
          */
         toggleInsideReplytBox(item){
             this.$set(item, "boxShow", !item.boxShow);
+            this.$forceUpdate();
         },
         /**
          * 页码改变事件
@@ -724,6 +726,8 @@ export default {
             width: 960px;
         }
     }
+
+    //  针对小屏幕特殊样式
     @media screen and (max-width:600px) {
         .container {
             padding: 0px;
@@ -731,8 +735,14 @@ export default {
         .header{
             padding: 0px 25px !important;
         }
-        .article{
-            padding: 0px 25px !important;
+        // .article{
+        //     padding: 0px 25px !important;
+        // }
+        .reply,.form,.reply-list{
+            padding: 0px;
+        }
+        .inside-reply-list{
+            margin: 10px;
         }
     }
 
