@@ -18,7 +18,7 @@
                 <div v-if="token" class="form-group text-right">
                     <button class="btn btn-success" @click="editArticle()">编辑内容</button>
                 </div>
-                <h5 class="text-right">{{article.createdAt}}</h5>
+                <h5 class="text-right">{{ article.createdAt }}</h5>
                 <h5 class="text-right"># {{ fliterTypeName(article.type) }}</h5>
             </header>
             <header v-if="isEdit" class="col-sm-12">
@@ -49,8 +49,12 @@
             <!-- 点赞区域开始 -->
             <div class="like-and-share col-sm-12 text-center">
                 <button class="like-btn btn btn-lg btn-default" title="我觉得可以" @click="newLike()">
-                    <p class="like-icon">&nbsp;&nbsp;👍&nbsp;&nbsp;</p>
-                    <p>{{article.like}}</p>
+                    <p class="like-icon">
+                        &nbsp;&nbsp;
+                        <img class="emoji" alt="+1" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" />
+                        &nbsp;&nbsp;
+                    </p>
+                    <p>{{ article.like }}</p>
                 </button>
             </div>
             <!-- 点赞区域结束 -->

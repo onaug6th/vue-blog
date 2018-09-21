@@ -17,7 +17,7 @@
                 <div ref="contentLeft" class="col-lg-3 col-lg-offset-1">
                     <div ref="profile" class="profile" :class="{'profile-fiexd' : profileFiexd}">
                         <!-- 个人资料开始 -->
-                        <h5>我 🦁️</h5>
+                        <h5>我 <img class="emoji" title=":octocat:" alt=":octocat:" src="https://assets-cdn.github.com/images/icons/emoji/sheep.png" height="20" width="20" align="absmiddle"></h5>
                         <hr>
                         <section class="info">
                             <img src="../assets/home/avatar.jpg" alt="avatar" class="avatar img-rounded">
@@ -26,7 +26,7 @@
                         </section>
                         <!-- 个人资料结束 -->
                         <!-- 标签开始 -->
-                        <h5>标签 🏷️</h5>
+                        <h5>标签 <img class="emoji" alt="star2" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/unicode/paperclip.png"></h5>
                         <hr>
                         <section class="tags">
                             <a :class="{ 'active': articleType == item.id }" v-for="(item,index) in typeList" :key="index" :title="item.name" @click="switchType(item)">{{ item.name }}</a>
@@ -61,10 +61,12 @@
                                 <div class="article-info">
                                     <hr>
                                     <p>
-                                    {{item.createdAt}}
+                                        {{item.createdAt}}
                                         <button class="btn btn-default pull-left" @click="readDetail(item.id)">Read Detail</button>
                                     </p>
-                                    <p class="read" style="" :data-read="item.read">👍 {{item.like}}</p>
+                                    <p class="read" style="" :data-read="item.read">
+                                        <img class="emoji" alt="+1" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png">
+                                        {{item.like}}</p>
                                 </div>
                             </div>
                         </template>
