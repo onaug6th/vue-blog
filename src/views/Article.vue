@@ -401,7 +401,7 @@ export default {
             const that = this;
 
             if(!that.replyObj.content || !that.replyObj.name){
-                return that.$swal("名称和内容是必须的", "", "success");
+                return that.$swal("名称和内容是必须的", "", "warning");
             }
 
             const params = {
@@ -575,7 +575,7 @@ export default {
         insideReplySubmit(floorId, item){
 
             if(!item.replyObj.content || !item.replyObj.name){
-                return this.$swal("名称和内容是必须的", "", "success");
+                return this.$swal("名称和内容是必须的", "", "warning");
             }
 
             const params = {
