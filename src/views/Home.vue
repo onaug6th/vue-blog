@@ -4,9 +4,8 @@
         <!-- 顶部背景图 -->
         <header class="home-bg">
             <div class="container">
-                <div class="row">
-                    <h1 style="font-weight:300">像我这样的人</h1>
-                </div>
+                <img style=" width: 100%; position: relative; top: -133px; " src="../assets/home/hope.png" alt="你是我的梦想">
+                <h1 style="font-weight:300">像我这样的人</h1>
             </div>
         </header>
         <!-- 顶部背景图结束 -->
@@ -14,7 +13,7 @@
         <div class="container">
             <div class="row content">
                 <!-- 左侧介绍 -->
-                <div ref="contentLeft" class="col-lg-3 col-lg-offset-1">
+                <div ref="contentLeft" class="col-lg-4">
                     <div ref="profile" class="profile" :class="{'profile-fiexd' : profileFiexd}">
                         <!-- 个人资料开始 -->
                         <h5>我 <img class="emoji" title=":octocat:" alt=":octocat:" src="https://assets-cdn.github.com/images/icons/emoji/sheep.png" height="20" width="20" align="absmiddle"></h5>
@@ -26,7 +25,7 @@
                         </section>
                         <!-- 个人资料结束 -->
                         <!-- 标签开始 -->
-                        <h5>标签 <img class="emoji" alt="star2" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/unicode/paperclip.png"></h5>
+                        <h5>标签 <img class="emoji" alt="star2" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/paperclip.png"></h5>
                         <hr>
                         <section class="tags">
                             <a :class="{ 'active': articleType == item.id }" v-for="(item,index) in typeList" :key="index" :title="item.name" @click="switchType(item)">{{ item.name }}</a>
@@ -277,6 +276,12 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@media screen and (max-width:1040px) {
+    header.home-bg{
+        background-size :unset !important;
+    }
+}
+
 
 .home{
 
@@ -286,11 +291,14 @@ export default {
 
     header.home-bg{
         height: 24em;
-        background: gray;
-        background-size: cover !important;
-        background-position: bottom !important;
-        // background-image: url("../assets/home/s75142.jpg");
-        background-attachment: fixed;
+        overflow: hidden;
+        
+        .container{
+            // height: 24em;
+            // background-image: url("../assets/home/hope.png");
+            // background-attachment: fixed;
+            // background-repeat: no-repeat;
+        }
 
         h1{
             position: absolute; 

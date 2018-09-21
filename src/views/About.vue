@@ -5,7 +5,7 @@
         <div class="row">
             <h2 class="about">关于</h2>
             <hr>
-            <div class="col-sm-12" style="margin-bottom:25px;">
+            <div class="col-sm-12 clearfix" style="margin-bottom:25px;">
                 <div class="pull-left">
                     <img class="img-circle" src="../assets/home/avatar.jpg" style="max-width: 44px;">
                 </div>
@@ -34,7 +34,7 @@
                     <p>
                         <span>
                             喜欢javascript，喜欢node，<br>
-                            喜欢运动，喜欢写代码，
+                            喜欢运动，喜欢玩游戏<br>
                         </span>
                     </p>
 
