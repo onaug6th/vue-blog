@@ -405,6 +405,7 @@ export default {
                     &.active{
                         color: white;
                         background: #2c84cc;
+                        border: none;
                     }
                 }
 

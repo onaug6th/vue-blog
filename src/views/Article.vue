@@ -748,6 +748,17 @@ export default {
         .inside-reply-list{
             margin: 10px;
         }
+        .article-body{
+            .content{
+                header{
+                    padding: 0px 20px !important;
+                    margin-bottom: 1em;
+                }
+                article{
+                    padding: 0px 20px !important;
+                }
+            }
+        }
     }
 
     .article{
