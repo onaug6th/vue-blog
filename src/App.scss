@@ -2,3 +2,8 @@
 .swal-footer{
     text-align: center;
 }
+//  文字选中样式
+*::selection {
+    background: #aad3fe;
+    color: #fff;
+}

@@ -3,7 +3,7 @@
     <div class="app">
         <!-- 页面顶部导航栏 -->
         <nav class="top-nav container-fluid" :class="{'scroll' : navShow}">
-            <div class="top-nav-mid col-xs-12">
+            <div class="top-nav-mid container">
                 <div class="top-nav-content">
                     <ul class="menuNav">
                         <li>

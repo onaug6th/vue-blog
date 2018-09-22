@@ -4,7 +4,7 @@
         <!-- 顶部背景图 -->
         <header class="home-bg">
             <div class="container">
-                <img style=" width: 100%; position: relative; top: -133px; " src="../assets/home/hope.png" alt="你是我的梦想">
+                <img class="img" src="../assets/home/hope.png" alt="你是我的梦想">
                 <h1 style="font-weight:300">像我这样的人</h1>
             </div>
         </header>
@@ -276,12 +276,44 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@media screen and (max-width:1040px) {
+
+//  屏幕尺寸小于998时，去掉背景图片上偏移
+@media screen and (max-width:998px) {
     header.home-bg{
-        background-size :unset !important;
+
+        .img{
+            top: unset !important;
+        }
+        .container{
+            padding: 0px;
+        }
     }
 }
 
+//  屏幕尺寸再小到手机这么大时
+@media screen and (max-width:695px) {
+    header.home-bg{
+
+        .img{
+            top: 0px !important;
+            height: 100% !important;
+            width: auto !important;
+            right: 20em;
+        }
+    }
+
+
+    .article-pic{
+        padding : 15px !important;
+    }
+    .article-content{
+        padding: 15px !important;
+    }
+    //  文章信息框无内边距
+    .article-info{
+        padding: 0px !important;
+    }
+}
 
 .home{
 
@@ -298,6 +330,12 @@ export default {
             // background-image: url("../assets/home/hope.png");
             // background-attachment: fixed;
             // background-repeat: no-repeat;
+
+            .img{
+                width: 100%;
+                position: relative;
+                top: -133px;
+            }
         }
 
         h1{
@@ -348,6 +386,7 @@ export default {
             }
 
             .tags{
+                margin-bottom: 2em;
 
                 a{
                     display: inline-block;

@@ -265,7 +265,7 @@ export default {
                     //  获取评论列表并渲染
                     that.rendeReplyList();
                 }).catch((result) =>{
-                    that.$swal("找不到这篇文章", "", "success").then(()=>{
+                    that.$swal("找不到这篇文章", "看看其他的吧").then(()=>{
                         that.$router.push({
                             path : "/"
                         });
@@ -274,7 +274,7 @@ export default {
 
             });
         }else{
-            that.$swal("找不到这篇文章", "", "success").then(()=>{
+            that.$swal("找不到这篇文章", "看看其他的吧").then(()=>{
                 that.$router.push({
                     path : "/"
                 });
