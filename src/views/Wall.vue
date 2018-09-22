@@ -133,7 +133,7 @@ export default {
          */
         countWindowHeight(){
             const windowHeight = document.documentElement.clientHeight;
-            this.wallContainerRef.style.height = windowHeight + "px";
+            this.wallContainerRef.style.minHeight = windowHeight + "px";
         },
         /**
          * 打开纸条

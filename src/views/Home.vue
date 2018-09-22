@@ -123,11 +123,10 @@ export default {
         
         //  监听滚动事件
         window.addEventListener('scroll', that.handleScroll);
-        
-        //  获取url上可能存在的hash
-        that.getUrlQuery();
         //  设置分页组件属性
         that.setPagination();
+        //  获取url上可能存在的hash
+        that.getUrlQuery();
         //  获取文章列表
         that.getArticleList();
     },
@@ -201,6 +200,7 @@ export default {
         getUrlQuery(){
             const query = this.$route.query;
             const paginationConfig = this.paginationConfig;
+            debugger;
             
             query.page && (paginationConfig.page = +query.page);
             query.pageSize && (paginationConfig.pageSize = +query.pageSize);
