@@ -41,7 +41,7 @@
                         <button class="close" data-dismiss="modal">&times;</button>
                         <div class="stickyNote-content-top">
                             <div class="form-group">
-                                <input v-if="!isReadOnly" type="text" class="hidden-input" title="标题" style="font-size:30px;"
+                                <input v-if="!isReadOnly" type="text" class="hidden-input require-input" title="标题" style="font-size:30px;"
                                     placeholder="标题" v-model="stickyNote.title" data-field="标题" />
                                 <template v-if="isReadOnly">
                                     <span class="hidden-input">
@@ -50,7 +50,7 @@
                                 </template>
                             </div>
                             <div class="form-group">
-                                <input v-if="!isReadOnly" type="text" class="hidden-input" title="作者"
+                                <input v-if="!isReadOnly" type="text" class="hidden-input require-input" title="作者"
                                     placeholder="作者" v-model="stickyNote.name" data-field="作者" />
                                 <template v-if="isReadOnly">
                                     <span class="hidden-input">
@@ -177,7 +177,7 @@ export default {
             let isPass = true;
 
             $(".require-input").each((index, item) => {
-                if (item.content === "") {
+                if (item.value === "") {
                     that.$swal(item.attributes['data-field'].value + "不能为空", "", "info");
                     isPass = false;
                     //  return false退出循环
