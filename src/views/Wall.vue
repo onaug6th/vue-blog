@@ -8,8 +8,8 @@
             </div>
 
             <template v-for="(item,index) in stickNoteList">
-                <div :key="index" class="sticky-note col-sm-3" @click="openStickyNote(item)">
-                    <h4 style="height:10%">{{ item.title }}</h4>
+                <div :key="index" class="sticky-note col-sm-3" @click="openStickyNote(item)" :title="item.title">
+                    <h4 style="height: 10%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">{{ item.title }}</h4>
                     <h5 style="height:10%">{{ item.name }}</h5>
                     <h5 style="height:60%">{{ item.intro }}</h5>
                     <h5 class="text-right">{{ item.createdAt }}</h5>
@@ -41,23 +41,44 @@
                         <button class="close" data-dismiss="modal">&times;</button>
                         <div class="stickyNote-content-top">
                             <div class="form-group">
-                                <input type="text" class="hidden-input" title="标题" style="font-size:30px;"
-                                    :placeholder="isReadOnly ? '' : '请输入你的标题'" v-model="stickyNote.title" data-field="标题" :readonly="isReadOnly" />
+                                <input v-if="!isReadOnly" type="text" class="hidden-input" title="标题" style="font-size:30px;"
+                                    placeholder="标题" v-model="stickyNote.title" data-field="标题" />
+                                <template v-if="isReadOnly">
+                                    <span class="hidden-input">
+                                        {{ stickyNote.title }}
+                                    </span>
+                                </template>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="hidden-input" title="名称"
-                                    :placeholder="isReadOnly ? '' : '作者'" v-model="stickyNote.name" data-field="作者" :readonly="isReadOnly" />
+                                <input v-if="!isReadOnly" type="text" class="hidden-input" title="作者"
+                                    placeholder="作者" v-model="stickyNote.name" data-field="作者" />
+                                <template v-if="isReadOnly">
+                                    <span class="hidden-input">
+                                        {{ stickyNote.name }}
+                                    </span>
+                                </template>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="hidden-input" title="介绍"
-                                    :placeholder="isReadOnly ? '' : '简单介绍'" v-model="stickyNote.intro" data-field="简单介绍" :readonly="isReadOnly" />
+                                <input v-if="!isReadOnly" type="text" class="hidden-input" title="介绍"
+                                    placeholder="介绍" v-model="stickyNote.intro" data-field="介绍" />
+                                <template v-if="isReadOnly">
+                                    <span class="hidden-input">
+                                        {{ stickyNote.intro }}
+                                    </span>
+                                </template>
                             </div>
                         </div>
                         <div class="stickyNote-content-mid">
                             <div class="form-group">
-                                <textarea type="text" class="hidden-input require-input" title="正文"
-                                    :placeholder="isReadOnly ? '' : '正文'" style="width:100%;" rows="10" v-model="stickyNote.content"
-                                    data-field="正文" :readonly="isReadOnly"></textarea>
+                                <textarea v-if="!isReadOnly" type="text" class="hidden-input require-input" title="正文"
+                                    placeholder="正文" style="width:100%;" rows="10" v-model="stickyNote.content"
+                                    data-field="正文">
+                                </textarea>
+                                <template v-if="isReadOnly">
+                                    <span style="min-height: 260px; display: block; " class="hidden-input">
+                                        {{ stickyNote.content }}
+                                    </span>
+                                </template>
                             </div>
                         </div>
                         <div class="stickyNote-content-bottom">
