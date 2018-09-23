@@ -96,6 +96,7 @@ export default {
     }
     .scroll a{
         color: #555 !important;
+        text-shadow: none;
     }
     .top-nav-content .menuNav{
         font-weight: 100;
@@ -104,6 +105,7 @@ export default {
         padding:0;
         box-sizing: border-box;
         display: block;
+        text-shadow: 1px 1px 8px #444;
     }
     .top-nav-content .menuNav li{
         display: block;
