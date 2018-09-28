@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div ref="memoryContainer" class="container">
         <div class="memory-box col-sm-12 clearfix temp-bg">
             <div class="memory-box-photo">
 
@@ -28,13 +28,22 @@ export default {
     },
     data () {
         return {
-
+            memoryContainerRef : {}
         };
     },
     mounted () {
+        this.memoryContainerRef = this.$refs.memoryContainer;
+        //  计算高度
+        this.countWindowHeight();
     },
     methods: {
-
+        /**
+         * 计算窗口高度并设置页面高度
+         */
+        countWindowHeight(){
+            const windowHeight = document.documentElement.clientHeight;
+            this.memoryContainerRef.style.minHeight = windowHeight + "px";
+        }
     }
 };
 </script>
@@ -74,5 +83,9 @@ export default {
     .memory-box-icon{
         padding: 10px;
         font-size: 20px;
+    }
+
+    .temp-bg{
+        background:url('http://oz1y7s5ij.bkt.clouddn.com/images/common/memory.JPG')
     }
 </style>

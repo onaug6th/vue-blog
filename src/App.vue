@@ -9,7 +9,7 @@
                         <li>
                             <router-link to="/">首页</router-link>
                         </li>
-                        <li class="hide">
+                        <li>
                             <router-link to="/memory">印象</router-link>
                         </li>
                         <li>

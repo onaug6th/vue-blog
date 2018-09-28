@@ -200,7 +200,6 @@ export default {
         getUrlQuery(){
             const query = this.$route.query;
             const paginationConfig = this.paginationConfig;
-            debugger;
             
             query.page && (paginationConfig.page = +query.page);
             query.pageSize && (paginationConfig.pageSize = +query.pageSize);
@@ -495,10 +494,6 @@ export default {
         transform:scale(1.01,1.01) ;
     }
     
-}
-
-.temp-bg{
-  background:url('http://oz1y7s5ij.bkt.clouddn.com/images/common/memory.JPG')
 }
 
 </style>
