@@ -250,15 +250,12 @@ export default {
     mounted(){
         const that = this;
         const params = this.$route.params;
-        let canFindArticle = false;
 
         if( params.id ){
             //  获取文章信息
             that.$http.put(`article/read/${params.id}`).then(()=>{
                 
                 that.getArticle(params.id).then((result) =>{
-
-                    canFindArticle = true;
 
                     that.article = result.data;
                     //  获取url上可能存在的hash
@@ -268,18 +265,23 @@ export default {
 
                     //  获取评论列表并渲染
                     that.rendeReplyList();
+                }).catch(()=>{
+                    that.$swal("找不到这篇文章", "看看其他的吧").then(()=>{
+                        that.$router.push({
+                            path : "/"
+                        });
+                    });
                 });
 
             });
-        }
-
-        if(!canFindArticle){
+        }else{
             that.$swal("找不到这篇文章", "看看其他的吧").then(()=>{
                 that.$router.push({
                     path : "/"
                 });
             });
         }
+
     },
     updated(){
         if(!this.isEdit){
