@@ -133,7 +133,7 @@ export default {
             //  先保存文章，获取文章id
             that.$http.post("article", that.formData).then((res)=>{
                 
-                //  如果上传了照片
+                //  如果上传了文章背景图片
                 if(that.$refs["file"].getImg()){
                     that.saveBackGroundImg(res).then((result)=>{
                         
@@ -143,7 +143,7 @@ export default {
                 }
                 
                 const picArr = that.$refs["tinymceEdit"].picArr;
-                //  说明在新增文章时，已经上传过照片
+                //  说明在新增文章时，上传了文章内容中的图片
                 if(picArr.length > 0){
                     const picIdArr = picArr.map((item, index)=>{
                         return item.id;
