@@ -27,7 +27,7 @@
 
             <div class="form-group">
                 <label>content</label>
-                <tinymceEdit ref="tinymceEdit" v-model="formData.content"></tinymceEdit>
+                <tinymceEdit ref="tinymceEdit" :value="formData.content"></tinymceEdit>
             </div>
 
             <div class="form-group">
@@ -129,7 +129,7 @@ export default {
          */
         add() {
             const that = this;
-
+            that.formData.content = that.$refs["tinymceEdit"].getTinymceContent();
             //  先保存文章，获取文章id
             that.$http.post("article", that.formData).then((res)=>{
                 
@@ -190,6 +190,7 @@ export default {
         },
         //  编辑文章保存
         save() {
+            this.formData.content = this.$refs["tinymceEdit"].getTinymceContent();
             const params = {
                 ...this.formData,
                 exclude : []

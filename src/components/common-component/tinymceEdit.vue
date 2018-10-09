@@ -107,7 +107,7 @@ export default {
             });
         },
         getTinymceContent(){
-            this.tinymceEditor.getContent();
+            return this.tinymceEditor.getContent();
         },
         destroyedTinymce() {
             this.tinymceEditor.destroy();

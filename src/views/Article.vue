@@ -40,7 +40,7 @@
             <article v-if="!isEdit" class="col-sm-12" v-html="article.content">
             </article>
             <div v-if="isEdit" class="form-group edit">
-                <tinymceEdit v-model="article.content"></tinymceEdit>
+                <tinymceEdit ref="tinymceEdit" :value="article.content"></tinymceEdit>
             </div>
             <!-- 正文结束 -->
             <div v-if="isEdit" class="form-group text-center">
@@ -376,6 +376,7 @@ export default {
          * 更新文章
          */
         updateArticle(){
+            this.article.content = this.$refs["tinymceEdit"].getTinymceContent();
             const params = {
                 ...this.article,
                 exclude : ["bgUrl", "read", "like", "show"]
