@@ -7,7 +7,7 @@
             <hr>
             <div class="col-sm-12 clearfix" style="margin-bottom:25px;">
                 <div class="pull-left">
-                    <img class="img-circle" src="../assets/home/avatar.jpg" style="max-width: 44px;">
+                    <img class="img-circle" src="http://oz1y7s5ij.bkt.clouddn.com/images/avatar/5a2cdfe6a075990840ad3517.august.JPG" style="max-width: 44px;">
                 </div>
                 <div class="col-xs-8">
                     <p style="color: #616161;font-weight:bold">onaug6th</p>
