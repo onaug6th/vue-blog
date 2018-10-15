@@ -242,7 +242,7 @@ import tinymceEdit from "../components/common-component/tinymceEdit";
 import pagination from "../components/common-component/pagination";
 
 export default {
-    name: 'article',
+    name: 'article-c',
     components: {
         tinymceEdit,
         pagination
@@ -514,7 +514,6 @@ export default {
                     item.pagination = {
                         currentPage : 1,
                         pageSize : 5,
-                        currentPage : 1,
                         totalPages : 0,
                         prevText : "前页",
                         nextText : "后页"

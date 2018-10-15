@@ -20,8 +20,8 @@ import swal from "sweetalert";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
 //	第三方依赖——代码美化
-import "../static/dependence/prism/prism.css";
-import "../static/dependence/prism/prism.js";
+import "./assets/dependence/prism/prism.css";
+import "./assets/dependence/prism/prism.js";
 
 //	关闭生产提示
 Vue.config.productionTip = false;
@@ -97,10 +97,10 @@ router.afterEach((to, from) => {
 	NProgress.done();
 });
 
+
 new Vue({
-	el: '#app',
 	router,
 	store,
-	components: { App },
-	template: '<App/>'
-});
+	render: h => h(App)
+}).$mount('#app')
+

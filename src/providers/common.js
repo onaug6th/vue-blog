@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import swal from "sweetalert";
 
 /**
  * 项目配置相关文件
@@ -42,7 +41,7 @@ const methods = {
 
         typeof item['events'][event]['fn'] == "function" ?
             item['events'][event]['fn'].apply(this, param) :
-            that.noop();
+            (function(){})();
     }
 }
 

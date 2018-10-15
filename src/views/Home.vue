@@ -4,7 +4,7 @@
         <!-- 顶部背景图 -->
         <header class="home-bg">
             <div class="container">
-                <img class="img" src="../assets/home/hope.png" alt="你是我的梦想">
+                <img class="img" src="../assets/home/hope.png">
                 <h1 style="font-weight:300">像我这样的人</h1>
             </div>
         </header>
