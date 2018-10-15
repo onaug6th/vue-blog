@@ -770,7 +770,6 @@ export default {
             background: gray;
             background-size: cover !important;
             background-position: bottom !important;
-            background-image: url("../assets/home/s75142.jpg");
             background-attachment: fixed;
 
             &>div.container > div{
