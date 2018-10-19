@@ -26,7 +26,7 @@ cd onaug6th
 
 npm install 
 
-ng serve
+npm run dev
 ```
 默认会开启8888端口，访问localhost:8888即可打开项目。
 
