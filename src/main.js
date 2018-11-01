@@ -3,10 +3,13 @@ import App from './App';
 import router from './router';
 import store from './store/store';
 
+//	项目的一些默认样式
 import appScss from "./App.scss";
 
 //	http请求库
-import httpClient from './providers/httpClient';
+// import httpClient from './providers/httpClient';
+import superHttp from './providers/superHttp';
+
 //	项目配置
 import projectConfig from './providers/common';
 
@@ -34,7 +37,7 @@ NProgress.configure(
 );
 
 //	挂载请求库
-Vue.prototype.$http = httpClient;
+Vue.prototype.$http = superHttp;
 
 //	配置甜叫
 swal.setDefaults({
@@ -51,20 +54,17 @@ router.beforeEach((to, from, next) => {
 	NProgress.start();
 
 	//	你想要去哪？
-	if (to.meta.showNav){
-		store.commit("toggleNavShow", true);
-		store.commit("toggleNavFixed", true);
-	}else{
-		store.commit("toggleNavShow", false);
-		store.commit("toggleNavFixed", false);
-	}
+	store.commit("toggleNavShow", to.meta.showNav || false);
+	store.commit("toggleNavFixed", to.meta.showNav || false);
 
-	//  如果该路由设置了校验，检查token的存在。
+	//  这个地方可不是谁都能打开的，看看你的token
 	if (to.meta.requireAuth) {
 
+		//	好小子，居然有token
 		if (store.state.token) {
 			next();
 		}
+		//	呵呵
 		else {
 			next({
 				path: '/'
@@ -74,16 +74,19 @@ router.beforeEach((to, from, next) => {
 	//	管理员登陆？ 等等
 	else if (to.name == "adminLogin") {
 
-		//	放你过去吧
+		//	居然登录了？放你过去吧
 		if (store.state.token) {
 			next({
 				path: '/newWorld'
 			});
-		} else {
+		}
+		//	去登录吧，年轻人
+		else {
 			next();
 		}
 
 	}
+	//	随便你去
 	else {
 		next();
 	}
