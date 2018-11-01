@@ -7,7 +7,8 @@ import store from './store/store';
 import appScss from "./App.scss";
 
 //	http请求库
-// import httpClient from './providers/httpClient';
+//	import httpClient from './providers/httpClient';
+//	superHttp请求库
 import superHttp from './providers/superHttp';
 
 //	项目配置
@@ -36,18 +37,16 @@ NProgress.configure(
 	}
 );
 
+//	配置甜叫
+swal.setDefaults({});
+
 //	挂载请求库
 Vue.prototype.$http = superHttp;
-
-//	配置甜叫
-swal.setDefaults({
-
-});
 
 //	挂载甜叫
 Vue.prototype.$swal = swal;
 
-//	监听路由改变事件
+//	监听路由跳转前事件
 router.beforeEach((to, from, next) => {
 	
 	//	进度条开始
@@ -93,6 +92,7 @@ router.beforeEach((to, from, next) => {
 
 });
 
+//	监听路由跳转后事件
 router.afterEach((to, from) => {
 	//	回到顶部
 	document.documentElement.scrollTop = 0;

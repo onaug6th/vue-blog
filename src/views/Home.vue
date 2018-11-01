@@ -118,8 +118,8 @@ export default {
     mounted(){
         const that = this;
 
-        that.contentLeftRef  = this.$refs.contentLeft;
-        that.profileRef  = this.$refs.profile;
+        that.contentLeftRef = this.$refs.contentLeft;
+        that.profileRef = this.$refs.profile;
         
         //  监听滚动事件
         window.addEventListener('scroll', that.handleScroll);
