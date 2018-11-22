@@ -1,7 +1,5 @@
 # onaug6th
 
-## website : www.onaug6th.com
-
 个人博客网站系统
 
 已切换到 vue-cli 3.0分支上开发，主分支用于知识备份！
