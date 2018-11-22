@@ -2,7 +2,9 @@
 
 ## website : www.onaug6th.com
 
-个人博客网站博客系统
+个人博客网站系统
+
+已切换到 vue-cli 3.0分支上开发，主分支用于知识备份！
 
 后端代码 : https://github.com/onaug6th/onaug6th-backEnd
 
