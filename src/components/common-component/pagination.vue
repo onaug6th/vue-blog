@@ -164,8 +164,8 @@ export default {
          * @param {number} minValue
          */
         pagerGenerator(minValue) {
-            const target = new Array(5).fill('').map((v, i) => i + minValue);
-            return target;
+            //  new Array，实例化一个空数组。fill遍历全部值为空，map返回最小值加1，共五条数据。
+            return new Array(5).fill('').map((v, i) => minValue + i );
         }
     }
 };

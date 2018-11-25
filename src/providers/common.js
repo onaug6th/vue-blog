@@ -1,15 +1,15 @@
 import Vue from 'vue';
-import swal from "sweetalert";
 
 /**
  * 项目配置相关文件
  */
 const projectConfig = {
+    //  服务地址
     serverUrl: "http://localhost:3000/api/",
     defaultAvatar: `http://wx2.sinaimg.cn/mw690/9311b2dagy1fxk3xwv3gij20fz0dft90.jpg`,
+    //  头像列表
     avatarArr: [
-        `http://wx2.sinaimg.cn/mw690/9311b2dagy1fxk3xwv3gij20fz0dft90.jpg`,
-        `http://oz1y7s5ij.bkt.clouddn.com/images/avatar/5a2cdfe6a075990840ad3517.august.JPG`
+        `http://wx2.sinaimg.cn/mw690/9311b2dagy1fxk3xwv3gij20fz0dft90.jpg`
     ]
 }
 
@@ -42,7 +42,7 @@ const methods = {
 
         typeof item['events'][event]['fn'] == "function" ?
             item['events'][event]['fn'].apply(this, param) :
-            that.noop();
+            (function(){})();
     }
 }
 

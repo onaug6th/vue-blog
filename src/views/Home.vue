@@ -4,7 +4,7 @@
         <!-- 顶部背景图 -->
         <header class="home-bg">
             <div class="container">
-                <img class="img" src="../assets/home/hope.png" alt="你是我的梦想">
+                <img class="img" src="http://oz1y7s5ij.bkt.clouddn.com/hope.png">
                 <h1 style="font-weight:300">像我这样的人</h1>
             </div>
         </header>
@@ -19,7 +19,7 @@
                         <h5>我 <img class="emoji" title=":octocat:" alt=":octocat:" src="https://assets-cdn.github.com/images/icons/emoji/sheep.png" height="20" width="20" align="absmiddle"></h5>
                         <hr>
                         <section class="info">
-                            <img src="../assets/home/avatar.jpg" alt="avatar" class="avatar img-rounded">
+                            <img src="http://oz1y7s5ij.bkt.clouddn.com/images/avatar/5a2cdfe6a075990840ad3517.august.JPG" alt="avatar" class="avatar img-rounded">
                             <span class="name">August Yang</span>
                             <span class="intro">自言自语工程师</span>
                         </section>
@@ -118,8 +118,8 @@ export default {
     mounted(){
         const that = this;
 
-        that.contentLeftRef  = this.$refs.contentLeft;
-        that.profileRef  = this.$refs.profile;
+        that.contentLeftRef = this.$refs.contentLeft;
+        that.profileRef = this.$refs.profile;
         
         //  监听滚动事件
         window.addEventListener('scroll', that.handleScroll);

@@ -3,10 +3,14 @@ import App from './App';
 import router from './router';
 import store from './store/store';
 
+//	项目的一些默认样式
 import appScss from "./App.scss";
 
 //	http请求库
-import httpClient from './providers/httpClient';
+//	import httpClient from './providers/httpClient';
+//	superHttp请求库
+import superHttp from './providers/superHttp';
+
 //	项目配置
 import projectConfig from './providers/common';
 
@@ -20,8 +24,8 @@ import swal from "sweetalert";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
 //	第三方依赖——代码美化
-import "../static/dependence/prism/prism.css";
-import "../static/dependence/prism/prism.js";
+import "./assets/dependence/prism/prism.css";
+import "./assets/dependence/prism/prism.js";
 
 //	关闭生产提示
 Vue.config.productionTip = false;
@@ -33,38 +37,33 @@ NProgress.configure(
 	}
 );
 
-//	挂载请求库
-Vue.prototype.$http = httpClient;
-
 //	配置甜叫
-swal.setDefaults({
+swal.setDefaults({});
 
-});
+//	挂载请求库
+Vue.prototype.$http = superHttp;
 
 //	挂载甜叫
 Vue.prototype.$swal = swal;
 
-//	监听路由改变事件
+//	监听路由跳转前事件
 router.beforeEach((to, from, next) => {
 	
 	//	进度条开始
 	NProgress.start();
 
 	//	你想要去哪？
-	if (to.meta.showNav){
-		store.commit("toggleNavShow", true);
-		store.commit("toggleNavFixed", true);
-	}else{
-		store.commit("toggleNavShow", false);
-		store.commit("toggleNavFixed", false);
-	}
+	store.commit("toggleNavShow", to.meta.showNav || false);
+	store.commit("toggleNavFixed", to.meta.showNav || false);
 
-	//  如果该路由设置了校验，检查token的存在。
+	//  这个地方可不是谁都能打开的，看看你的token
 	if (to.meta.requireAuth) {
 
+		//	好小子，居然有token
 		if (store.state.token) {
 			next();
 		}
+		//	呵呵
 		else {
 			next({
 				path: '/'
@@ -74,22 +73,26 @@ router.beforeEach((to, from, next) => {
 	//	管理员登陆？ 等等
 	else if (to.name == "adminLogin") {
 
-		//	放你过去吧
+		//	居然登录了？放你过去吧
 		if (store.state.token) {
 			next({
 				path: '/newWorld'
 			});
-		} else {
+		}
+		//	去登录吧，年轻人
+		else {
 			next();
 		}
 
 	}
+	//	随便你去
 	else {
 		next();
 	}
 
 });
 
+//	监听路由跳转后事件
 router.afterEach((to, from) => {
 	//	回到顶部
 	document.documentElement.scrollTop = 0;
@@ -97,10 +100,10 @@ router.afterEach((to, from) => {
 	NProgress.done();
 });
 
+
 new Vue({
-	el: '#app',
 	router,
 	store,
-	components: { App },
-	template: '<App/>'
-});
+	render: h => h(App)
+}).$mount('#app')
+

@@ -28,14 +28,14 @@
             <router-view/>
         </transition>
 
-        <onaug6th-footer></onaug6th-footer>
+        <superFooter></superFooter>
         <!-- 结束啦 :) -->
     </div>
 
 </template>
 
 <script>
-import onaug6thFooter from './components/common-component/footer.vue';
+import superFooter from './components/common-component/superFooter.vue';
 //  获取文章类型列表
 import { articleTypeList } from "./api/articleType.js";
 
@@ -54,7 +54,7 @@ export default {
         }
     },
     components:{
-        onaug6thFooter
+        superFooter
     },
     mounted() {
         window.addEventListener('scroll', this.handleScroll);

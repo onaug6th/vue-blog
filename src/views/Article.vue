@@ -185,7 +185,7 @@
                                         <div class="reply" @click="toggleInsideReplytBox(inside)">
                                             <span class="glyphicon glyphicon-comment"></span><font>回复</font>
                                         </div>
-                                        <div v-if="token" class="trash" @click="deleteInsideReply(inside, item.subList)">
+                                        <div v-if="token" class="trash" @click="deleteInsideReply(inside, item.floor)">
                                             <span class="glyphicon glyphicon-trash"></span><font>删除</font>
                                         </div>
                                     </div>
@@ -242,7 +242,7 @@ import tinymceEdit from "../components/common-component/tinymceEdit";
 import pagination from "../components/common-component/pagination";
 
 export default {
-    name: 'article',
+    name: 'article-c',
     components: {
         tinymceEdit,
         pagination
@@ -514,7 +514,6 @@ export default {
                     item.pagination = {
                         currentPage : 1,
                         pageSize : 5,
-                        currentPage : 1,
                         totalPages : 0,
                         prevText : "前页",
                         nextText : "后页"
@@ -673,16 +672,16 @@ export default {
         /**
          * 删除楼中楼回复
          * @param {object} item 行对象
-         * @param {Array} subList 楼中楼回复数组
+         * @param {Array} floorId 楼id
          */
-        deleteInsideReply(item, subList){
+        deleteInsideReply(item, floorId){
             const that = this;
 
             that.$http.delete("insideReply/" + item.id)
                 .then((result) =>{
                     that.$swal(result.detailMsg, "", "success");
                     if(result.code == 0){
-                        that.findObjectInArrayAndDelete(item.id, "id", subList);
+                        that.renderInsideReplyList(false, floorId);
                     }
                 });
         },
@@ -771,7 +770,6 @@ export default {
             background: gray;
             background-size: cover !important;
             background-position: bottom !important;
-            background-image: url("../assets/home/s75142.jpg");
             background-attachment: fixed;
 
             &>div.container > div{

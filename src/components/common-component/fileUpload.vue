@@ -36,15 +36,8 @@ export default {
         },
         //  获取图片地址
         getObjectURL(file) {
-            var url = null;
-            if (window.createObjectURL != undefined) {
-                url = window.createObjectURL(file);
-            } else if (window.URL != undefined) {
-                url = window.URL.createObjectURL(file);
-            } else if (window.webkitURL != undefined) {
-                url = window.webkitURL.createObjectURL(file);
-            }
-            return url;
+            const convertFn = window.URL.createObjectURL || window.createObjectURL || window.webkitURL.createObjectURL;
+            return convertFn(file);
         }
     }
 };

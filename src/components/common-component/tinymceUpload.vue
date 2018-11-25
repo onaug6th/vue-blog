@@ -46,7 +46,7 @@ export default {
             const that = this;
             const formData = new FormData();
 
-            formData.append("articleImg", this.$refs["file"].getImg());
+            formData.append("articleImg", that.$refs["file"].getImg());
 
             that.$http.post("upload/articleImg", formData).then(result =>{
                 that.$emit("uploadSuccess", result.data);
