@@ -6,9 +6,9 @@ import swal from "sweetalert";
  */
 const projectConfig = {
     serverUrl: "http://localhost:3000/api/",
-    defaultAvatar: `http://oz1y7s5ij.bkt.clouddn.com/images/common/head.jpg`,
+    defaultAvatar: `http://wx2.sinaimg.cn/mw690/9311b2dagy1fxk3xwv3gij20fz0dft90.jpg`,
     avatarArr: [
-        `http://oz1y7s5ij.bkt.clouddn.com/images/common/head.jpg`,
+        `http://wx2.sinaimg.cn/mw690/9311b2dagy1fxk3xwv3gij20fz0dft90.jpg`,
         `http://oz1y7s5ij.bkt.clouddn.com/images/avatar/5a2cdfe6a075990840ad3517.august.JPG`
     ]
 }

@@ -140,6 +140,8 @@ export default {
                         that.$swal("新建文章成功", "", "success");
 
                     });
+                }else{
+                    that.$swal("新建文章成功", "", "success");
                 }
                 
                 const picArr = that.$refs["tinymceEdit"].picArr;
@@ -197,10 +199,11 @@ export default {
             };
             
             this.$http.put(`article/${this.formData.id}`, params).then((result) =>{
-                this.$swal("保存编辑文章成功", result.detailMsg, "success");
+
                 if(result.code == 0){
-                    this.isEdit = false;
+                    this.$swal("保存编辑文章成功", result.detailMsg, "success");
                 }
+
             });
         }
     }
