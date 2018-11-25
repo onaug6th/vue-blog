@@ -92,7 +92,10 @@ const routes = [
     {
         path: "/memory",
         name: "memory",
-        component: () => import("./views/Memory.vue")
+        component: () => import("./views/Memory.vue"),
+        meta : {
+            showNav : true
+        }
     },
     //  墙
     {

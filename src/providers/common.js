@@ -6,12 +6,10 @@ import Vue from 'vue';
 const projectConfig = {
     //  服务地址
     serverUrl: "http://localhost:3000/api/",
-    //  默认头像地址
-    defaultAvatar: `http://oz1y7s5ij.bkt.clouddn.com/images/common/head.jpg`,
+    defaultAvatar: `http://wx2.sinaimg.cn/mw690/9311b2dagy1fxk3xwv3gij20fz0dft90.jpg`,
     //  头像列表
     avatarArr: [
-        `http://oz1y7s5ij.bkt.clouddn.com/images/common/head.jpg`,
-        `http://oz1y7s5ij.bkt.clouddn.com/images/avatar/5a2cdfe6a075990840ad3517.august.JPG`
+        `http://wx2.sinaimg.cn/mw690/9311b2dagy1fxk3xwv3gij20fz0dft90.jpg`
     ]
 }
 

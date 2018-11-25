@@ -1,14 +1,14 @@
 <template>
-    <div ref="memoryContainer" class="container">
+    <div ref="memoryContainer" class="memory-container container">
         <div class="memory-box col-sm-12 clearfix temp-bg">
-            <div class="memory-box-photo">
+            <div class="photo">
 
             </div>
-            <div class="memory-box-detail">
-                <div class="form-group memory-box-icon">
-
-                </div>
-                <button class="btn btn-default">Read Detail</button>
+            <div class="detail">
+                <h3>纪念，毕业生</h3>
+                <h5>像做了一场梦</h5>
+                <hr>
+                <button class="btn btn-default" @click="wacthMemory()">Read Detail</button>
             </div>
         </div>
     </div>
@@ -43,49 +43,64 @@ export default {
         countWindowHeight(){
             const windowHeight = document.documentElement.clientHeight;
             this.memoryContainerRef.style.minHeight = windowHeight + "px";
+        },
+        wacthMemory(){
+            this.$swal("印象还没准备好");
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-    .memory{
-        padding: 0px 10px 0px 10px;
-        margin: 20px 0px 20px 0px;
-        transition: 1s;
+
+    .memory-container{
+        padding-top : 5em;
     }
 
-    .memory:hover{
-        transform:scale(1.02,1.02) ;
+    @media screen and (min-width:1200px) , (min-width:992px){
+        .container{
+            width: 960px;
+        }
     }
 
     .memory-box{
         padding: 0px;
         background-size: cover !important;
-        height:250px;
+        height:400px;
+        transition: 0.75s;
         box-shadow: -4px 0 4px rgba(7,17,27,.1),
                     4px 0 4px rgba(7,17,27,.1), 
                     0 -4px 4px rgba(7,17,27,.1),
                     0 4px 4px rgba(7,17,27,.1);
-    }
 
-    .memory-box-photo{
-        height:60%;
-        background-size:cover !important; 
-    }
+        &:hover{
+            transform:scale(1.02,1.02) ;
+        }
 
-    .memory-box-detail{
-        height: 40%;
-        padding: 0px 15px 0px 15px;
-        background: rgba(255, 255, 255, 0.7);
-    }
+        .photo{
+            height:60%;
+            background-size:cover !important; 
+        }
 
-    .memory-box-icon{
-        padding: 10px;
-        font-size: 20px;
+        .detail{
+            height: 40%;
+            padding: 10px 15px 0px 15px;
+            background: rgba(255, 255, 255, 0.7);
+            
+            hr{
+                margin-bottom: 5px;
+            }
+
+            .icon{
+                padding: 10px;
+                font-size: 20px;
+            }
+
+        }
     }
 
     .temp-bg{
         background:url('http://oz1y7s5ij.bkt.clouddn.com/images/common/memory.JPG')
     }
+    
 </style>
