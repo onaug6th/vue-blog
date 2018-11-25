@@ -60,7 +60,7 @@ export default {
             this.$nextTick(() => {
                 const that = this;
                 let height = document.body.offsetHeight - 300;
-                window.tinymce.baseURL = '/example/dependence/tinymce';
+                window.tinymce.baseURL = '/static/dependence/tinymce';
                 window.tinymce.suffix = '.min';
                 
                 tinymce.init({

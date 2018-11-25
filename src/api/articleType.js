@@ -1,11 +1,10 @@
-import httpClient from '../providers/httpClient';
-import superHttp from '../providers/superHttp';
+import http from '../providers/httpClient';
 
 /**
  * 获取文章分类列表
  */
 function articleTypeList() {
-    return superHttp({
+    return http({
         url: 'articleType/list',
         method: 'post',
         data : {}
