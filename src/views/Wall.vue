@@ -9,9 +9,12 @@
 
             <template v-for="(item,index) in stickNoteList">
                 <div :key="index" class="sticky-note col-sm-3" @click="openStickyNote(item)" :title="item.title">
-                    <h4 style="height: 10%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">{{ item.title }}</h4>
-                    <h5 style="height:10%">{{ item.name }}</h5>
-                    <h5 style="height:60%">{{ item.intro }}</h5>
+                    <h4 class="title">{{ item.title }}</h4>
+                    <h5 class="name">{{ item.name }}</h5>
+                    <h5 class="intro">{{ item.intro }}</h5>
+                    <h5 class="reply">
+                        <span v-if="item.reply">作者回复了</span>
+                    </h5>
                     <h5 class="text-right">{{ item.createdAt }}</h5>
                 </div>
                 <li v-if="token" class="btn btn-primary" style="background:black;" :key="index">
@@ -44,7 +47,7 @@
                                 <input v-if="!isReadOnly" type="text" class="hidden-input require-input" title="标题" style="font-size:30px;"
                                     placeholder="标题" v-model="stickyNote.title" data-field="标题" />
                                 <template v-if="isReadOnly">
-                                    <span class="hidden-input">
+                                    <span class="hidden-input" style="font-size: 22px;">
                                         {{ stickyNote.title }}
                                     </span>
                                 </template>
@@ -286,6 +289,26 @@ export default {
             background-size:100% 85%;
             background-position: center;
             cursor: pointer;
+
+            .title{
+                height: 10%; 
+                white-space: nowrap; 
+                text-overflow: ellipsis; 
+                overflow: hidden;
+            }
+            .name{
+                height: 10%;
+                white-space: nowrap;
+                text-overflow: ellipsis; 
+                overflow: hidden;
+            }
+            .intro{
+                height: 50%;
+                overflow: hidden;
+            }
+            .reply{
+                height: 10%;
+            }
         }
 
         //  模态框，内容区域
@@ -323,7 +346,7 @@ export default {
             background: none; 
             border: none;
             font-weight: 100; 
-            font-size: 18px;
+            font-size: 16px;
         }
         //  纸片类型
         .sticky-note-type{
