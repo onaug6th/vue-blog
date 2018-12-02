@@ -4,7 +4,7 @@
         <!-- 顶部背景图 -->
         <header class="home-bg">
             <div class="container">
-                <img class="img" src="http://oz1y7s5ij.bkt.clouddn.com/hope.png">
+                <img class="img" src="http://www.onaug6th.com/images/common/hope.jpg">
                 <h1 style="font-weight:300">像我这样的人</h1>
             </div>
         </header>
@@ -19,9 +19,12 @@
                         <h5>我 <img class="emoji" title=":octocat:" alt=":octocat:" src="https://assets-cdn.github.com/images/icons/emoji/sheep.png" height="20" width="20" align="absmiddle"></h5>
                         <hr>
                         <section class="info">
-                            <img src="http://oz1y7s5ij.bkt.clouddn.com/images/avatar/5a2cdfe6a075990840ad3517.august.JPG" alt="avatar" class="avatar img-rounded">
+                            <img src="https://avatars1.githubusercontent.com/u/24285577?s=460&v=4" alt="avatar" class="avatar img-rounded">
                             <span class="name">August Yang</span>
                             <span class="intro">自言自语工程师</span>
+                            <span class="other">
+                                <a href="https://github.com/onaug6th" target="_blank"><img class="emoji" alt="star2" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/octocat.png">onaug6th</a>
+                            </span>
                         </section>
                         <!-- 个人资料结束 -->
                         <!-- 标签开始 -->
@@ -380,6 +383,15 @@ export default {
 
                 .avatar{
                     width: 150px;
+                }
+
+                .other{
+                    display: block;
+                    text-align: left;
+
+                    a{
+                        text-decoration: unset;
+                    }
                 }
 
             }

@@ -100,7 +100,7 @@ export default {
     }
 
     .temp-bg{
-        background:url('http://oz1y7s5ij.bkt.clouddn.com/images/common/memory.JPG')
+        background:url('http://wx3.sinaimg.cn/large/9311b2dagy1fxrh5u006vj21900u0u0z.jpg')
     }
     
 </style>
