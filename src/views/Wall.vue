@@ -12,8 +12,8 @@
                     <h4 class="title">{{ item.title }}</h4>
                     <h5 class="name">{{ item.name }}</h5>
                     <h5 class="intro">{{ item.intro }}</h5>
-                    <h5 class="reply">
-                        <span v-if="item.reply">作者回复了</span>
+                    <h5 class="reply text-right">
+                        <span v-if="item.reply"><img class="emoji" alt="star2" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/speech_balloon.png"></span>
                     </h5>
                     <h5 class="text-right">{{ item.createdAt }}</h5>
                 </div>
@@ -64,11 +64,6 @@
                             <div class="form-group">
                                 <input v-if="!isReadOnly" type="text" class="hidden-input" title="介绍"
                                     placeholder="介绍" v-model="stickyNote.intro" data-field="介绍" />
-                                <template v-if="isReadOnly">
-                                    <span class="hidden-input">
-                                        {{ stickyNote.intro }}
-                                    </span>
-                                </template>
                             </div>
                         </div>
                         <div class="stickyNote-content-mid">
@@ -78,15 +73,21 @@
                                     data-field="正文">
                                 </textarea>
                                 <template v-if="isReadOnly">
-                                    <span style="min-height: 260px; display: block; " class="hidden-input">
+                                    <p style="min-height: 240px;" class="hidden-input">
                                         {{ stickyNote.content }}
-                                    </span>
+                                    </p>
+                                </template>
+                                <template v-if="stickyNote.reply">
+                                    <h4>回复：</h4>
+                                    <p>
+                                        {{stickyNote.reply}}
+                                    </p>
                                 </template>
                             </div>
                         </div>
                         <div class="stickyNote-content-bottom">
                             <div class="form-group text-center">
-                                <h5 class="text-right" style="font-weight:100;font-family:'微软雅黑';">{{stickyNote.createdAt}}</h5>
+                                <h5 class="text-right" style="font-weight:100;">{{stickyNote.createdAt}}</h5>
                                 <button v-if="!isReadOnly" class="btn btn-success" style="font-weight: 100;" @click="submitStickyNote()">贴上墙</button>
                             </div>
                         </div>
@@ -323,6 +324,7 @@ export default {
             .modal-body {
                 padding: 4em 7em;
             }
+
         }
         
         //  媒体查询啦
