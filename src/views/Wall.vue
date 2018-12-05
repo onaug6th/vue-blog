@@ -152,6 +152,10 @@ export default {
         //  计算高度
         this.countWindowHeight();
     },
+    beforeDestroy(){
+        //  取消监听滚动事件
+        window.removeEventListener('resize', this.countWindowHeight);
+    },
     methods: {
         /**
          * 计算窗口高度并设置页面高度

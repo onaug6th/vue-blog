@@ -14,38 +14,18 @@
     <div class="article-body container">
 
         <div class="row content">
-            <header v-if="!isEdit" class="col-sm-12">
+            <header class="col-sm-12">
                 <div v-if="token" class="form-group text-right">
                     <button class="btn btn-success" @click="editArticle()">编辑内容</button>
                 </div>
                 <h5 class="text-right">{{ article.createdAt }}</h5>
                 <h5 class="text-right"># {{ fliterTypeName(article.type) }}</h5>
             </header>
-            <header v-if="isEdit" class="col-sm-12">
-                <h2 class="text-center">
-                    <input class="form-control text-center" v-model="article.title" placeholder="标题"/>
-                </h2>
-                <div class="form-group text-right">
-                    <button class="btn btn-success" @click="editArticle()">取消编辑</button>
-                </div>
-                <h5>
-                    <input class="form-control text-right" v-model="article.createdAt" placeholder="时间"/>
-                </h5>
-                <h5>
-                    <input class="form-control text-right" v-model="article.type" placeholder="类型"/>
-                </h5>
-            </header>
             <!-- 顶部标题，及时间等信息 -->
             <!-- 正文开始 -->
-            <article v-if="!isEdit" class="col-sm-12" v-html="article.content">
+            <article class="col-sm-12" v-html="article.content">
             </article>
-            <div v-if="isEdit" class="form-group edit">
-                <tinymceEdit ref="tinymceEdit" :value="article.content"></tinymceEdit>
-            </div>
             <!-- 正文结束 -->
-            <div v-if="isEdit" class="form-group text-center">
-                <button class="btn btn-success" @click="updateArticle()">保存</button>
-            </div>  
             <!-- 点赞区域开始 -->
             <div class="like-and-share col-sm-12 text-center">
                 <button class="like-btn btn btn-lg btn-default" title="我觉得可以" @click="newLike()">
@@ -237,14 +217,12 @@
 </template>
 
 <script>
-import tinymceEdit from "../components/common-component/tinymceEdit";
 
 import pagination from "../components/common-component/pagination";
 
 export default {
     name: 'article-c',
     components: {
-        tinymceEdit,
         pagination
     },
     mounted(){
@@ -284,12 +262,10 @@ export default {
 
     },
     updated(){
-        if(!this.isEdit){
-            //  代码高亮
-            this.$nextTick(()=>{
-                window["Prism"].highlightAll();
-            });
-        }
+        //  代码高亮
+        this.$nextTick(()=>{
+            window["Prism"].highlightAll();
+        });
     },
     data(){
         return {
@@ -310,8 +286,6 @@ export default {
                 read : "",
                 like : ""
             },
-            //  是否编辑
-            isEdit : false,
             //  评论信息
             replyObj : {
                 content : "",
@@ -364,28 +338,6 @@ export default {
                         reject(result);
                     }
                 });
-            });
-        },
-        /**
-         * 切换编辑
-         */
-        editArticle(){
-            this.isEdit = !this.isEdit;
-        },
-        /**
-         * 更新文章
-         */
-        updateArticle(){
-            this.article.content = this.$refs["tinymceEdit"].getTinymceContent();
-            const params = {
-                ...this.article,
-                exclude : ["bgUrl", "read", "like", "show"]
-            };
-            this.$http.put(`article/${this.article.id}`, params).then((result) =>{
-                this.$swal(result.detailMsg, "", "success");
-                if(result.code == 0){
-                    this.isEdit = false;
-                }
             });
         },
         changeAvatar(){
@@ -715,13 +667,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s;
-    }
-    .fade-enter, .fade-leave-to{
-        opacity: 0;
-    }
 
     hr{
         width: 95%;

@@ -123,11 +123,5 @@ export default {
     .top-nav-content .menuNav a:hover{
         color:#0083cb;
     }
-
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s;
-    }
-    .fade-enter, .fade-leave-to{
-        opacity: 0;
-    }
+    
 </style>

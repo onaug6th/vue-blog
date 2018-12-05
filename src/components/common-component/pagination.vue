@@ -44,7 +44,8 @@
             <li class="number"
                 :class="{ 'active' : (config.currentPage === config.totalPages)}"
                 @click="pageTo(config.totalPages)"
-                v-if="config.totalPages > 1"><a>{{ config.totalPages }}</a>
+                v-if="config.totalPages > 1">
+                <a>{{ config.totalPages }}</a>
             </li>
             <!-- 最后一页按钮 -->
             <!-- 下一页按钮 -->
@@ -100,7 +101,7 @@ export default {
          * 上一页
          */
         prevPage(){
-            if(this.config.currentPage <= 1){
+            if(this.config.currentPage <= 1) {
                 return false;
             }
             this.config.currentPage -= 1;

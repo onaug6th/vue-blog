@@ -3,11 +3,9 @@ import App from './App';
 import router from './router';
 import store from './store/store';
 
-//	项目的一些默认样式
+//	项目的全局默认样式
 import appScss from "./App.scss";
 
-//	http请求库
-//	import httpClient from './providers/httpClient';
 //	superHttp请求库
 import superHttp from './providers/superHttp';
 
@@ -56,40 +54,7 @@ router.beforeEach((to, from, next) => {
 	store.commit("toggleNavShow", to.meta.showNav || false);
 	store.commit("toggleNavFixed", to.meta.showNav || false);
 
-	//  这个地方可不是谁都能打开的，看看你的token
-	if (to.meta.requireAuth) {
-
-		//	好小子，居然有token
-		if (store.state.token) {
-			next();
-		}
-		//	呵呵
-		else {
-			next({
-				path: '/'
-			});
-		}
-	}
-	//	管理员登陆？ 等等
-	else if (to.name == "adminLogin") {
-
-		//	居然登录了？放你过去吧
-		if (store.state.token) {
-			next({
-				path: '/newWorld'
-			});
-		}
-		//	去登录吧，年轻人
-		else {
-			next();
-		}
-
-	}
-	//	随便你去
-	else {
-		next();
-	}
-
+	next();
 });
 
 //	监听路由跳转后事件

@@ -31,7 +31,7 @@
                         <h5>标签 <img class="emoji" alt="star2" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/paperclip.png"></h5>
                         <hr>
                         <section class="tags">
-                            <a :class="{ 'active': articleType == item.id }" v-for="(item,index) in typeList" :key="index" :title="item.name" @click="switchType(item)">{{ item.name }}</a>
+                            <a :class="{ 'active': articleType == item.id }" v-for="(item, index) in typeList" :key="index" :title="item.name" @click="switchType(item)">{{ item.name }}</a>
                         </section>
                         <!-- 标签结束 -->
                     </div>
@@ -133,6 +133,10 @@ export default {
         //  获取文章列表
         that.getArticleList();
     },
+    beforeDestroy(){
+        //  取消监听滚动事件
+        window.removeEventListener('scroll', this.handleScroll);
+    },
     methods : {
         /**
          * 文章类型中文名称转义
@@ -204,7 +208,7 @@ export default {
             const query = this.$route.query;
             const paginationConfig = this.paginationConfig;
             
-            query.page && (paginationConfig.page = +query.page);
+            query.page && (paginationConfig.page = paginationConfig.currentPage = +query.page);
             query.pageSize && (paginationConfig.pageSize = +query.pageSize);
             query.type && (this.articleType = query.type)
         },

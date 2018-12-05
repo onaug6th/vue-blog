@@ -1,4 +1,3 @@
-import httpClient from '../providers/httpClient';
 import superHttp from '../providers/superHttp';
 
 /**
