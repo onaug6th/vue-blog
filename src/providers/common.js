@@ -5,7 +5,7 @@ import Vue from 'vue';
  */
 const projectConfig = {
     //  服务地址
-    serverUrl: "http://localhost:3000/api/",
+    serverUrl: "http://www.onaug6th.com/api/",
     defaultAvatar: `http://wx2.sinaimg.cn/mw690/9311b2dagy1fxk3xwv3gij20fz0dft90.jpg`,
     //  头像列表
     avatarArr: [
@@ -30,19 +30,19 @@ const methods = {
     },
     /**
      * 事件中转，用于全部通用组件
-     * @param {string} event 事件名称
+     * @param {string} eventName 事件名称
      * @param {object} item 当前对象
      * @param {any} param 参数
      */
-    eventsTransfer(event, item ,param) {
+    eventsTransfer(eventName, item, param) {
         
         item['events'] = item['events'] || {};
-  
-        param = item['events'][event]['params'] ? [param, ...item['events'][event]['params']] : [param]; 
 
-        typeof item['events'][event]['fn'] == "function" ?
-            item['events'][event]['fn'].apply(this, param) :
-            (function(){})();
+        const event = item['events'][eventName];
+
+        event && (typeof event['fn'] == "function" ?
+            event['fn'].apply(this, event['params'] ? [param, ...event['params']] : [param]) :
+            (function(){})());
     }
 }
 

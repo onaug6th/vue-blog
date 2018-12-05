@@ -18,9 +18,6 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 //	第三方依赖——甜叫
 import swal from "sweetalert";
-//  第三方依赖——bootstrap
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
 //	第三方依赖——代码美化
 import "../public/dependence/prism/prism.css";
 import "../public/dependence/prism/prism.js";

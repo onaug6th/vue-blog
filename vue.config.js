@@ -110,12 +110,7 @@ module.exports = {
             //     //     to: resolve("dist/example"),
             //     //     toType: "dir"
             //     // }
-            // ]),
-
-            new webpack.ProvidePlugin({
-                jQuery: "jquery",
-                $: "jquery"
-            })
+            // ])
         ]
     },
 

@@ -37,64 +37,70 @@
 
         </div>
 
-        <div ref="stickModal" id="new-stickyNote" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <button class="close" data-dismiss="modal">&times;</button>
-                        <div class="stickyNote-content-top">
-                            <div class="form-group">
-                                <input v-if="!isReadOnly" type="text" class="hidden-input require-input" title="标题" style="font-size:30px;"
-                                    placeholder="标题" v-model="stickyNote.title" data-field="标题" />
-                                <template v-if="isReadOnly">
-                                    <span class="hidden-input" style="font-size: 22px;">
+        <transition name="fade">
+            <div v-if="showModal" id="new-stickyNote" class="modal" role="dialog" style="display: block;" @click="closeModal($event)">
+                <div class="modal-dialog" role="document">
+
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button class="close" @click="closeModal()">&times;</button>
+                            <div class="stickyNote-content-top">
+                                <div class="form-group" title="标题">
+                                    <input v-if="isEdit" type="text" class="hidden-input require-input" style="font-size:30px;"
+                                        placeholder="标题" v-model="stickyNote.title" />
+                                    <span v-else class="hidden-input" style="font-size: 30px;">
                                         {{ stickyNote.title }}
                                     </span>
-                                </template>
-                            </div>
-                            <div class="form-group">
-                                <input v-if="!isReadOnly" type="text" class="hidden-input require-input" title="作者"
-                                    placeholder="作者" v-model="stickyNote.name" data-field="作者" />
-                                <template v-if="isReadOnly">
-                                    <span class="hidden-input">
+                                </div>
+                                <div class="form-group" title="作者">
+                                    <input v-if="isEdit" type="text" class="hidden-input require-input"
+                                        placeholder="作者" v-model="stickyNote.name" />
+                                    <span v-else class="hidden-input">
                                         {{ stickyNote.name }}
                                     </span>
-                                </template>
+                                </div>
+                                <div class="form-group" title="介绍">
+                                    <input v-if="isEdit" type="text" class="hidden-input" title="介绍"
+                                        placeholder="介绍" v-model="stickyNote.intro" />
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input v-if="!isReadOnly" type="text" class="hidden-input" title="介绍"
-                                    placeholder="介绍" v-model="stickyNote.intro" data-field="介绍" />
+                            <div class="stickyNote-content-mid">
+                                <div class="form-group">
+
+                                    <textarea v-if="isEdit" type="text" class="hidden-input require-input" title="正文"
+                                        style="width:100%;" rows="10" v-model="stickyNote.content"
+                                        data-field="正文">
+                                    </textarea>
+                                    <template v-else>
+                                        <p style="min-height: 240px;" class="hidden-input">
+                                            {{ stickyNote.content }}
+                                        </p>
+                                    </template>
+                                    
+                                    <template v-if="stickyNote.reply">
+                                        <h4>回复：</h4>
+                                        <p>
+                                            {{stickyNote.reply}}
+                                        </p>
+                                    </template>
+                                </div>
                             </div>
-                        </div>
-                        <div class="stickyNote-content-mid">
-                            <div class="form-group">
-                                <textarea v-if="!isReadOnly" type="text" class="hidden-input require-input" title="正文"
-                                    placeholder="正文" style="width:100%;" rows="10" v-model="stickyNote.content"
-                                    data-field="正文">
-                                </textarea>
-                                <template v-if="isReadOnly">
-                                    <p style="min-height: 240px;" class="hidden-input">
-                                        {{ stickyNote.content }}
-                                    </p>
-                                </template>
-                                <template v-if="stickyNote.reply">
-                                    <h4>回复：</h4>
-                                    <p>
-                                        {{stickyNote.reply}}
-                                    </p>
-                                </template>
-                            </div>
-                        </div>
-                        <div class="stickyNote-content-bottom">
-                            <div class="form-group text-center">
-                                <h5 class="text-right" style="font-weight:100;">{{stickyNote.createdAt}}</h5>
-                                <button v-if="!isReadOnly" class="btn btn-success" style="font-weight: 100;" @click="submitStickyNote()">贴上墙</button>
+                            <div class="stickyNote-content-bottom">
+                                <div class="form-group text-center">
+                                    <h5 class="text-right" style="font-weight:100;">{{stickyNote.createdAt}}</h5>
+                                    <button v-if="isEdit" class="btn btn-success" style="font-weight: 100;" @click="submitStickyNote()">贴上墙</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
-        </div>
+        </transition>
+
+        <transition name="fade">
+            <div class="modal-backdrop in" v-if="showModal"></div>
+        </transition>
 
         <!--底部分页按钮-->
         <pagination :config="paginationConfig" @pageChange="pageChange"></pagination>
@@ -128,19 +134,20 @@ export default {
             },
             //  外边区域索引
             wallContainerRef : {},
-            //  是否只读
-            isReadOnly : false,
+            //  展示模态框
+            showModal : false,
+            //  是否编辑
+            isEdit : false,
             //  纸条内容
             stickyNote : {
                 title : "",
                 name : "",
-                anonymous : "",
                 intro : "",
                 content : "",
                 createdAt : ""
             },
             //  纸条列表
-            stickNoteList:[]
+            stickNoteList: []
         };
     },
     mounted () {
@@ -170,28 +177,31 @@ export default {
          */
         openStickyNote(item){
             this.stickyNote = item;
-            this.isReadOnly = true;
-            $("#new-stickyNote").modal('show');
+            this.isEdit = false;
+            this.showModal = true;
+        },
+        closeModal(event){
+            this.showModal = false;
         },
         //  写新纸条
         newStickyNote(){
-            $("#new-stickyNote").modal('show');
             this.stickyNote = {};
-            this.isReadOnly = false;
+            this.isEdit = true;
+            this.showModal = true;
         },
         //  发布新贴纸
         submitStickyNote(){
             const that = this;
             let isPass = true;
 
-            $(".require-input").each((index, item) => {
-                if (item.value === "") {
-                    that.$swal(item.attributes['data-field'].value + "不能为空", "", "info");
-                    isPass = false;
-                    //  return false退出循环
-                    return false;
-                }
-            });
+            // $(".require-input").each((index, item) => {
+            //     if (item.value === "") {
+            //         that.$swal(item.attributes['data-field'].value + "不能为空", "", "info");
+            //         isPass = false;
+            //         //  return false退出循环
+            //         return false;
+            //     }
+            // });
 
             if(isPass){
                 const stickyNote = this.stickyNote;
@@ -208,14 +218,14 @@ export default {
                 
                     if(result.code == 0){
                         this.$set(this.paginationConfig, "currentPage" , this.paginationConfig.totalPages);
-                        $("#new-stickyNote").modal('hide');
+                        that.showModal = false;
                         this.stickyNote = {};
                         this.getStickyNoteList();
                     }
                 });
             }
         },
-        //  获取贴纸列表  
+        //  获取贴纸列表
         getStickyNoteList(){
             const that = this;
 
