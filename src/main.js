@@ -24,8 +24,8 @@ import swal from "sweetalert";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
 //	第三方依赖——代码美化
-import "./assets/dependence/prism/prism.css";
-import "./assets/dependence/prism/prism.js";
+import "../public/dependence/prism/prism.css";
+import "../public/dependence/prism/prism.js";
 
 //	关闭生产提示
 Vue.config.productionTip = false;

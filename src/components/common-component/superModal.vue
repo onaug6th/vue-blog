@@ -14,14 +14,16 @@
                     <template v-if="config.form">
                         <form class="form-horizontal">
                             <template v-for="(item, index) in config.form.config">
-                                <label class="col-sm-2" :key="index">
-                                    {{ item.labelText }}
-                                </label>
-                                <template v-if="item.type == 'text'">
-                                    <div class="col-sm-4" :key="index">
-                                        <input class="form-control" v-model="config.form.data[item.field]">
-                                    </div>
-                                </template>
+                                <div :key="index">
+                                    <label class="col-sm-2">
+                                        {{ item.labelText }}
+                                    </label>
+                                    <template v-if="item.type == 'text'">
+                                        <div class="col-sm-4">
+                                            <input class="form-control" v-model="config.form.data[item.field]">
+                                        </div>
+                                    </template>
+                                </div>
                             </template>
                         </form>
                     </template>
