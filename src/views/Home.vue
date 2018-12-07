@@ -4,7 +4,7 @@
         <!-- 顶部背景图 -->
         <header class="home-bg">
             <div class="container">
-                <img class="img" src="http://www.onaug6th.com/images/common/hope.jpg">
+                <img class="img" src="http://wx2.sinaimg.cn/large/9311b2dagy1fxy3pmo0bvj20sg0e8myr.jpg">
                 <h1 style="font-weight:300">像我这样的人</h1>
             </div>
         </header>

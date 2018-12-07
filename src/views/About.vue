@@ -5,40 +5,62 @@
         <div class="row">
             <h2 class="about">关于</h2>
             <hr>
-            <div class="col-sm-12 clearfix" style="margin-bottom:25px;">
-                <div class="pull-left">
-                    <img class="img-circle" src="https://avatars1.githubusercontent.com/u/24285577?s=460&v=4" style="max-width: 44px;">
-                </div>
-                <div class="col-xs-8">
-                    <p style="color: #616161;font-weight:bold">onaug6th</p>
-                    <span>2018-08-06</span>
-                </div>
-            </div>
-            <div class="content col-sm-12">
+            <div class="content">
                 <div class="gray">
-                    
-                    <h2>
-                        <span>关于我</span>
-                    </h2>
+                        <div class="col-sm-6">
+                            <div class="clearfix" style="margin-bottom:25px;">
+                                <div class="pull-left">
+                                    <img class="img-circle" src="https://avatars1.githubusercontent.com/u/24285577?s=460&v=4" style="max-width: 44px;">
+                                </div>
+                                <div class="col-xs-8">
+                                    <p style="color: #616161;font-weight:bold">onaug6th</p>
+                                    <span>2017-08-06</span>
+                                </div>
+                            </div>
+                            <h3>
+                                <span>关于我</span>
+                            </h3>
 
-                    <p>
-                        <span>onaug6th</span>
-                    </p>
+                            <p>
+                                <span>onaug6th</span>
+                            </p>
 
-                    <p>
-                        <span>意思是在八月的六号</span>
-                    </p>
+                            <p>
+                                <span>意思是在八月的六号</span>
+                            </p>
+                            <hr>
+                            <p>
+                                <span>
+                                    喜欢JavaScript，喜欢node.js，<br>
+                                    喜欢运动，喜欢打游戏<br>
+                                </span>
+                            </p>
 
-                    <hr>
+                            <p>
+                                <span>
+                                    喜欢一本正经的做些沙雕事<br>
+                                    喜欢一本正经的说些大道理<br>
+                                </span>
+                            </p>
 
-                    <p>
-                        <span>
-                            喜欢javascript，喜欢node，<br>
-                            喜欢运动，喜欢玩游戏<br>
-                        </span>
-                    </p>
+                            <p>
+                                <span>
+                                    喜欢看风景<br>
+                                    喜欢美女<br>
+                                </span>
+                            </p>
 
-                    <p>一个很纯粹的人</p>
+                            <p style="color: white">
+                                <span>
+                                    喜欢你<br>
+                                </span>
+                            </p>
+
+                            <p>一个很纯粹的人</p>
+                        </div>
+                        <div class="col-sm-6 hidden-sm hidden-xs">
+                            <img src="http://wx3.sinaimg.cn/mw690/9311b2daly8fmd9jsd598j20bd0goq3e.jpg" style="float: right; width: 280px;">
+                        </div>
                 </div>
             </div>
         </div>
