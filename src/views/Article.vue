@@ -217,8 +217,11 @@
 </template>
 
 <script>
-
-import pagination from "../components/common-component/pagination";
+//  分页组件
+import pagination from "../components/pagination";
+//	代码美化
+import "../../public/dependence/prism/prism.css";
+import "../../public/dependence/prism/prism.js";
 
 export default {
     name: 'article-c',

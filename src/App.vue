@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import superFooter from './components/common-component/superFooter.vue';
+import superFooter from './components/superFooter.vue';
 //  获取文章类型列表
 import { articleTypeList } from "./api/articleType.js";
 

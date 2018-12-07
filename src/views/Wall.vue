@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import pagination from "../components/common-component/pagination";
+import pagination from "../components/pagination";
 
 export default {
     name: 'wall',
