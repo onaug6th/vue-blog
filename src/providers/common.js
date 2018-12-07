@@ -5,7 +5,7 @@ import Vue from 'vue';
  */
 const projectConfig = {
     //  服务地址
-    serverUrl: "http://www.onaug6th.com/api/",
+    serverUrl: "http://localhost:8080/api/",
     defaultAvatar: `http://wx2.sinaimg.cn/mw690/9311b2dagy1fxk3xwv3gij20fz0dft90.jpg`,
     //  头像列表
     avatarArr: [

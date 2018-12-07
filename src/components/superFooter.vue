@@ -32,9 +32,7 @@ export default {
          * 进入新世界
          */
         newWorld(){
-            this.$router.push({
-                path : "/adminLogin"
-            });
+            this.$swal("你好，没事多点点我");
         }
     }
 }

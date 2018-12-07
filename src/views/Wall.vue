@@ -69,7 +69,7 @@
 
                                     <textarea v-if="isEdit" type="text" class="hidden-input require-input" title="正文"
                                         style="width:100%;" rows="10" v-model="stickyNote.content"
-                                        data-field="正文">
+                                        placeholder="正文">
                                     </textarea>
                                     <template v-else>
                                         <p style="min-height: 240px;" class="hidden-input">
@@ -126,7 +126,7 @@ export default {
             //  分页配置
             paginationConfig : {
                 page : 1,
-                pageSize : 10,
+                pageSize : 8,
                 prevText : "前页",
                 nextText : "后页",
                 currentPage : 1,
@@ -181,7 +181,7 @@ export default {
             this.showModal = true;
         },
         closeModal(event){
-            this.showModal = false;
+            (!event || event.target.id == "new-stickyNote") && (this.showModal = false);
         },
         //  写新纸条
         newStickyNote(){
@@ -193,18 +193,11 @@ export default {
         submitStickyNote(){
             const that = this;
             let isPass = true;
+            const stickyNote = this.stickyNote;
 
-            // $(".require-input").each((index, item) => {
-            //     if (item.value === "") {
-            //         that.$swal(item.attributes['data-field'].value + "不能为空", "", "info");
-            //         isPass = false;
-            //         //  return false退出循环
-            //         return false;
-            //     }
-            // });
+            (!stickyNote.title || !stickyNote.name || !stickyNote.content) && (isPass = false, this.$swal("标题，作者，内容都是必填的。"));
 
             if(isPass){
-                const stickyNote = this.stickyNote;
 
                 const params = {
                     name : stickyNote.name,

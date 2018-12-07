@@ -39,6 +39,13 @@ const routes = [
         meta : {
             showNav : true
         }
+    },
+    {
+        path: "*",
+        component: () => import("./views/NotFound.vue"),
+        meta : {
+            showNav : true
+        }
     }
 ];
 
