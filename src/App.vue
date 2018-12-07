@@ -36,8 +36,6 @@
 
 <script>
 import superFooter from './components/superFooter.vue';
-//  获取文章类型列表
-import { articleTypeList } from "./api/articleType.js";
 
 export default {
     data(){
@@ -58,7 +56,7 @@ export default {
     },
     mounted() {
         window.addEventListener('scroll', this.handleScroll);
-        articleTypeList().then( (result) =>{
+        this.$http.post('articleType/list').then( (result) =>{
             this.$store.commit("updateArticleTypeList", result.data.rows);
         });
     },
