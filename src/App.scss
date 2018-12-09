@@ -11,9 +11,15 @@ input, textarea{
     color: #fff;
 }
 //  渐变动画
-.fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to{
+.fade-enter-active {
+    transition: opacity 500ms 500ms ease;
+    opacity: 1;
+  }
+  
+  .fade-leave-active {
+    transition: opacity 500ms ease;
+    opacity: 1;
+  }
+  .fade-enter, .fade-leave-active {
     opacity: 0;
-}
+  }

@@ -4,7 +4,7 @@
         <!-- 顶部背景图 -->
         <header class="home-bg">
             <div class="container">
-                <img class="img" src="http://pjd5crrcu.bkt.clouddn.com/hope.png">
+                <img class="img" :src="homeBgUrl">
                 <h1 style="font-weight:300">像我这样的人</h1>
             </div>
         </header>
@@ -16,7 +16,7 @@
                 <div ref="contentLeft" class="col-lg-4">
                     <div ref="profile" class="profile" :class="{'profile-fiexd' : profileFiexd}">
                         <!-- 个人资料开始 -->
-                        <h5>我 <img class="emoji" title=":octocat:" alt=":octocat:" src="https://assets-cdn.github.com/images/icons/emoji/sheep.png" height="20" width="20" align="absmiddle"></h5>
+                        <h5> <img class="emoji" title=":octocat:" alt=":octocat:" src="https://assets-cdn.github.com/images/icons/emoji/sheep.png" height="20" width="20" align="absmiddle"></h5>
                         <hr>
                         <section class="info">
                             <img src="https://avatars1.githubusercontent.com/u/24285577?s=460&v=4" alt="avatar" class="avatar img-rounded">
@@ -108,6 +108,8 @@ export default {
             contentLeftRef : {},
             //  资料索引
             profileRef : {},
+            //  背景图片地址
+            homeBgUrl : "",
             //  当前文章列表
             articleList : []
         }
@@ -116,6 +118,14 @@ export default {
         //  标签列表
         typeList(){
             return this.$store.state.articleTypeList;
+        }
+    },
+    created() {
+        const nowHour = new Date().getHours();
+        if(nowHour <= 18){
+            this.homeBgUrl = `http://pjd5crrcu.bkt.clouddn.com/hope.png`;
+        }else{
+            this.homeBgUrl = `http://pjd5crrcu.bkt.clouddn.com/hope1.png`;
         }
     },
     mounted(){
