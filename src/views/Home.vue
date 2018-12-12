@@ -4,10 +4,27 @@
 
         <!-- 顶部背景图开始 -->
         <header class="home-bg" :style="{'background-image' : `url(${homeBgUrl})`}">
+            <section class="info" style=" position: absolute; width: 293px; right: 50px; top: 5px; background: white; border-radius: 10px; text-align: center; padding-top: 20px; padding-bottom: 20px; color: #555; z-index: 2; ">
+                <div style="row">
+                    <div class="col-sm-6">
+                        <img src="https://avatars1.githubusercontent.com/u/24285577?s=460&amp;v=4" alt="avatar" class="avatar img-rounded" style="width:100px ;">
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="name" style=" font-weight: 300; font-size: 18px; white-space: nowrap;">August Yang</span>
+                        <p class="intro" style="white-space: nowrap; margin-top: 10px;">自言自语工程师</p>
+                        <p class="other" style="margin-top: 10px; ">
+                            <a href="https://github.com/onaug6th" target="_blank" style=" color: black; text-decoration: unset;">
+                                <img class="emoji" alt="star2" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/octocat.png">
+                                <span style="position: relative; bottom: -5px;">onaug6th</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </section>
             <div class="container">
                 <div class="content">
-                    <h1 class="title">像我这样的人</h1>
-                    <h2 class="description">其实也挺不错的</h2>
+                    <h1 class="title">趁我还记得</h1>
+                    <h2 class="description">其实我一直都记得</h2>
                 </div>
             </div>
         </header>
@@ -24,16 +41,7 @@
                         <div class="dont-delete-me"></div>
                     </a>
                     <div class="card-content">
-                        <section class="info">
-                            <img src="https://avatars1.githubusercontent.com/u/24285577?s=460&v=4" alt="avatar" class="avatar img-rounded">
-                            <span class="name">August Yang</span>
-                            <span class="intro">自言自语工程师</span>
-                            <span class="other">
-                                <a href="https://github.com/onaug6th" target="_blank">
-                                    <img class="emoji" alt="star2" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/octocat.png">onaug6th
-                                </a>
-                            </span>
-                        </section>
+                        <h3 class="text-center">你好啊</h3>
                     </div>
                 </div>
                 <!-- 个人资料 -->
@@ -218,6 +226,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 
+@media (min-width: 1200px){
+    .container {
+        width: 1040px;
+    }
+}
+
 //  屏幕尺寸小于998时，去掉背景图片上偏移
 @media screen and (max-width:998px) {
 
@@ -334,7 +348,7 @@ export default {
             &:hover {
                 box-shadow: 8px 28px 50px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04);
                 transition: all .4s ease;
-                transform: translate3D(0,-1px,0) scale(1.02);
+                transform: scale(1.02);
             }
 
             .card-image{
@@ -357,44 +371,6 @@ export default {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-
-                .info{
-                    text-align: center;
-                    padding: 15px 15px 30px 30px;
-                    color:#555;
-                    
-                    >h5{
-                        text-align: left;
-                    }
-
-                    span{
-                        margin-top: 5px;
-                    }
-
-                    .name{
-                        font-weight: 300;
-                        font-size: 18px;
-                        display: block;
-                    }
-
-                    .intro{
-                        display: block;
-                    }
-
-                    .avatar{
-                        width: 150px;
-                    }
-
-                    .other{
-                        display: block;
-                        text-align: left;
-
-                        a{
-                            text-decoration: unset;
-                        }
-                    }
-
-                }
             }
         }
         
