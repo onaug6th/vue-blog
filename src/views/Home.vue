@@ -1,26 +1,9 @@
 <template>
 
     <div class="home">
-
+        
         <!-- 顶部背景图开始 -->
         <header class="home-bg" :style="{'background-image' : `url(${homeBgUrl})`}">
-            <section class="info" style=" position: absolute; width: 293px; right: 50px; top: 5px; background: white; border-radius: 10px; text-align: center; padding-top: 20px; padding-bottom: 20px; color: #555; z-index: 2; ">
-                <div style="row">
-                    <div class="col-sm-6">
-                        <img src="https://avatars1.githubusercontent.com/u/24285577?s=460&amp;v=4" alt="avatar" class="avatar img-rounded" style="width:100px ;">
-                    </div>
-                    <div class="col-sm-6">
-                        <span class="name" style=" font-weight: 300; font-size: 18px; white-space: nowrap;">August Yang</span>
-                        <p class="intro" style="white-space: nowrap; margin-top: 10px;">自言自语工程师</p>
-                        <p class="other" style="margin-top: 10px; ">
-                            <a href="https://github.com/onaug6th" target="_blank" style=" color: black; text-decoration: unset;">
-                                <img class="emoji" alt="star2" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/octocat.png">
-                                <span style="position: relative; bottom: -5px;">onaug6th</span>
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </section>
             <div class="container">
                 <div class="content">
                     <h1 class="title">趁我还记得</h1>
@@ -35,16 +18,23 @@
 
             <div class="row main-content">
 
-                <!-- 个人资料 -->
+                <!-- 置顶文章 -->
                 <div class="card-box">
                     <a class="card-image">
                         <div class="dont-delete-me"></div>
                     </a>
                     <div class="card-content">
-                        <h3 class="text-center">你好啊</h3>
+                        <div class="content">
+                            <h3>第一篇文章</h3>
+                            <p>我看过沙漠下暴雨，看过大海亲吻鲨鱼。</p>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-default">Read Detail</button>
+                        </div>
                     </div>
                 </div>
-                <!-- 个人资料 -->
+                <!-- 置顶文章 -->
+
             </div>
         </main>
         <!-- 内容结束 -->
@@ -64,13 +54,13 @@ export default {
     },
     data(){
         return {
-            articleType : "",
+            articleType: "",
             //  分页配置
-            paginationConfig : {},
+            paginationConfig: {},
             //  背景图片地址
-            homeBgUrl : "",
+            homeBgUrl: "",
             //  当前文章列表
-            articleList : []
+            articleList: []
         }
     },
     computed:{
@@ -82,9 +72,9 @@ export default {
     created() {
         const nowHour = new Date().getHours();
         if(nowHour <= 18){
-            this.homeBgUrl = `http://pjd5crrcu.bkt.clouddn.com/hope.png`;
+            this.homeBgUrl = this.imgCdnUrl + `/hope.png`;
         }else{
-            this.homeBgUrl = `http://pjd5crrcu.bkt.clouddn.com/hope1.png`;
+            this.homeBgUrl = this.imgCdnUrl + `/hope1.png`;
         }
     },
     mounted(){
@@ -97,8 +87,6 @@ export default {
         this.getArticleList();
         
     },
-    beforeDestroy(){
-    },
     methods : {
         /**
          * 文章类型中文名称转义
@@ -106,21 +94,19 @@ export default {
          */
         fliterTypeName(id){
             
-            return this.typeList.filter((item) =>{
-                if(item.id == id){
-                    return item.name;
-                }
-            })[0]["name"];
+            try{
+                return this.typeList.filter((item) =>{
+                    if(item.id == id){
+                        return item.name;
+                    }
+                })[0]["name"];
+            }catch(e){
+                return "你自己想想为什么会看到我"
+            }
             
         },
         /**
-         * 监听滚动事件
-         */
-        handleScroll(){
-            
-        },
-        /**
-         * 切换文章类型
+         * 切换文章类型，同时更新url后携带的hash
          * @param {object} item 类型
          */
         switchType(item){
@@ -136,7 +122,7 @@ export default {
                 this.articleType = "";
             }else{
                 this.articleType = item.id;
-                query.type = this.articleType;
+                query.type && (query.type = this.articleType);
             }
 
             this.$router.push({
@@ -182,10 +168,10 @@ export default {
                 exclude : [ "content" ]
             };
 
-            this.articleType && (params.where = { type : this.articleType });
+            this.articleType && (params.where = { type: this.articleType });
 
             that.$http.post("article/list", params)
-                .then( (result) =>{
+                .then((result) =>{
                     if(result.code == 0){
                         that.paginationConfig.totalPages = result.data.totalPages;
                         that.articleList = result.data.rows;
@@ -213,7 +199,7 @@ export default {
             paginationConfig.page = page;
             
             this.$router.push({
-                query : {
+                query: {
                     page : page,
                     pageSize : paginationConfig.pageSize,
                     type : this.articleType
@@ -240,16 +226,6 @@ export default {
 //  屏幕尺寸再小到手机这么大时
 @media screen and (max-width:695px) {
 
-    .article-pic{
-        padding : 15px !important;
-    }
-    .article-content{
-        padding: 15px !important;
-    }
-    //  文章信息框无内边距
-    .article-info{
-        padding: 0px !important;
-    }
 }
 
 .home{
@@ -321,7 +297,7 @@ export default {
 
     }
 
-    .container{
+    main.container{
 
         @media (min-width: 900px) {
             .main-content{
@@ -371,6 +347,15 @@ export default {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
+
+                .content{
+                    padding: 30px 40px 0;
+                    flex-grow: 1;
+                }
+
+                .footer{
+                    padding: 0 40px 30px;
+                }
             }
         }
         
