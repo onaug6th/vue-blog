@@ -37,7 +37,7 @@
 
         </div>
 
-        <transition name="fade">
+        <transition name="fadefast">
             <div v-if="showModal" id="new-stickyNote" class="modal" role="dialog" style="display: block;" @click="closeModal($event)">
                 <div class="modal-dialog" role="document">
 
@@ -98,7 +98,7 @@
             </div>
         </transition>
 
-        <transition name="fade">
+        <transition name="fadefast">
             <div class="modal-backdrop in" v-if="showModal"></div>
         </transition>
 

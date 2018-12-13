@@ -13,7 +13,7 @@
                                     <img class="img-circle" src="https://avatars1.githubusercontent.com/u/24285577?s=460&v=4" style="max-width: 44px;">
                                 </div>
                                 <div class="col-xs-8">
-                                    <p style="color: #616161;font-weight:bold">onaug6th</p>
+                                    <p style="color: #616161;font-weight:bold; margin:0px;">onaug6th</p>
                                     <span>2017-08-06</span>
                                 </div>
                             </div>

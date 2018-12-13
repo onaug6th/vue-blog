@@ -10,16 +10,31 @@ input, textarea{
     background: #aad3fe;
     color: #fff;
 }
-//  渐变动画
+
+//  渐变动画fade
 .fade-enter-active {
     transition: opacity 500ms 500ms ease;
     opacity: 1;
-  }
-  
-  .fade-leave-active {
+}
+
+.fade-leave-active {
     transition: opacity 500ms ease;
     opacity: 1;
-  }
-  .fade-enter, .fade-leave-active {
+}
+.fade-enter, .fade-leave-active {
     opacity: 0;
-  }
+}
+
+//  渐变动画
+.fadefast-enter-active {
+    transition: opacity 500ms ease;
+    opacity: 1;
+}
+
+.fadefast-leave-active {
+    transition: opacity 500ms ease;
+    opacity: 1;
+}
+.fadefast-enter, .fadefast-leave-active {
+    opacity: 0;
+}

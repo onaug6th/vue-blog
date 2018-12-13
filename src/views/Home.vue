@@ -33,6 +33,90 @@
                         </div>
                     </div>
                 </div>
+                <div class="card-box">
+                    <a class="card-image">
+                        <div class="dont-delete-me"></div>
+                    </a>
+                    <div class="card-content">
+                        <div class="content">
+                            <h3>第一篇文章</h3>
+                            <p>我看过沙漠下暴雨，看过大海亲吻鲨鱼。</p>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-default">Read Detail</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-box">
+                    <a class="card-image">
+                        <div class="dont-delete-me"></div>
+                    </a>
+                    <div class="card-content">
+                        <div class="content">
+                            <h3>第一篇文章</h3>
+                            <p>我看过沙漠下暴雨，看过大海亲吻鲨鱼。</p>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-default">Read Detail</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-box">
+                    <a class="card-image">
+                        <div class="dont-delete-me"></div>
+                    </a>
+                    <div class="card-content">
+                        <div class="content">
+                            <h3>第一篇文章</h3>
+                            <p>我看过沙漠下暴雨，看过大海亲吻鲨鱼。</p>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-default">Read Detail</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-box">
+                    <a class="card-image">
+                        <div class="dont-delete-me"></div>
+                    </a>
+                    <div class="card-content">
+                        <div class="content">
+                            <h3>第一篇文章</h3>
+                            <p>我看过沙漠下暴雨，看过大海亲吻鲨鱼。</p>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-default">Read Detail</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-box">
+                    <a class="card-image">
+                        <div class="dont-delete-me"></div>
+                    </a>
+                    <div class="card-content">
+                        <div class="content">
+                            <h3>第一篇文章</h3>
+                            <p>我看过沙漠下暴雨，看过大海亲吻鲨鱼。</p>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-default">Read Detail</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-box">
+                    <a class="card-image">
+                        <div class="dont-delete-me"></div>
+                    </a>
+                    <div class="card-content">
+                        <div class="content">
+                            <h3>第一篇文章</h3>
+                            <p>我看过沙漠下暴雨，看过大海亲吻鲨鱼。</p>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-default">Read Detail</button>
+                        </div>
+                    </div>
+                </div>
                 <!-- 置顶文章 -->
 
             </div>
@@ -264,13 +348,12 @@ export default {
 
             .content{
                 align-items: center;
-                padding: 10vw 4vw;
-                min-height: 200px;
+                min-height: 24em;
                 max-height: 450px;
                 text-align: center;
 
                 .title{
-                    margin: 0;
+                    margin-top: 3em;
                     padding: 0;
                     font-size: 3.8rem;
                     font-weight: 100;

@@ -2,52 +2,14 @@
 
     <div class="app">
 
-        <sidebarMenu></sidebarMenu>
+        <sidebarMenu ref="sidebarMenu"></sidebarMenu>
 
         <!-- 页面顶部导航栏 -->
         <nav class="top-nav container-fluid" :class="{'scroll' : navShow}">
             <div class="container">
-                <!-- 导航栏中部 -->
-                <div class="top-nav-mid">
-                    <ul class="menuNav">
-                        <li>
-                            <router-link to="/">首页</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/">时间</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/memory">印象</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/wall">墙</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/about">关于</router-link>
-                        </li>
-                    </ul>
-                </div>
-                <!-- 导航栏中部 -->
                 <!-- 导航栏右部 -->
                 <div class="top-nav-right pull-right">
-                    <img alt="avatar" class="avatar img-circle" :src="myAvatar">
-                    <section class="info">
-                        <div style="row">
-                            <div class="col-sm-6">
-                                <img :src="myAvatar" alt="avatar" class="avatar img-rounded">
-                            </div>
-                            <div class="col-sm-6">
-                                <p class="name">August Yang</p>
-                                <p class="intro">自言自语工程师</p>
-                                <p class="other">
-                                    <a href="https://github.com/onaug6th" target="_blank">
-                                        <img class="emoji" alt="github" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/octocat.png">
-                                        <span>onaug6th</span>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </section>
+                    <img alt="avatar" class="avatar img-circle" :src="myAvatar" @click="togglesideBarMenu">
                 </div>
                 <!-- 导航栏右部 -->
             </div>
@@ -72,7 +34,7 @@ import sidebarMenu from "./components/sidebarMenu";
 export default {
     data(){
         return {
-            
+            lastScrollY: 0
         }
     },
     computed: {
@@ -106,12 +68,21 @@ export default {
                 return false;
             }
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-            //  滚动距离大于 200 时，背景显示
-            if(scrollTop > 200){
+            let direction = scrollTop > this.lastScrollY ? "down" : "up";
+            this.lastScrollY = scrollTop;
+
+            //  下滚隐藏
+            if(direction == "down"){
                 return this.$store.commit("toggleNavShow", true);
+            }else{
+                //  否则背景隐藏
+                return this.$store.commit("toggleNavShow", false);
             }
-            //  否则背景隐藏
-            return this.$store.commit("toggleNavShow", false);
+        },
+
+        //  切换显示sideBarMenu
+        togglesideBarMenu(){
+            this.$refs.sidebarMenu.menuToggle();
         }
 
     }
@@ -122,10 +93,10 @@ export default {
 <style lang="scss" scoped>
     // 顶部状态栏
     .top-nav{
-        width:100%;
-        position:fixed;
-        padding:0px;
-        top:0px;
+        width: 100%;
+        position: fixed;
+        padding: 0px;
+        top: 0px;
         z-index:3;
         transition: all .3s;
 
@@ -169,67 +140,13 @@ export default {
                 margin-top: 5px;
                 cursor: pointer;
             }
-            &:hover .info{
-                display: block;
-            }
-        }
-    }
-
-    // 顶部状态栏个人信息
-    .info{
-        display: none;
-        position: absolute;
-        width: 290px;
-        right: 50px;
-        top: 5px;
-        background: white;
-        border-radius: 10px;
-        text-align: center;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        color: #555;
-        z-index: 2;
-        box-shadow: 8px 14px 38px rgba(39, 44, 49, 0.06), 1px 3px 8px rgba(39, 44, 49, 0.03);
-
-        img.avatar{
-            width:100px;
-        }
-        p{
-            white-space: nowrap;
-
-            &.name{
-                font-weight: 300;
-                font-size: 18px;
-                
-            }
-            &.intro{
-                margin-top: 10px;
-            }
-            &.other{
-                margin-top: 10px;
-
-                a{
-                    color: black;
-                    text-decoration: unset;
-
-                    span{
-                        position: relative;
-                        bottom: -5px;
-                    }
-                }
-            }
         }
     }
 
     .scroll{
-        background: hsla(0,0%,100%,.86);
-        box-shadow: 0 0 25px #ccc;
-        color: #999;
-
-        a{
-            color: #555 !important;
-            text-shadow: none;
-        }
+        top: -55px;
+        z-index: 1;
+        transition: all .3s;
     }
     
 </style>

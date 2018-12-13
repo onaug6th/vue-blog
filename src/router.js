@@ -20,10 +20,7 @@ const routes = [
     {
         path: "/memory",
         name: "memory",
-        component: () => import("./views/Memory.vue"),
-        meta : {
-            showNav : true
-        }
+        component: () => import("./views/Memory.vue")
     },
     //  墙
     {
@@ -35,17 +32,11 @@ const routes = [
     {
         path: "/about",
         name: "about",
-        component: () => import("./views/About.vue"),
-        meta : {
-            showNav : true
-        }
+        component: () => import("./views/About.vue")
     },
     {
         path: "*",
-        component: () => import("./views/NotFound.vue"),
-        meta : {
-            showNav : true
-        }
+        component: () => import("./views/NotFound.vue")
     }
 ];
 

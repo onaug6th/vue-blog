@@ -1,46 +1,36 @@
 <template>
-    
-    <div class="side-menu">
-        <transition-group name="fade">
-            <div v-if="isShowMenu" class="modal-backdrop fade in" @click="menuToggle()"></div>
-            <div v-if="isShowMenu" class="sidebar-main">
+    <transition name="fadefast">
+        <div v-if="isShowMenu" class="side-menu">
+            <div class="modal-backdrop fade in" @click="menuToggle()"></div>
+            <div class="sidebar-main">
                 <div class="sidebar-header header-cover" :style="{'background-image' : `url(${imgCdnUrl}/hope.png)`}">
                     <div class="top-bar"></div>
                     <div class="sidebar-image">
                         <img class="img-circle" :src="myAvatar" alt="avatar">
                     </div>
                     <a class="sidebar-brand clearfix">
-                        <p>August Yang</p>
-                        <p>onaug6th@qq.com</p>
+                        <p>onaug6th</p>
+                        <p>自言自语工程师</p>
                     </a>
                 </div>
                 <ul class="nav sidebar-nav">
-                    <li>
-                        <router-link to="/">主页</router-link>
-                    </li>
-                    <li class="dropdown clearfix">
-                        <a href="#" class="ripple-effect dropdown-toggle">
-                            <i class="glyphicon glyphicon-book"></i> 归档
-                        </a>
-                    </li>
-                    <li class="dropdown clearfix">
-                        <a href="#" class="ripple-effect dropdown-toggle">
-                            <i class="glyphicon glyphicon-inbox"></i> 印象
-                        </a>
-                    </li>
-                    <li class="dropdown clearfix">
-                        <a href="#" class="ripple-effect dropdown-toggle">
-                            <i class="glyphicon glyphicon-inbox"></i> 墙
-                        </a>
+                    <li v-for="(item, index) in sidebarList" :key="index">
+                        <a @click="other(item)"><i class="glyphicon" :class="item.icon"></i>  {{item.label}}</a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <router-link to="/about">关于</router-link>
+                        <a href="https://github.com/onaug6th" target="_blank" title="github">
+                            <img class="emoji" alt="github" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/octocat.png">
+                            <span style="position: relative; bottom: -5px;">onaug6th</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a @click="other({path: 'about'})">关于</a>
                     </li>
                 </ul>
             </div>
-        </transition-group>
-    </div>
+        </div>
+    </transition>
 
 </template>
 
@@ -50,18 +40,40 @@ export default {
     name: "sidebarMenu",
     data(){
         return {
-            isShowMenu: false
+            isShowMenu: false,
+            sidebarList: [
+                {
+                    "path": "",
+                    "icon": "glyphicon-home",
+                    "label": "主页"
+                },
+                {
+                    "path": "",
+                    "icon": "glyphicon-book",
+                    "label": "归档"
+                },
+                {
+                    "path": "memory",
+                    "icon": "glyphicon-picture",
+                    "label": "印象"
+                },
+                {
+                    "path": "wall",
+                    "icon": "glyphicon-tag",
+                    "label": "墙"
+                }
+            ]
         }
-    },
-    computed: {
-        
-    },
-    mounted() {
-
     },
     methods:{
         menuToggle(){
-            this.isShowMenu = false;
+            this.isShowMenu = !this.isShowMenu;
+        },
+        other(item){
+            this.menuToggle();
+            this.$router.push({
+                path : `/${item.path}`
+            });
         }
     }
 }
@@ -74,7 +86,6 @@ export default {
     * 来自远古代码的样式
     */
     .side-menu{
-        display: none;
         z-index: 20;
         position:absolute;
 
@@ -119,16 +130,6 @@ export default {
                 display: block;
                 padding: 15px;
                 transition: all .2s ease-in-out;
-            }
-
-            li.dropdown ul{
-                position: relative;
-                width: 100%;
-                margin: 0;
-                padding: 0;
-                border: none;
-                border-radius: 0;
-                box-shadow: none;
             }
 
             li.divider{
