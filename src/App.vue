@@ -71,11 +71,15 @@ export default {
             let direction = scrollTop > this.lastScrollY ? "down" : "up";
             this.lastScrollY = scrollTop;
 
+            if(scrollTop == 0){
+                return this.$store.commit("toggleNavShow", false);
+            }
+
             //  下滚隐藏
             if(direction == "down"){
                 return this.$store.commit("toggleNavShow", true);
             }else{
-                //  否则背景隐藏
+                //  否则显示
                 return this.$store.commit("toggleNavShow", false);
             }
         },
