@@ -34,16 +34,12 @@ import sidebarMenu from "./components/sidebarMenu";
 export default {
     data(){
         return {
-            lastScrollY: 0
+            lastScrollY: 0,
+            navShow: false
         }
     },
     computed: {
-        navShow(){
-            return this.$store.state.navShow;
-        },
-        navFixed(){
-            return this.$store.state.navFixed;
-        }
+        
     },
     components:{
         superFooter,
@@ -64,23 +60,20 @@ export default {
 
         //  监听滚动事件
         handleScroll(){
-            if(this.navFixed){
-                return false;
-            }
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
             let direction = scrollTop > this.lastScrollY ? "down" : "up";
             this.lastScrollY = scrollTop;
 
             if(scrollTop == 0){
-                return this.$store.commit("toggleNavShow", false);
+                return this.navShow = false;
             }
 
             //  下滚隐藏
             if(direction == "down"){
-                return this.$store.commit("toggleNavShow", true);
+                return this.navShow = true;
             }else{
                 //  否则显示
-                return this.$store.commit("toggleNavShow", false);
+                return this.navShow = false;
             }
         },
 

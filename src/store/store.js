@@ -10,10 +10,8 @@ const state = {
 	token: "",
 	//	文章类型列表
 	articleTypeList : [],
-	//	导航栏是否固定
-	navFixed : false,
-	//	导航栏是否显示
-	navShow : true
+	//	菜单栏是否固定
+	isMenuFixed : false
 }
 
 export default new Vuex.Store({

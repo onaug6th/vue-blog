@@ -44,10 +44,6 @@ router.beforeEach((to, from, next) => {
 	//	进度条开始
 	NProgress.start();
 
-	//	你想要去哪？
-	store.commit("toggleNavShow", to.meta.showNav || false);
-	store.commit("toggleNavFixed", to.meta.showNav || false);
-
 	next();
 });
 

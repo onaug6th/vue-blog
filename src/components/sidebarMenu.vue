@@ -1,9 +1,11 @@
 <template>
     <transition name="fadefast">
         <div v-if="isShowMenu" class="side-menu">
-            <div class="modal-backdrop fade in" @click="menuToggle()"></div>
+            <div v-if="!isMenuFixed" class="modal-backdrop fade in" @click="menuToggle()"></div>
             <div class="sidebar-main">
-                <div class="sidebar-header header-cover" :style="{'background-image' : `url(${imgCdnUrl}/hope.png)`}">
+                <div class="sidebar-header header-cover"
+                    :style="{'background-image' : `url(${imgCdnUrl}/hope.png)`}"
+                    >
                     <div class="top-bar"></div>
                     <div class="sidebar-image">
                         <img class="img-circle" :src="myAvatar" alt="avatar">
@@ -17,17 +19,23 @@
                     <li v-for="(item, index) in sidebarList" :key="index">
                         <a @click="other(item)"><i class="glyphicon" :class="item.icon"></i>  {{item.label}}</a>
                     </li>
-                    <li class="divider"></li>
                     <li>
                         <a href="https://github.com/onaug6th" target="_blank" title="github">
                             <img class="emoji" alt="github" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/octocat.png">
-                            <span style="position: relative; bottom: -5px;">onaug6th</span>
+                            <span class="relative">onaug6th</span>
                         </a>
                     </li>
+                    <li class="divider"></li>
                     <li>
                         <a @click="other({path: 'about'})">关于</a>
                     </li>
                 </ul>
+                <div class="sidebar-footer">
+                    <div>
+                        <span class="relative">固定</span>
+                        <superSwitch class="pull-right" :config="switchConfig" @switchChange="toggleFixedMenu"></superSwitch>
+                    </div>
+                </div>
             </div>
         </div>
     </transition>
@@ -35,9 +43,13 @@
 </template>
 
 <script>
+import superSwitch from "./superSwitch.vue";
 
 export default {
     name: "sidebarMenu",
+    components: {
+        superSwitch
+    },
     data(){
         return {
             isShowMenu: false,
@@ -62,7 +74,16 @@ export default {
                     "icon": "glyphicon-tag",
                     "label": "墙"
                 }
-            ]
+            ],
+            switchConfig: {
+                onText: "on",
+                offText: "off"
+            }
+        }
+    },
+    computed: {
+        isMenuFixed(){
+            return this.$store.state.isMenuFixed;
         }
     },
     methods:{
@@ -70,10 +91,13 @@ export default {
             this.isShowMenu = !this.isShowMenu;
         },
         other(item){
-            this.menuToggle();
+            !this.isMenuFixed && this.menuToggle();
             this.$router.push({
                 path : `/${item.path}`
             });
+        },
+        toggleFixedMenu(status){
+            this.$store.commit("toggleMenuFixed", status);
         }
     }
 }
@@ -83,7 +107,7 @@ export default {
 <style lang="scss" scoped>
 
     /*
-    * 来自远古代码的样式
+    * 来自远古时期的样式代码
     */
     .side-menu{
         z-index: 20;
@@ -102,43 +126,69 @@ export default {
             .sidebar-header{
                 background-size: cover !important;
                 background-position: center !important;
+
+                .top-bar{
+                    height: 25px;;
+                }
+                .sidebar-image{
+                    position: relative;
+
+                    img{
+                        width: 50px;
+                        margin: 16px;
+                    }
+
+                }
+                .sidebar-brand{
+                    display: block;
+                    width: 100%;
+                    color:white;
+                    text-decoration: none;
+                    padding: 10px 10px 0px 10px;
+                    background: rgba(0, 0, 0, 0.4);
+                }
             }
 
-            .top-bar{
-                height: 25px;;
+            .sidebar-nav{
+                
+                li a{
+                    position: relative;
+                    cursor: pointer;
+                    color: #555;
+                    user-select: none;
+                    display: block;
+                    padding: 15px;
+                    transition: all .2s ease-in-out;
+                }
+
+                li.divider{
+                    height: 1px;
+                    margin: 9px 0;
+                    overflow: hidden;
+                    background-color: #e5e5e5;
+                }
             }
 
-            .sidebar-image img{
-                width: 50px;
-                margin: 16px;
-            }
-
-            .sidebar-brand{
-                display: block;
-                width: 100%;
-                color:white;
-                text-decoration: none;
-                padding: 10px 10px 0px 10px;
-                background: rgba(0, 0, 0, 0.4);
-            }
-
-            .sidebar-nav li a{
-                position: relative;
-                cursor: pointer;
-                color: #555;
-                user-select: none;
-                display: block;
+            .sidebar-footer{
+                position: fixed;
+                bottom: 0px;
+                width: 300px;
                 padding: 15px;
-                transition: all .2s ease-in-out;
-            }
 
-            li.divider{
-                height: 1px;
-                margin: 9px 0;
-                overflow: hidden;
-                background-color: #e5e5e5;
+                > div{
+                    color: #555;
+                    user-select: none;
+                    display: block;
+                    
+                    transition: all .2s ease-in-out;
+                }
             }
         }
+    }
+
+    .relative{
+        position: relative;
+        bottom: -5px;
     }
     
 </style>
