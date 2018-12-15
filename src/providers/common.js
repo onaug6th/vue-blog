@@ -13,6 +13,9 @@ const projectConfig = {
     //  我的头像
     myAvatar: "https://avatars1.githubusercontent.com/u/24285577?s=460&amp;v=4",
 
+    //  文章默认背景图片
+    articleDefaultBg: "https://avatars1.githubusercontent.com/u/24285577?s=460&amp;v=4",
+
     //  回复文章默认头像，胖虎
     defaultAvatar: `http://wx2.sinaimg.cn/mw690/9311b2dagy1fxk3xwv3gij20fz0dft90.jpg`,
 
@@ -20,6 +23,29 @@ const projectConfig = {
     avatarArr: [
         `http://wx2.sinaimg.cn/mw690/9311b2dagy1fxk3xwv3gij20fz0dft90.jpg`
     ]
+}
+
+const methods = {
+    /**
+     * 日期格式化
+     * @param {*} date yyyy-mm-dd hh:mm:ss
+     * @param {*} en 高端大气上档次的洋气英文格式化？
+     */
+    dateFormat(date, en){
+        if(!date){
+            return false;
+        }
+        const yymmdd = date.split(" ")[0];
+        const monthEN = [
+            "hello", "January", "February", "March", "April", "May", "June", "July",
+            "August", "September", "October", "November", "December"
+        ];
+        const yy = yymmdd.split("-")[0];
+        const mm = yymmdd.split("-")[1];
+        const dd = yymmdd.split("-")[2];
+        
+        return (en ? `${dd}  ${monthEN[+mm]}  ${yy}` : `${yy}.${mm}.${dd}`);
+    }
 }
 
 /**
@@ -36,6 +62,6 @@ function setAttrToVue(objArr) {
     });
 }
 
-setAttrToVue([projectConfig]);
+setAttrToVue([methods, projectConfig]);
 
 export { projectConfig }
