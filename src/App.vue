@@ -34,12 +34,13 @@ import sidebarMenu from "./components/sidebarMenu";
 export default {
     data(){
         return {
-            lastScrollY: 0,
             navShow: false
         }
     },
     computed: {
-        
+        lastScrollY(){
+            return this.$store.state.scrollY;
+        }
     },
     components:{
         superFooter,
@@ -62,7 +63,7 @@ export default {
         handleScroll(){
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
             let direction = scrollTop > this.lastScrollY ? "down" : "up";
-            this.lastScrollY = scrollTop;
+            this.$store.commit("updateScrollY", scrollTop);
 
             if(scrollTop == 0){
                 return this.navShow = false;

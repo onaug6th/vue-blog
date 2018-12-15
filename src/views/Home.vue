@@ -19,106 +19,45 @@
             <div class="row main-content">
 
                 <!-- 置顶文章 -->
-                <div class="card-box">
+                <!-- <div class="card-box">
                     <a class="card-image">
-                        <div class="dont-delete-me"></div>
+                        <div style="background-image: url(http://wx1.sinaimg.cn/large/9311b2dagy1fy7kl3ozgcj21400u0qv5.jpg)" class="dont-delete-me"></div>
                     </a>
                     <div class="card-content">
                         <div class="content">
-                            <h3>第一篇文章</h3>
-                            <p>我看过沙漠下暴雨，看过大海亲吻鲨鱼。</p>
+                            <span>奇思妙想</span>
+                            <h3>这就是全部</h3>
+                            <p>是的，这就是全部了。</p>
                         </div>
                         <div class="footer">
-                            <button class="btn btn-default">Read Detail</button>
+                            <button class="btn btn-default" @click="readDetail(1)">Read Detail</button>
+                            <span class="date">2018.09.18</span>
                         </div>
                     </div>
-                </div>
-                <div class="card-box">
-                    <a class="card-image">
-                        <div class="dont-delete-me"></div>
-                    </a>
-                    <div class="card-content">
-                        <div class="content">
-                            <h3>第一篇文章</h3>
-                            <p>我看过沙漠下暴雨，看过大海亲吻鲨鱼。</p>
-                        </div>
-                        <div class="footer">
-                            <button class="btn btn-default">Read Detail</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-box">
-                    <a class="card-image">
-                        <div class="dont-delete-me"></div>
-                    </a>
-                    <div class="card-content">
-                        <div class="content">
-                            <h3>第一篇文章</h3>
-                            <p>我看过沙漠下暴雨，看过大海亲吻鲨鱼。</p>
-                        </div>
-                        <div class="footer">
-                            <button class="btn btn-default">Read Detail</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-box">
-                    <a class="card-image">
-                        <div class="dont-delete-me"></div>
-                    </a>
-                    <div class="card-content">
-                        <div class="content">
-                            <h3>第一篇文章</h3>
-                            <p>我看过沙漠下暴雨，看过大海亲吻鲨鱼。</p>
-                        </div>
-                        <div class="footer">
-                            <button class="btn btn-default">Read Detail</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-box">
-                    <a class="card-image">
-                        <div class="dont-delete-me"></div>
-                    </a>
-                    <div class="card-content">
-                        <div class="content">
-                            <h3>第一篇文章</h3>
-                            <p>我看过沙漠下暴雨，看过大海亲吻鲨鱼。</p>
-                        </div>
-                        <div class="footer">
-                            <button class="btn btn-default">Read Detail</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-box">
-                    <a class="card-image">
-                        <div class="dont-delete-me"></div>
-                    </a>
-                    <div class="card-content">
-                        <div class="content">
-                            <h3>第一篇文章</h3>
-                            <p>我看过沙漠下暴雨，看过大海亲吻鲨鱼。</p>
-                        </div>
-                        <div class="footer">
-                            <button class="btn btn-default">Read Detail</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-box">
-                    <a class="card-image">
-                        <div class="dont-delete-me"></div>
-                    </a>
-                    <div class="card-content">
-                        <div class="content">
-                            <h3>第一篇文章</h3>
-                            <p>我看过沙漠下暴雨，看过大海亲吻鲨鱼。</p>
-                        </div>
-                        <div class="footer">
-                            <button class="btn btn-default">Read Detail</button>
-                        </div>
-                    </div>
-                </div>
+                </div> -->
                 <!-- 置顶文章 -->
 
+                <div class="card-box" v-for="(item, index) in articleList" :key="index">
+                    <a class="card-image">
+                        <div
+                            :style="{
+                                'background-image' : `url(${item.bgUrl})`
+                            }"
+                            class="dont-delete-me"></div>
+                    </a>
+                    <div class="card-content">
+                        <div class="content">
+                            <span>{{ fliterTypeName(item.type) }}</span>
+                            <h3>{{ item.title }}</h3>
+                            <p>{{ item.intro }}</p>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-default" @click="readDetail(item.id)">Read Detail</button>
+                            <span class="date">{{ dateFormat(item.createdAt) }}</span>
+                        </div>
+                    </div>
+                </div>
+                <pagination :config="paginationConfig" @pageChange="pageChange"></pagination>
             </div>
         </main>
         <!-- 内容结束 -->
@@ -162,7 +101,6 @@ export default {
         }
     },
     mounted(){
-
         //  设置分页组件属性
         this.setPagination();
         //  获取url上可能存在的hash
@@ -185,7 +123,7 @@ export default {
                     }
                 })[0]["name"];
             }catch(e){
-                return "你自己想想为什么会看到我"
+                return "你自己想想为什么会看到我";
             }
             
         },
@@ -391,16 +329,50 @@ export default {
             }
         }
 
+        .main-content{
+            padding-top: 10px;
+        }
+
+        @media (min-width: 795px){
+            .card-box{
+                flex: 1 1 100% !important;
+                flex-direction: row !important;
+
+                .card-image{
+                    flex: 1 1 auto;
+
+                    & > div{
+                        position: absolute;
+                        width: 100% !important;
+                        height: 100% !important;
+                    }
+                }
+                .card-content{
+                    flex: 0 1 357px;
+
+                    .content{
+                        padding: 30px 40px 0;
+                    }
+
+                    .footer{
+                        padding: 0 40px 30px;
+                    }
+                }
+            }
+        }
+
         .card-box{
-            flex: 1 1 100%;
-            flex-direction: row;
+            flex: 1 1 300px;
+            flex-direction: column;
             overflow: hidden;
             margin: 0 20px 40px;
             min-height: 300px;
             background: #fff 50%;
             background-size: cover;
             border-radius: 5px;
-            box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
+            box-shadow: 
+                        8px 14px 38px rgba(39,44,49,.06),
+                        1px 3px 8px rgba(39,44,49,.03);
             transition: all .5s ease;
             display: flex;
 
@@ -410,34 +382,53 @@ export default {
                 transform: scale(1.02);
             }
 
+
             .card-image{
-                flex: 1 1 auto;
-                border-radius: 5px 0 0 5px;
                 position: relative;
                 overflow: hidden;
 
                 & > div{
-                    background-image: url(https://casper.ghost.org/v2.0.0/images/welcome-to-ghost.jpg);
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
+                    width: auto;
+                    height: 200px;
+                    background: #c5d2d9 no-repeat 50%;
                     background-size: cover;
                 }
             }
 
             .card-content{
-                flex: 0 1 357px;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
 
                 .content{
-                    padding: 30px 40px 0;
+                    padding: 25px 25px 0;
                     flex-grow: 1;
+
+                    h3{
+                        margin-top: 10px;
+                    }
+
+                    span{
+                        display: block;
+                        margin-bottom: 4px;
+                        color: #738a94;
+                        font-size: 1.2rem;
+                        line-height: 1.15em;
+                        font-weight: 500;
+                        letter-spacing: .5px;
+                        text-transform: uppercase;
+                    }
                 }
 
                 .footer{
-                    padding: 0 40px 30px;
+                    padding: 0px 25px 25px 25px;
+
+                    .date{
+                        float: right;
+                        position: relative;
+                        bottom: -10px;
+                        color: #738a94;
+                    }
                 }
             }
         }

@@ -9,9 +9,11 @@ const state = {
 	//	fucken
 	token: "",
 	//	文章类型列表
-	articleTypeList : [],
+	articleTypeList: [],
 	//	菜单栏是否固定
-	isMenuFixed : false
+	isMenuFixed: false,
+	//	Y轴滚动距离
+	scrollY: 0
 }
 
 export default new Vuex.Store({

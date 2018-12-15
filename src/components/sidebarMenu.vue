@@ -32,7 +32,7 @@
                 </ul>
                 <div class="sidebar-footer">
                     <div>
-                        <span class="relative">固定</span>
+                        <span class="relative">固定菜单</span>
                         <superSwitch class="pull-right" :config="switchConfig" @switchChange="toggleFixedMenu"></superSwitch>
                     </div>
                 </div>
@@ -60,7 +60,7 @@ export default {
                     "label": "主页"
                 },
                 {
-                    "path": "",
+                    "path": "archive",
                     "icon": "glyphicon-book",
                     "label": "归档"
                 },

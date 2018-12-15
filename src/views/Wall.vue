@@ -8,7 +8,7 @@
             </div>
 
             <template v-for="(item,index) in stickNoteList">
-                <div :key="index" class="sticky-note col-sm-3" @click="openStickyNote(item)" :title="item.title">
+                <div :key="index" class="sticky-note col-sm-6 col-md-3" @click="openStickyNote(item)" :title="item.title">
                     <h4 class="title">{{ item.title }}</h4>
                     <h5 class="name">{{ item.name }}</h5>
                     <h5 class="intro">{{ item.intro }}</h5>

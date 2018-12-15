@@ -16,6 +16,12 @@ const routes = [
         name: "article",
         component: () => import("./views/Article.vue")
     },
+    //  归档
+    {
+        path: "/archive",
+        name: "archive",
+        component: () => import("./views/Archive.vue")
+    },
     //  印象
     {
         path: "/memory",
