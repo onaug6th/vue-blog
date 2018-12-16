@@ -1,7 +1,11 @@
 import Vue from "vue";
-import Router from "vue-router";
+import Vue_router from "vue-router";
+//	第三方依赖——进度条
+import NProgress from 'nprogress';
+//  vueX
+import store from './store/store';
 
-Vue.use(Router);
+Vue.use(Vue_router);
 
 const routes = [
     //  博客首页
@@ -46,6 +50,36 @@ const routes = [
     }
 ];
 
-export default new Router({
-    routes
-})
+const Router = new Vue_router({routes});
+
+//	监听路由跳转前事件
+Router.beforeEach((to, from, next) => {
+	
+	//	进度条开始
+    NProgress.start();
+    
+    if(["home"].includes(from.name)){
+        //  记录上一个页面滚动的距离
+        store.commit("updateLastPageScrollY", window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop);
+    }
+    
+	next();
+});
+
+//	监听路由跳转后事件
+Router.afterEach((to, from) => {
+
+    if(["home"].includes(to.name)){
+        window.scrollTo(0, store.state.lastPageScrollY);
+    }else{
+        //	回到顶部
+        window.scrollTo(0, 0);
+    }
+    
+	//	是时候结束了吧
+    NProgress.done();
+    
+});
+
+export default Router;
+

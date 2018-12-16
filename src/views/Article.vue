@@ -6,7 +6,6 @@
             <div class="title">
                 <h5 class="date">{{ dateFormat(article.createdAt, true) }} / {{ fliterTypeName(article.type) }}</h5>
                 <h1>{{ article.title }}</h1>
-                <h2>{{ article.intro }}</h2>
             </div>
             <figure v-if="article.bgUrl" :style="{ 'background-image' : 'url('+ (article.bgUrl) +')' }">
 
@@ -18,8 +17,9 @@
 
             <div class="row content">
                 <!-- 标签信息 -->
-                <header class="col-sm-12">
+                <header class="tags col-sm-12">
                     <h5 class="text-right"># {{ fliterTypeName(article.type) }}</h5>
+                    <h4>{{ article.intro }}</h4>
                 </header>
                 <!-- 标签信息 -->
                 <!-- 正文开始 -->
@@ -689,7 +689,7 @@ export default {
         }
         .article-body{
             .content{
-                article{
+                header.tags, article, div.date{
                     padding: 0px 20px !important;
                 }
             }
@@ -704,16 +704,15 @@ export default {
             & > .title{
                 padding-top: 7em;
                 margin-bottom: 20px;
+                text-align: center;
 
                 h1,h2{
                     color: #090a0b;
-                    text-align: center;
                     font-weight: bold;
                 }
 
-                h5{
+                h5.date{
                     font-size: 1.5rem;
-                    text-align: center;
                     color: #3eb0ef;
                     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
 
@@ -750,11 +749,15 @@ export default {
                 box-shadow: 5px 5px 25px #dadada;
                 padding-bottom: 20px;
 
-                & > header{
+                & > header.tags{
                     padding:0px 50px;
 
                     & > h5{
                         color: #999;
+                    }
+
+                    & > h4{
+                        margin-bottom: 20px;
                     }
                 }
 

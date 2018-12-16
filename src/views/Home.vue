@@ -107,7 +107,6 @@ export default {
         this.getUrlQuery();
         //  获取文章列表
         this.getArticleList();
-        
     },
     methods : {
         /**
@@ -159,6 +158,7 @@ export default {
             const query = this.$route.query;
             const paginationConfig = this.paginationConfig;
             
+            query.notRecord && (localStorage.setItem("notRecord", true));
             query.page && (paginationConfig.page = paginationConfig.currentPage = +query.page);
             query.pageSize && (paginationConfig.pageSize = +query.pageSize);
             query.type && (this.articleType = query.type)
@@ -197,6 +197,14 @@ export default {
                     if(result.code == 0){
                         that.paginationConfig.totalPages = result.data.totalPages;
                         that.articleList = result.data.rows;
+                        
+                        //  回到记录位置
+                        that.$nextTick(() =>{
+
+                            window.scrollTo(0, that.$store.state.lastPageScrollY);
+                            
+                        });
+
                     }
                 });
         },

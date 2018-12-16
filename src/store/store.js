@@ -13,7 +13,9 @@ const state = {
 	//	菜单栏是否固定
 	isMenuFixed: false,
 	//	Y轴滚动距离
-	scrollY: 0
+	scrollY: 0,
+	//	上个页面Y轴滚动距离
+	lastPageScrollY: 0
 }
 
 export default new Vuex.Store({

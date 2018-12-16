@@ -30,5 +30,13 @@ export default {
 	 */
 	updateScrollY(state, value){
 		state.scrollY = value;
+	},
+	/**
+	 * 更新上一页Y轴滚动距离
+	 * @param {*} state 
+	 * @param {*} value 
+	 */
+	updateLastPageScrollY(state, value){
+		state.lastPageScrollY = value;
 	}
 }
