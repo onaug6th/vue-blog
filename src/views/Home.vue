@@ -75,7 +75,7 @@ export default {
     components: {
         pagination
     },
-    data(){
+    data() {
         return {
             articleType: "",
             //  分页配置
@@ -86,7 +86,7 @@ export default {
             articleList: []
         }
     },
-    computed:{
+    computed: {
         //  标签列表
         typeList(){
             return this.$store.state.articleTypeList;
@@ -100,7 +100,7 @@ export default {
             this.homeBgUrl = this.imgCdnUrl + `/hope1.png`;
         }
     },
-    mounted(){
+    mounted() {
         //  设置分页组件属性
         this.setPagination();
         //  获取url上可能存在的hash
@@ -108,7 +108,7 @@ export default {
         //  获取文章列表
         this.getArticleList();
     },
-    methods : {
+    methods: {
         /**
          * 文章类型中文名称转义
          * @param {string} id id

@@ -1,9 +1,8 @@
 export default {
-
 	recordToken({ commit, state }, value) {
-		commit('RECORDMENULEVELONE', value);
+		commit('recordToken', value);
 	},
 	toggleMenuFixed({ commit, state }, value) {
-		commit('TOGGLEMENUFIXED', value);
+		commit('toggleMenuFixed', value);
 	}
 }

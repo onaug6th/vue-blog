@@ -56,6 +56,11 @@ export default {
             this.$store.commit("updateArticleTypeList", result.data.rows);
         });
 
+        //  拉取文章标签列表
+        this.$http.post('tag/list').then( (result) =>{
+            this.$store.commit("updateTagList", result.data.rows);
+        });
+
     },
     methods:{
 

@@ -7,9 +7,7 @@
                 <h5 class="date">{{ dateFormat(article.createdAt, true) }} / {{ fliterTypeName(article.type) }}</h5>
                 <h1>{{ article.title }}</h1>
             </div>
-            <figure v-if="article.bgUrl" :style="{ 'background-image' : 'url('+ (article.bgUrl) +')' }">
-
-            </figure>
+            <figure v-if="article.bgUrl" :style="{ 'background-image' : 'url('+ (article.bgUrl) +')' }"></figure>
         </header>
         <!-- 页面头部 -->
         <!-- 页面内容 -->
@@ -18,8 +16,16 @@
             <div class="row content">
                 <!-- 标签信息 -->
                 <header class="tags col-sm-12">
-                    <h5 class="text-right"># {{ fliterTypeName(article.type) }}</h5>
-                    <h4>{{ article.intro }}</h4>
+                    <template v-if="article.tag">
+                        <a
+                            v-for="(item, index) in tagFormat(article.tag, $store.state.tagList)"
+                            :key="index"
+                            :title="item.name"
+                            @click="goArchiveTag(item)"
+                            >{{ item.name }}
+                        </a>
+                    </template>
+                    <h4 class="text-left">{{ article.intro }}</h4>
                 </header>
                 <!-- 标签信息 -->
                 <!-- 正文开始 -->
@@ -273,6 +279,7 @@ export default {
             article: {
                 id: "",
                 type: "",
+                tag: "",
                 title: "",
                 content: "",
                 bgUrl: "",
@@ -315,6 +322,10 @@ export default {
                     path : "/"
                 });
             });
+        },
+        //  前往档案标签分类
+        goArchiveTag(){
+            this.$swal("请耐心等候程序员完工");
         },
         /**
          * 文章类型中文名称转义
@@ -690,7 +701,7 @@ export default {
         .article-body{
             .content{
                 header.tags, article, div.date{
-                    padding: 0px 20px !important;
+                    padding: 5px 15px !important;
                 }
             }
         }
@@ -750,7 +761,28 @@ export default {
                 padding-bottom: 20px;
 
                 & > header.tags{
-                    padding:0px 50px;
+                    padding: 5px 50px;
+                    text-align: right;
+
+                    a{
+                        display: inline-block;
+                        cursor: pointer;
+                        border: 1px solid #ccc;
+                        color: #555;
+                        border-radius: 15px;
+                        padding: 0 10px;
+                        line-height: 24px;
+                        font-size: 12px;
+                        text-decoration: none;
+                        margin-left: 5px;
+                        transition: 0.75s;
+
+                        &.active{
+                            color: white;
+                            background: #2c84cc;
+                            border: none;
+                        }
+                    }
 
                     & > h5{
                         color: #999;

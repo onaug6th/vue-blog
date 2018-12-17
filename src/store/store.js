@@ -10,6 +10,8 @@ const state = {
 	token: "",
 	//	文章类型列表
 	articleTypeList: [],
+	//	标签类型列表
+	tagList: [],
 	//	菜单栏是否固定
 	isMenuFixed: false,
 	//	Y轴滚动距离

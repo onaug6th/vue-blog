@@ -174,16 +174,19 @@ export default {
 
 <style lang="scss" scoped>
 
-    .pagination .active>a{
-        color:#77e576;
-        border: 0px solid;
-        background-color:white;
-        border-color: #dddddd;
-        border-bottom: #77e576 1px solid;
-        z-index: 2;
-    }
-    .pagination a{
-        border: 0px solid;
+    .pagination{
+        .active > a{
+            color:#77e576;
+            border: 0px solid;
+            background-color:white;
+            border-color: #dddddd;
+            border-bottom: #77e576 1px solid;
+            z-index: 2;
+        }
+        a{
+            cursor: pointer;
+            border: 0px solid;
+        }
     }
 
 </style>

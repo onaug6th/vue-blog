@@ -2,15 +2,15 @@ export default {
 	/**
 	 * 记录token
 	 * @param {*} state 
-	 * @param {*} value 
+	 * @param {string} value 
 	 */
 	recodeToken(state, value) {
 		state.token = value;
 	},
 	/**
-	 * 切换固定菜单
+	 * 切换菜单固定状态
 	 * @param {*} state 
-	 * @param {*} value 
+	 * @param {boolean} value 
 	 */
 	toggleMenuFixed(state, value){
 		state.isMenuFixed = value;
@@ -18,15 +18,23 @@ export default {
 	/**
 	 * 更新文章类型列表
 	 * @param {*} state 
-	 * @param {*} value 
+	 * @param {array} value 
 	 */
 	updateArticleTypeList(state, value){
 		state.articleTypeList = value;
 	},
 	/**
+	 * 更新标签列表
+	 * @param {*} state 
+	 * @param {array} value 
+	 */
+	updateTagList(state, value){
+		state.tagList = value;
+	},
+	/**
 	 * 更新Y轴滚动距离
 	 * @param {*} state 
-	 * @param {*} value 
+	 * @param {number | string} value 
 	 */
 	updateScrollY(state, value){
 		state.scrollY = value;
@@ -34,7 +42,7 @@ export default {
 	/**
 	 * 更新上一页Y轴滚动距离
 	 * @param {*} state 
-	 * @param {*} value 
+	 * @param {number | string} value 
 	 */
 	updateLastPageScrollY(state, value){
 		state.lastPageScrollY = value;
