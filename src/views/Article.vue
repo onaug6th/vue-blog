@@ -75,7 +75,7 @@
                                 </textarea>
                             </div>
                         </div>
-                        <div class="form col-sm-12 clearfix">
+                        <div class="form col-sm-12">
                             <div class="submit-warp col-sm-6 text-right pull-right">
                                 <button class="btn btn-success" @click="replySubmit()">提交</button>
                             </div>
@@ -689,6 +689,14 @@ export default {
 
     //  针对小屏幕特殊样式
     @media screen and (max-width:600px) {
+        header.article-bg{
+
+            & > .title{
+                h1{
+                    font-size: 2.3em;
+                }
+            }
+        }
         .container {
             padding: 0px;
         }
@@ -702,6 +710,7 @@ export default {
             .content{
                 header.tags, article, div.date{
                     padding: 5px 15px !important;
+                    padding-top: 10px !important;
                 }
             }
         }
@@ -720,6 +729,7 @@ export default {
                 h1,h2{
                     color: #090a0b;
                     font-weight: bold;
+                    white-space: nowrap;
                 }
 
                 h5.date{
@@ -762,6 +772,7 @@ export default {
 
                 & > header.tags{
                     padding: 5px 50px;
+                    padding-top: 10px;
                     text-align: right;
 
                     a{
@@ -777,10 +788,9 @@ export default {
                         margin-left: 5px;
                         transition: 0.75s;
 
-                        &.active{
-                            color: white;
-                            background: #2c84cc;
-                            border: none;
+                        &:hover{
+                            color: #2c84cc;
+                            border: 1px solid #2c84cc;
                         }
                     }
 
@@ -807,6 +817,7 @@ export default {
                 & > .like-and-share{
                     text-align: center;
                     padding:20px;
+                    padding-bottom: 60px;
 
                     .like-btn{
                         padding:3px 35px;
