@@ -17,22 +17,6 @@
                     </h5>
                     <h5 class="text-right">{{ item.createdAt }}</h5>
                 </div>
-                <li v-if="token" class="btn btn-primary" style="background:black;" :key="index">
-                    <a class="dropdown-toggle" data-toggle="dropdown" style="color:white">
-                        操作
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a @click="commonHandle(item, 'delete')">
-                                删除
-                            </a>
-                            <a @click="commonHandle(item, 'hide')">
-                                隐藏
-                            </a>
-                        </li>
-                    </ul>
-                </li>
             </template>
 
         </div>
@@ -236,33 +220,6 @@ export default {
 
         },
         /**
-         * 通用操作
-         * @param {object} item 行对象
-         * @param {string} type 类型    
-         */
-        commonHandle(item, type){
-            const that = this;
-            let method = "delete";
-            let url = `wall/${item.id}`;
-            let params = {
-                ...item
-            }
-            
-            if(type == "delete"){
-                method = "delete";
-            }else{
-                method = "put";
-                params.show = "0";
-                params.include = ["show"];
-            }
-
-            that.$http[method](url, params)
-                .then( (result) =>{
-                    that.$swal(result.detailMsg, "", "success");
-                    that.getStickyNoteList();
-                });
-        },
-        /**
          * 页码改变事件
          * @param {number} page 野马
          */
@@ -366,11 +323,6 @@ export default {
             padding: 3px 10px; 
             background: #f1f1f1; 
             font-size: 14px;
-        }
-        
-        .btn-primary .dropdown-menu{
-            top:100px;
-            left:inherit;
         }
     }
 </style>
