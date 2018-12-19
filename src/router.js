@@ -69,8 +69,8 @@ Router.beforeEach((to, from, next) => {
 //	监听路由跳转后事件
 Router.afterEach((to, from) => {
 
-    if(["home"].includes(to.name)){
-        window.scrollTo(0, store.state.lastPageScrollY);
+    if(["home"].includes(to.name) || ["article"].includes(from.name)){
+        sessionStorage.setItem("scrollLastPage", true);
     }else{
         //	回到顶部
         window.scrollTo(0, 0);

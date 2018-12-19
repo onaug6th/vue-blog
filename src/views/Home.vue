@@ -18,25 +18,6 @@
 
             <div class="row main-content">
 
-                <!-- 置顶文章 -->
-                <!-- <div class="card-box">
-                    <a class="card-image">
-                        <div style="background-image: url(http://wx1.sinaimg.cn/large/9311b2dagy1fy7kl3ozgcj21400u0qv5.jpg)" class="dont-delete-me"></div>
-                    </a>
-                    <div class="card-content">
-                        <div class="content">
-                            <span>奇思妙想</span>
-                            <h3>这就是全部</h3>
-                            <p>是的，这就是全部了。</p>
-                        </div>
-                        <div class="footer">
-                            <button class="btn btn-default" @click="readDetail(1)">Read Detail</button>
-                            <span class="date">2018.09.18</span>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- 置顶文章 -->
-
                 <div class="card-box" v-for="(item, index) in articleList" :key="index">
                     <a class="card-image">
                         <div
@@ -110,6 +91,19 @@ export default {
     },
     methods: {
         /**
+         * 设置分页组件属性
+         */
+        setPagination(){
+            this.paginationConfig = {
+                page : 1,
+                pageSize : 10,
+                prevText : "前页",
+                nextText : "后页",
+                currentPage : 1,
+                totalPages : 0
+            }
+        },
+        /**
          * 文章类型中文名称转义
          * @param {string} id id
          */
@@ -161,52 +155,41 @@ export default {
             query.notRecord && (localStorage.setItem("notRecord", true));
             query.page && (paginationConfig.page = paginationConfig.currentPage = +query.page);
             query.pageSize && (paginationConfig.pageSize = +query.pageSize);
-            query.type && (this.articleType = query.type)
-        },
-        /**
-         * 设置分页组件属性
-         */
-        setPagination(){
-            this.paginationConfig = {
-                page : 1,
-                pageSize : 10,
-                prevText : "前页",
-                nextText : "后页",
-                currentPage : 1,
-                totalPages : 0
-            }
+            query.type && (this.articleType = query.type);
         },
         /**
          * 获取文章列表
          * 添加排除的内容，来减少数据拉取量
          */
         getArticleList(){
-            const that = this;
-            const { page, pageSize } = that.paginationConfig;
+            const { page, pageSize } = this.paginationConfig;
             
             const params = {
                 page,
                 pageSize,
-                exclude : [ "content" ]
+                exclude : ["content"]
             };
 
             this.articleType && (params.where = { type: this.articleType });
 
-            that.$http.post("article/list", params)
-                .then((result) =>{
-                    if(result.code == 0){
-                        that.paginationConfig.totalPages = result.data.totalPages;
-                        that.articleList = result.data.rows;
-                        
-                        //  回到记录位置
-                        that.$nextTick(() =>{
-
-                            window.scrollTo(0, that.$store.state.lastPageScrollY);
+            return new Promise(resolve =>{
+                this.$http.post("article/list", params)
+                    .then((result) =>{
+                        if(result.code == 0){
+                            this.paginationConfig.totalPages = result.data.totalPages;
+                            this.articleList = result.data.rows;
                             
-                        });
-
-                    }
-                });
+                            this.$nextTick(() =>{
+                                resolve(result);
+                                if(sessionStorage.getItem("scrollLastPage")){
+                                    sessionStorage.removeItem("scrollLastPage");
+                                    window.scrollTo(0, this.$store.state.lastPageScrollY);
+                                }
+                            });
+                            
+                        }
+                    });
+            });
         },
         /**
          * 查看文章
@@ -219,6 +202,25 @@ export default {
             });
 
         },
+        //  滚动到列表顶部
+        srcollToListHead(){
+
+            //  当前滚动滚动高度
+            let scrollHeight = document.documentElement.scrollTop || document.body.scrollTop;
+            //  封面高度
+            let headerHeight = document.querySelector(".home-bg").clientHeight - 50;
+            //  每次滚动的距离
+            let step = scrollHeight / 50;
+
+            ;(function jump(){
+                if(scrollHeight > headerHeight){
+                    scrollHeight-=step;
+                    window.scrollTo(0, scrollHeight);
+                    setTimeout(jump, 10);
+                }
+            })();
+
+        },
         /**
          * 页码改变事件
          * @param {number} page 页码
@@ -227,15 +229,16 @@ export default {
             const paginationConfig = this.paginationConfig;
 
             paginationConfig.page = page;
+
+            let hash = `#/?page=${page}&pageSize=${paginationConfig.pageSize}&type=`;
             
-            this.$router.push({
-                query: {
-                    page : page,
-                    pageSize : paginationConfig.pageSize,
-                    type : this.articleType
-                }
+            this.articleType && (hash += `&type=${this.articleType}`);
+
+            window.location.hash = hash;
+
+            this.getArticleList().then(() =>{
+                this.srcollToListHead();
             });
-            this.getArticleList();
         }
     }
 }

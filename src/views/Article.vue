@@ -663,12 +663,8 @@ export default {
 
             params.page = page;
             
-            this.$router.push({
-                query: {
-                    page : page,
-                    pageSize : params.pageSize
-                }
-            });
+            window.location.hash = `#/?page=${page}&pageSize=${params.pageSize}`;
+
             this.rendeReplyList();
         }
     }
