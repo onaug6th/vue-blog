@@ -68,7 +68,7 @@ export default {
         }
     },
     computed: {
-        //  标签列表
+        //  文章类型列表
         typeList(){
             return this.$store.state.articleTypeList;
         }
