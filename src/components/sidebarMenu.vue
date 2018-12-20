@@ -2,7 +2,7 @@
     <transition name="fadefast">
         <div v-if="isShowMenu" class="side-menu">
             <div v-if="!isMenuFixed" class="modal-backdrop fade in" @click="menuToggle()"></div>
-            <div class="sidebar-main">
+            <div class="sidebar-main" :class="{'short': isMenuFixed}">
                 <div class="sidebar-header header-cover"
                     :style="{'background-image' : `url(${imgCdnUrl}/hope.png)`}"
                     >
@@ -107,13 +107,22 @@ export default {
 <style lang="scss" scoped>
 
     /*
-    * 来自远古时期的样式代码
-    */
+     * 来自远古时期的样式代码
+     */
     .side-menu{
         z-index: 20;
         position:absolute;
 
+        .sidebar-main.short{
+            width: 200px !important;
+
+            .sidebar-footer{
+                width: 200px !important;
+            }
+        }
+
         .sidebar-main{
+            transition: all .5s;
             position: fixed;
             z-index: 1041;
             top: 0;
@@ -170,6 +179,7 @@ export default {
             }
 
             .sidebar-footer{
+                transition: all .5s;
                 position: fixed;
                 bottom: 0px;
                 width: 300px;

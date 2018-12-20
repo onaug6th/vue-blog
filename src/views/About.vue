@@ -14,12 +14,9 @@
                                 </div>
                                 <div class="col-xs-8">
                                     <p style="color: #616161;font-weight:bold; margin:0px;">onaug6th</p>
-                                    <span>2017-08-06</span>
+                                    <span>2016-11-05</span>
                                 </div>
                             </div>
-                            <h3>
-                                <span>关于我</span>
-                            </h3>
 
                             <p>
                                 <span>onaug6th</span>
@@ -31,8 +28,16 @@
                             <hr>
                             <p>
                                 <span>
-                                    喜欢JavaScript，喜欢node.js，<br>
+                                    喜欢JavaScript，喜欢Node.js<br>
                                     喜欢运动，喜欢打游戏<br>
+                                    喜欢独处
+                                </span>
+                            </p>
+
+                            <p>
+                                <span>
+                                    喜欢钻研事物<br>
+                                    喜欢做些有成就的事情
                                 </span>
                             </p>
 
@@ -46,12 +51,12 @@
                             <p>
                                 <span>
                                     喜欢看风景<br>
-                                    喜欢美女<br>
+                                    喜欢看美女<br>
                                 </span>
                             </p>
 
                             <p style="color: white">
-                                <span>
+                                <span title="Now you see me">
                                     喜欢你<br>
                                 </span>
                             </p>

@@ -18,8 +18,11 @@
 
             <div class="row main-content">
                 <div class="article-type" v-for="(articleType, index) in typeList" :key="index">
-                    <h5>
+                    <h5 class="type-name">
                         {{articleType.name}}
+                    </h5>
+                    <h5>
+                        {{articleType.intro}}
                     </h5>
                     <a 
                         class="tag"
@@ -51,9 +54,14 @@ export default {
     },
     data(){
         return {
+            homeBgUrl: `https://static.ghost.org/v2.0.0/images/app-integrations.jpg`,
+            //  查询条件
+            params: {
+                articleType: "",
+                tag: ""
+            },
             //  分页配置
             paginationConfig: {},
-            homeBgUrl: `https://static.ghost.org/v2.0.0/images/app-integrations.jpg`,
             //  当前文章列表
             articleList: []
         }
@@ -71,10 +79,18 @@ export default {
     mounted() {
         //  设置分页组件属性
         this.setPagination();
-        //  获取url上可能存在的hash
-        this.getUrlQuery();
-        //  获取文章列表
-        this.getArticleList();
+
+        if(!this.$store.state.allArticleList.length){
+            //  获取全部文章列表
+            this.getAllArticleList().then(() =>{
+                //  获取url上可能存在的hash
+                this.getUrlQuery();
+            });
+        }else{
+            //  获取url上可能存在的hash
+            this.getUrlQuery();
+        }
+        
     },
     methods:{
         /**
@@ -93,8 +109,16 @@ export default {
         getUrlQuery(){
 
         },
-        getArticleList(){
-
+        getAllArticleList(){
+            return new Promise(resolve =>{
+                this.$http.post("article/list", {})
+                    .then((result) =>{
+                        if(result.code == 0){
+                            this.$store.commit("updateAllArticleList", result.data.rows);
+                            resolve(result);
+                        }
+                    });
+            });
         },
         /**
          * 根据文章类型，过滤出对应标签
@@ -231,7 +255,7 @@ main.container{
             border-radius: 5px;
             padding: 5px 30px;
             
-            & > h5{
+            & > .type-name{
                 font-weight: bold;
             }
 
@@ -251,6 +275,12 @@ main.container{
                 margin: 0 1px;
                 margin-bottom: 6px;
                 cursor: pointer;
+
+                &:hover{
+                    color: #2c84cc;
+                    border: 1px solid #2c84cc;
+                    background: white;
+                }
             }
         }
     }

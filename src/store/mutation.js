@@ -20,6 +20,14 @@ export default {
 	 * @param {*} state 
 	 * @param {array} value 
 	 */
+	updateAllArticleList(state, value){
+		state.allArticleList = value;
+	},
+	/**
+	 * 更新文章类型列表
+	 * @param {*} state 
+	 * @param {array} value 
+	 */
 	updateArticleTypeList(state, value){
 		state.articleTypeList = value;
 	},

@@ -4,7 +4,7 @@
             <p>
                 <span class="glyphicon glyphicon-piggy-bank" @click="newWorld()"></span>
             </p>
-            <h4>© 2018 onaug6th. All rights reserved.</h4>
+            <h5>2017-2018 onaug6th.com</h5>
         </div>
     </footer>
 </template>
@@ -39,11 +39,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-footer{
-    color: #555;
-    height:120px;
-    box-shadow: 0 0 25px #ccc;
-    text-align: center;
-    padding-top: 2rem;
-}
+    footer{
+        color: #555;
+        height:120px;
+        box-shadow: 0 0 25px #ccc;
+        text-align: center;
+        padding-top: 2rem;
+
+        h5{
+            font-size: 16px;
+        }
+    }
 </style>

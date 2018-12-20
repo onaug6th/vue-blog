@@ -16,10 +16,12 @@
         </nav>
         <!-- 页面顶部导航栏 -->
 
-        <transition name="fade">
-            <!-- 路由页面出口 -->
-            <router-view/>
-        </transition>
+        <div ref="contentRef">
+            <transition name="fade">
+                <!-- 路由页面出口 -->
+                <router-view/>
+            </transition>
+        </div>
 
         <superFooter></superFooter>
         <!-- 结束啦 :) -->
@@ -47,6 +49,8 @@ export default {
         sidebarMenu
     },
     mounted() {
+
+        this.$refs.contentRef.style.minHeight = document.documentElement.clientHeight + "px";
 
         //  监听导航栏滚动状态
         window.addEventListener('scroll', this.handleScroll);

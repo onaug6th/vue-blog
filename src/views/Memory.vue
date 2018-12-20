@@ -1,5 +1,5 @@
 <template>
-    <div ref="memoryContainer" class="memory-container container">
+    <div class="memory-container container">
         <div class="memory-box col-sm-12 clearfix temp-bg">
             <div class="photo">
 
@@ -19,31 +19,17 @@
 export default {
     name: 'memory',
     computed: {
-        token(){
-            return this.$store.state.token;
-        }
     },
     components : {
         
     },
     data () {
         return {
-            memoryContainerRef : {}
         };
     },
     mounted () {
-        this.memoryContainerRef = this.$refs.memoryContainer;
-        //  计算高度
-        this.countWindowHeight();
     },
     methods: {
-        /**
-         * 计算窗口高度并设置页面高度
-         */
-        countWindowHeight(){
-            const windowHeight = document.documentElement.clientHeight;
-            this.memoryContainerRef.style.minHeight = windowHeight + "px";
-        },
         wacthMemory(){
             this.$swal("印象还没准备好");
         }

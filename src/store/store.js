@@ -8,6 +8,8 @@ Vue.use(Vuex);
 const state = {
 	//	fucken
 	token: "",
+	//	全部文章
+	allArticleList: [],
 	//	文章类型列表
 	articleTypeList: [],
 	//	标签类型列表

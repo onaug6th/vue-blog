@@ -87,7 +87,6 @@ export default {
             width: 150%;
             position: relative;
             top: 0;
-            background-color: #409eff;
 
             &.switch-on {
                 left: 0%;
