@@ -2,7 +2,7 @@
     <div>
         <ul class="pagination pagination-sm no-margin pull-right" :class="config.className">
             <!-- 上一页按钮 -->
-            <li :class="{ 'disabled' : (config.currentPage <= 1)}"
+            <li :class="{ 'disabled' : (config.page <= 1)}"
                 @click="prevPage()"
                 >
                 <a href="javascript:void(0)">
@@ -11,7 +11,7 @@
             </li>
             <!-- 上一页按钮介绍 -->
             <!-- 第一页按钮 -->
-            <li :class="{ 'active' : config.currentPage == 1 }"
+            <li :class="{ 'active' : config.page == 1 }"
                 @click="pageTo(1)"
                 v-if="config.totalPages > 0">
                 <a>1</a>
@@ -27,7 +27,7 @@
             <li class="number"
                 v-for="(item, index) in pageList"
                 @click="pageTo(item)"
-                :class="{ 'active' : config.currentPage === item }"
+                :class="{ 'active' : config.page === item }"
                 :key="index"
                 >
                 <a>{{ item }}</a>
@@ -42,14 +42,14 @@
             <!-- 下五页按钮 -->
             <!-- 最后一页按钮 -->
             <li class="number"
-                :class="{ 'active' : (config.currentPage === config.totalPages)}"
+                :class="{ 'active' : (config.page === config.totalPages)}"
                 @click="pageTo(config.totalPages)"
                 v-if="config.totalPages > 1">
                 <a>{{ config.totalPages }}</a>
             </li>
             <!-- 最后一页按钮 -->
             <!-- 下一页按钮 -->
-            <li :class="{ 'disabled' : (config.currentPage == config.totalPages)}"
+            <li :class="{ 'disabled' : (config.page == config.totalPages)}"
                 @click="nextPage()"
                 >
                 <a href="javascript:void(0)">
@@ -87,9 +87,9 @@ export default {
             if(!this.config.totalPages){
                 return [];
             }
-            const pageList = this.makePagers(this.config.currentPage, this.config.totalPages);
+            const pageList = this.makePagers(this.config.page, this.config.totalPages);
             if(!this.firstLoad){
-                this.$emit("pageChange" , this.config.currentPage, this.config);
+                this.$emit("pageChange" , this.config.page, this.config);
             }else{
                 this.firstLoad = !this.firstLoad;
             }
@@ -101,18 +101,18 @@ export default {
          * 上一页
          */
         prevPage(){
-            if(this.config.currentPage <= 1) {
+            if(this.config.page <= 1) {
                 return false;
             }
-            this.config.currentPage -= 1;
+            this.config.page -= 1;
         },
         /**
          * 根据页码去指定页
          * @param {number} page 页码
          */
         pageTo(page){
-            if (page !== this.currentPage) {
-                this.config.currentPage = page;
+            if (page !== this.page) {
+                this.config.page = page;
             }
         },
         /**
@@ -120,17 +120,17 @@ export default {
          * @param {number} step 页码
          */
         jumpTo(step){
-            const nextPage = this.config.currentPageNum + step;
-            this.config.currentPage = nextPage < 1 ? 1 : nextPage > this.config.totalPages ? this.config.totalPages : nextPage;
+            const nextPage = this.config.page + step;
+            this.config.page = nextPage < 1 ? 1 : nextPage > this.config.totalPages ? this.config.totalPages : nextPage;
         },
         /**
          * 下一页
          */
         nextPage(){
-            if(this.config.currentPage == this.config.totalPages){
+            if(this.config.page == this.config.totalPages){
                 return false;
             }
-            this.config.currentPage += 1;
+            this.config.page += 1;
         },
         /**
          * 生成页码

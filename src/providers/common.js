@@ -68,7 +68,7 @@ const methods = {
      * @param {array} tagList
      */
     tagFormat(tags, tagList){
-        return tags.split(",").map((item) =>{
+        return !tags ? [] : tags.split(",").map((item) =>{
             return methods.findObjectInArray(item, "id", tagList);
         });
     }

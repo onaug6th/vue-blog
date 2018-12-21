@@ -98,7 +98,6 @@ export default {
                 pageSize : 10,
                 prevText : "前页",
                 nextText : "后页",
-                currentPage : 1,
                 totalPages : 0
             }
         },
@@ -127,7 +126,7 @@ export default {
             const paginationConfig = this.paginationConfig;
             
             query.notRecord && (localStorage.setItem("notRecord", true));
-            query.page && (paginationConfig.page = paginationConfig.currentPage = +query.page);
+            query.page && (paginationConfig.page = +query.page);
             query.pageSize && (paginationConfig.pageSize = +query.pageSize);
         },
         /**

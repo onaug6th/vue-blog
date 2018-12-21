@@ -400,7 +400,7 @@ export default {
                     that.emptyReplyObj();
                     that.rendeReplyList();
                     //  自动跳转到最后一页。
-                    that.$set(that.paginationConfig, "currentPage" , that.paginationConfig.totalPages);
+                    that.$set(that.paginationConfig, "page" , that.paginationConfig.totalPages);
                 }
             });
         },
@@ -453,7 +453,7 @@ export default {
             this.paginationConfig = {
                 prevText : "前页",
                 nextText : "后页",
-                currentPage : this.params.page,
+                page : this.params.page,
                 count : 0,
                 totalPages : 0
             }
@@ -489,7 +489,7 @@ export default {
                 //  当获取评论列表成功时，尝试获取内部楼中楼回复，并且赋予每个对象都保存分页属性。
                 result.data.rows.forEach((item, index) =>{
                     item.pagination = {
-                        currentPage: 1,
+                        page: 1,
                         pageSize: 5,
                         totalPages: 0,
                         prevText: "前页",
@@ -547,7 +547,7 @@ export default {
                     }
                 })[0];
                 
-                obj && obj.pagination && (this.$set(obj.pagination, "currentPage", obj.pagination.totalPages));
+                obj && obj.pagination && (this.$set(obj.pagination, "page", obj.pagination.totalPages));
             });
         },
         /**
@@ -632,7 +632,7 @@ export default {
             const that = this;
             const params = {
                 articleId: that.article.id,
-                page: item.pagination.currentPage,
+                page: item.pagination.page,
                 pageSize: item.pagination.pageSize,
                 floorId: item.floor || item.floorId
             };

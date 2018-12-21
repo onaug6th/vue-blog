@@ -49,8 +49,17 @@
                         <h4>
                             <a @click="readDetail(article.id)">{{ article.title }}</a>
                         </h4>
-                        <h5 class="clearfix">
+                        <h5 class="clearfix" v-if="article.intro">
                             {{ article.intro }}
+                        </h5>
+                        <h5 class="clearfix">
+                            <a 
+                                class="tag"
+                                v-for="(tag, i) in tagFormat(article.tag, $store.state.tagList)"
+                                :key="i"
+                            >
+                                {{tag.name}}
+                            </a>
                             <span class="pull-right">
                                 {{ dateFormat(article.createdAt) }}
                             </span>
@@ -123,7 +132,6 @@ export default {
                 pageSize : 10,
                 prevText : "前页",
                 nextText : "后页",
-                currentPage : 1,
                 totalPages : 0
             }
         },
@@ -169,6 +177,7 @@ export default {
         switchParams(type, obj){
             const params = this.params;
             const articleType = params["articleType"];
+            this.paginationConfig.page = 1;
 
             if(type == "articleType"){
                 
@@ -231,11 +240,11 @@ export default {
         },
         //  分页切割文章数据
         paginationArticleList(list){
-            const {currentPage, pageSize} = this.paginationConfig;
+            const {page, pageSize} = this.paginationConfig;
 
             this.paginationConfig.totalPages = Math.ceil(list.length / pageSize);
             
-            return list.slice((pageSize * (currentPage - 1)), (currentPage * pageSize));
+            return list.slice((pageSize * (page - 1)), (page * pageSize));
             
         },
         /**
@@ -298,7 +307,7 @@ export default {
             //  封面高度
             let headerHeight = document.querySelector(".home-bg").clientHeight - 50;
             //  每次滚动的距离
-            let step = scrollHeight / 50;
+            let step = scrollHeight / 20;
 
             ;(function jump(){
                 if(scrollHeight > headerHeight){
@@ -476,9 +485,21 @@ main.container{
                 padding: 10px 0px;
                 border-bottom: 1px solid #eee;
                 
-                a{
+                h4 a{
                     cursor: pointer;
                     text-decoration: unset;
+                }
+
+                a.tag{
+                    display: inline-block;
+                    border: 1px solid #ccc;
+                    color: #555;
+                    border-radius: 15px;
+                    padding: 0 10px;
+                    line-height: 24px;
+                    font-size: 12px;
+                    text-decoration: none;
+                    margin-right: 5px;
                 }
             }
         }

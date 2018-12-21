@@ -113,7 +113,6 @@ export default {
                 pageSize : 8,
                 prevText : "前页",
                 nextText : "后页",
-                currentPage : 1,
                 totalPages : 0
             },
             //  外边区域索引
@@ -194,7 +193,7 @@ export default {
                     this.$swal(result.detailMsg, "", "success");
                 
                     if(result.code == 0){
-                        this.$set(this.paginationConfig, "currentPage" , this.paginationConfig.totalPages);
+                        this.$set(this.paginationConfig, "page" , this.paginationConfig.totalPages);
                         that.showModal = false;
                         this.stickyNote = {};
                         this.getStickyNoteList();
