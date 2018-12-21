@@ -22,7 +22,7 @@
                     v-for="(articleType, index) in typeList"
                     :key="index"
                     :class="{'active': params.articleType == articleType.id}"
-                    @click="switchParams('articleType', articleType.id)"
+                    @click="switchParams('articleType', articleType)"
                 >
                     <h5 class="type-name">
                         {{articleType.name}}
@@ -35,7 +35,7 @@
                         v-for="(tag, i) in tagFilter(articleType.id)"
                         :key="i"
                         :class="{'active': params.tag.includes(tag.id)}"
-                        @click="switchParams('tag', tag.id)"
+                        @click.stop="switchParams('tag', tag)"
                     >
                         {{tag.name}}
                     </a>
@@ -47,7 +47,7 @@
                     </h3>
                     <div class="articles" v-for="(article, i) in item.list" :key="i">
                         <h4>
-                            {{ article.title }}
+                            <a @click="readDetail(article.id)">{{ article.title }}</a>
                         </h4>
                         <h5 class="clearfix">
                             {{ article.intro }}
@@ -138,6 +138,17 @@ export default {
                 }
             });
         },
+        /**
+         * 查看文章
+         * @param {string} id id
+         */
+        readDetail(id){
+
+            this.$router.push({
+                path : `/article/${id}`
+            });
+
+        },
         //  获取全部文章数据
         getAllArticleList(){
             return new Promise(resolve =>{
@@ -153,33 +164,66 @@ export default {
         /**
          * 切换查询条件
          * @param {string} type 切换的类型
-         * @param {string} value 值
+         * @param {string} obj
          */
-        switchParams(type, value){
+        switchParams(type, obj){
             const params = this.params;
-            let attr = this.params[type];
+            const articleType = params["articleType"];
+
             if(type == "articleType"){
-                params[type] !== value && (params["tag"] = []);
-                params[type] = value;
+                
+                //  如果没有选择或不一样，赋值
+                if(!articleType || articleType !== obj.id){
+                    params["articleType"] = obj.id;
+                    this.$set(this.params, "tag", []);
+                }
+                //  如果相同
+                else if(articleType == obj.id){
+                    params["articleType"] = "";
+                    this.$set(this.params, "tag", []);
+                }
+
             }else{
-                if(!attr.includes(value)){
-                    attr.push(value);
+                const id = obj.id;
+                //  如果文章类型不相同
+                if(articleType != obj.articleType){
+                    params["articleType"] = obj.articleType;
+                    this.$set(this.params, "tag", []);
+                }
+
+                if(!this.params["tag"].includes(id)){
+                    this.params["tag"].push(id);
                 }else{
-                    attr.forEach((item, index) =>{
-                        item === value && (
-                            attr.splice(index, 1)
+                    this.params["tag"].forEach((item, index) =>{
+                        item === id && (
+                            this.params["tag"].splice(index, 1)
                         );
                     });
                 }
+
             }
+            
             this.initArticleList();
+        },
+        /**
+         * 我在那个数组中吗？
+         * @param {array} arr1
+         * @param {array} arr2
+         */
+        Array2isInArray1(arr1, arr2){
+            return arr2.filter(item =>{
+                if(arr1.includes(item)){
+                    return item;
+                }
+            }).length == arr2.length ? true : false;
         },
         //  参数筛选文章列表
         paramsInitArticleList(){
             const params = this.params;
+
             return this.$store.state.allArticleList.filter(item =>{
                 const typeCorrect = (!params.articleType ? true : item.type == params.articleType);
-                const tagInclude = (!params.tag.length ? true : item.tag.includes(params.tag.join()));
+                const tagInclude = (!params.tag.length ? true : this.Array2isInArray1(item.tag, params.tag));
                 if(typeCorrect && tagInclude){
                     return item;
                 }
@@ -382,7 +426,7 @@ main.container{
             }
 
             &.active{
-                color: #2c84cc;
+                color: rgb(51, 51, 51) !important;
                 box-shadow: -4px 0 4px rgba(7,17,27,.1),
                     4px 0 4px rgba(7,17,27,.1), 
                     0 -4px 4px rgba(7,17,27,.1),
@@ -431,6 +475,11 @@ main.container{
             .articles{
                 padding: 10px 0px;
                 border-bottom: 1px solid #eee;
+                
+                a{
+                    cursor: pointer;
+                    text-decoration: unset;
+                }
             }
         }
     }
