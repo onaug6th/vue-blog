@@ -662,8 +662,8 @@ export default {
             const params = this.params;
 
             params.page = page;
-            
-            window.location.hash = `#/?page=${page}&pageSize=${params.pageSize}`;
+
+            // window.location.hash = `#/article/${this.article.id}?page=${page}&pageSize=${params.pageSize}`;
 
             this.rendeReplyList();
         }

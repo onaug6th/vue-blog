@@ -58,7 +58,6 @@ export default {
     },
     data() {
         return {
-            articleType: "",
             //  分页配置
             paginationConfig: {},
             //  背景图片地址
@@ -121,31 +120,6 @@ export default {
             
         },
         /**
-         * 切换文章类型，同时更新url后携带的hash
-         * @param {object} item 类型
-         */
-        switchType(item){
-
-            const paginationConfig = this.paginationConfig;
-            
-            const query = {
-                page : paginationConfig.page,
-                pageSize : paginationConfig.pageSize
-            };
-
-            if(this.articleType == item.id){
-                this.articleType = "";
-            }else{
-                this.articleType = item.id;
-                query.type && (query.type = this.articleType);
-            }
-
-            this.$router.push({
-                query
-            });
-            this.getArticleList();
-        },
-        /**
          * 获取url上可能存在的hash，进行分页查询
          */
         getUrlQuery(){
@@ -155,7 +129,6 @@ export default {
             query.notRecord && (localStorage.setItem("notRecord", true));
             query.page && (paginationConfig.page = paginationConfig.currentPage = +query.page);
             query.pageSize && (paginationConfig.pageSize = +query.pageSize);
-            query.type && (this.articleType = query.type);
         },
         /**
          * 获取文章列表
@@ -169,8 +142,6 @@ export default {
                 pageSize,
                 exclude : ["content"]
             };
-
-            this.articleType && (params.where = { type: this.articleType });
 
             return new Promise(resolve =>{
                 this.$http.post("article/list", params)
@@ -230,9 +201,7 @@ export default {
 
             paginationConfig.page = page;
 
-            let hash = `#/?page=${page}&pageSize=${paginationConfig.pageSize}&type=`;
-            
-            this.articleType && (hash += `&type=${this.articleType}`);
+            let hash = `#/?page=${page}`;
 
             window.location.hash = hash;
 
