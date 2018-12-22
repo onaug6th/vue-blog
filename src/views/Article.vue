@@ -4,7 +4,7 @@
         <!-- 页面头部 -->
         <header class="article-bg container">
             <div class="title">
-                <h5 class="date">{{ dateFormat(article.createdAt, true) }} / {{ fliterTypeName(article.type) }}</h5>
+                <h5 class="date">{{ dateFormat(article.createdAt, true) }} / <a @click="goArchive('type', article.type)">{{ fliterTypeName(article.type) }}</a></h5>
                 <h1>{{ article.title }}</h1>
             </div>
             <figure v-if="article.bgUrl" :style="{ 'background-image' : 'url('+ (article.bgUrl) +')' }"></figure>
@@ -21,7 +21,7 @@
                             v-for="(item, index) in tagFormat(article.tag, $store.state.tagList)"
                             :key="index"
                             :title="item.name"
-                            @click="goArchiveTag(item)"
+                            @click="goArchive('tag', item.id)"
                             >{{ item.name }}
                         </a>
                     </template>
@@ -324,8 +324,15 @@ export default {
             });
         },
         //  前往档案标签分类
-        goArchiveTag(){
-            this.$swal("请耐心等候程序员完工");
+        goArchive(type, value){
+            const query = {
+                type: this.article.type
+            };
+            query[type] = value;
+            this.$router.push({
+                path : `/archive`,
+                query
+            });
         },
         /**
          * 文章类型中文名称转义
@@ -732,7 +739,10 @@ export default {
                     font-size: 1.5rem;
                     color: #3eb0ef;
                     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
-
+                    a{
+                        color: #3eb0ef;
+                        cursor: pointer;
+                    }
                 }
             }
 

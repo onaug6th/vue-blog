@@ -66,6 +66,9 @@
                         </h5>
                     </div>
                 </div>
+                <div v-if="!articleList.length">
+                    <h3 class="text-center">暂无符合条件文章</h3>
+                </div>
 
                 <pagination :config="paginationConfig" @pageChange="pageChange"></pagination>
             </div>
@@ -112,6 +115,8 @@ export default {
     mounted() {
         //  设置分页组件属性
         this.setPagination();
+        //  获取url上可能存在的参数
+        this.getUrlQuery();
 
         if(!this.$store.state.allArticleList.length){
             //  获取全部文章列表
@@ -134,6 +139,13 @@ export default {
                 nextText : "后页",
                 totalPages : 0
             }
+        },
+        getUrlQuery(){
+            const query = this.$route.query;
+
+            query.type && (this.params["articleType"] = query.type);
+
+            query.tag && (this.params["tag"].push(+query.tag), this.params["articleType"] = query.type);
         },
         /**
          * 根据文章类型，过滤出对应标签
@@ -269,11 +281,11 @@ export default {
         initArticleList(){
             return new Promise(resolve =>{
 
-                const params = this.paramsInitArticleList();
+                const afterParams = this.paramsInitArticleList();
                 
-                const pagination = this.paginationArticleList(params);
+                const afterPagination = this.paginationArticleList(afterParams);
 
-                this.articleList = this.sortArticleListByYear(pagination);
+                this.articleList = this.sortArticleListByYear(afterPagination);
 
                 this.$nextTick(() =>{
                     resolve(true);
@@ -425,13 +437,15 @@ main.container{
                 font-weight: bold;
             }
 
-            &:hover{
-                color: #2c84cc;
-                box-shadow: -4px 0 4px rgba(7,17,27,.1),
-                    4px 0 4px rgba(7,17,27,.1), 
-                    0 -4px 4px rgba(7,17,27,.1),
-                    0 4px 4px rgba(7,17,27,.1);
-                background: white;
+            @media (min-width: 500px) {
+                &:hover{
+                    color: #2c84cc;
+                    box-shadow: -4px 0 4px rgba(7,17,27,.1),
+                        4px 0 4px rgba(7,17,27,.1), 
+                        0 -4px 4px rgba(7,17,27,.1),
+                        0 4px 4px rgba(7,17,27,.1);
+                    background: white;
+                }
             }
 
             &.active{
@@ -459,11 +473,14 @@ main.container{
                 margin: 0 1px;
                 margin-bottom: 6px;
 
-                &:hover{
-                    color: #2c84cc;
-                    border: 1px solid #2c84cc;
-                    background: white;
+                @media (min-width: 500px) {
+                    &:hover{
+                        color: #2c84cc;
+                        border: 1px solid #2c84cc;
+                        background: white;
+                    }
                 }
+                
 
                 &.active{
                     color: #2c84cc;

@@ -135,6 +135,7 @@ export default {
             .sidebar-header{
                 background-size: cover !important;
                 background-position: center !important;
+                transition: all .5s;
 
                 .top-bar{
                     height: 25px;;
