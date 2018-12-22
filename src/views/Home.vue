@@ -139,7 +139,10 @@ export default {
             const params = {
                 page,
                 pageSize,
-                exclude : ["content"]
+                exclude: ["content"],
+                where: {
+                    homeShow: 1
+                }
             };
 
             return new Promise(resolve =>{
