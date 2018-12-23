@@ -17,6 +17,13 @@
         <main class="container">
 
             <div class="row main-content">
+
+                <div class="clearfix form-group">
+                    <div class="col-sm-4 row pull-right">
+                        <input type="text" class="form-control" placeholder="搜索内容" @input="fuzzySearch($event.target.value)">
+                    </div>
+                </div>
+
                 <div
                     class="article-type"
                     v-for="(articleType, index) in typeList"
@@ -41,11 +48,6 @@
                     </a>
                 </div>
 
-                <div class="clearfix form-group">
-                    <div class="col-sm-4 row pull-right">
-                        <input type="text" class="form-control" placeholder="搜索内容" @input="fuzzySearch($event.target.value)">
-                    </div>
-                </div>
 
                 <div class="article-list" v-for="(item, attr, index) in articleList" :key="index">
                     <h3 class="year">
@@ -105,7 +107,7 @@ export default {
             //  分页配置
             paginationConfig: {},
             //  当前文章列表
-            articleList: {}
+            articleList: []
         }
     },
     computed: {
@@ -237,6 +239,8 @@ export default {
          * @param {string} 文本框内容
          */
         fuzzySearch(value){
+            this.params.articleType = "";
+            this.params.tag = [];
             value = value.trim().toLowerCase().split(/[\s\-]+/);
             const resultArr = [];
             if(value.length > 0){
@@ -253,9 +257,9 @@ export default {
                     });
                 });
             }else{
-                this.initArticleList(this.$store.state.allArticleList);
+                this.initArticleList();
             }
-            resultArr.length &&  this.initArticleList(resultArr);
+            resultArr.length ? this.initArticleList(resultArr) : this.articleList = [];
         },
         /**
          * 我在那个数组中吗？
