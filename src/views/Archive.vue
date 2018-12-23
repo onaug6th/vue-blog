@@ -17,13 +17,14 @@
         <main class="container">
 
             <div class="row main-content">
-
+                <!-- 搜索框 -->
                 <div class="clearfix form-group">
-                    <div class="col-sm-4 row pull-right">
+                    <div class="col-sm-4 no-padding pull-right">
                         <input type="text" class="form-control" placeholder="搜索内容" @input="fuzzySearch($event.target.value)">
                     </div>
                 </div>
-
+                <!-- 搜索框 -->
+                <!-- 文章类型 -->
                 <div
                     class="article-type"
                     v-for="(articleType, index) in typeList"
@@ -47,8 +48,8 @@
                         {{tag.name}}
                     </a>
                 </div>
-
-
+                <!-- 文章类型 -->
+                <!-- 文章列表 -->
                 <div class="article-list" v-for="(item, attr, index) in articleList" :key="index">
                     <h3 class="year">
                         {{ item.year }}
@@ -74,10 +75,12 @@
                         </h5>
                     </div>
                 </div>
+                <!-- 文章列表 -->
+                <!-- 没有更多 -->
                 <div v-if="!articleList.length">
                     <h3 class="text-center">没有符合条件的内容</h3>
                 </div>
-
+                <!-- 没有更多 -->
                 <pagination :config="paginationConfig" @pageChange="pageChange"></pagination>
             </div>
         </main>
@@ -246,12 +249,14 @@ export default {
             if(value.length > 0){
                 this.$store.state.allArticleList.forEach((item) =>{
                     const title = item.title.trim().toLowerCase();
+                    const intro = item.intro.trim().toLowerCase();
                     const content = item.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
 
                     value.forEach((val) =>{
                         const inTitle = title.indexOf(val) >= 0;
+                        const inIntro = intro.indexOf(val) >= 0;
                         const inContent = content.indexOf(val) >= 0;
-                        if(inTitle || inContent){
+                        if(inTitle || inTitle || inContent){
                             resultArr.push(item);
                         }
                     });
@@ -273,7 +278,9 @@ export default {
                 }
             }).length == arr2.length ? true : false;
         },
-        //  参数筛选文章列表
+        /**
+         * 参数筛选文章列表
+         */
         paramsInitArticleList(list){
             const params = this.params;
 
@@ -285,7 +292,9 @@ export default {
                 }
             });
         },
-        //  分页切割文章数据
+        /**
+         * 分页切割文章数据
+         */
         paginationArticleList(list){
             const {page, pageSize} = this.paginationConfig;
 
@@ -327,6 +336,14 @@ export default {
                 this.articleList = this.sortArticleListByYear(afterPagination);
 
                 this.$nextTick(() =>{
+                    
+                    if(sessionStorage.getItem("scrollLastPage")){
+                        sessionStorage.removeItem("scrollLastPage");
+                        setTimeout(() =>{
+                            window.scrollTo(0, this.$store.state.lastPageScrollY);
+                        }, 0);
+                    }
+
                     resolve(true);
                 });
             });

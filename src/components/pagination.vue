@@ -19,7 +19,7 @@
             <!-- 第一页按钮 -->
             <!-- 上五页按钮 -->
             <li v-if="config.showPrevMore"
-                @click="jumpTo(-5)">
+                @click="pageTo(config.page - 5)">
                 <a>...</a>
             </li>
             <!-- 上五页按钮 -->
@@ -36,7 +36,7 @@
             <!-- 下五页按钮 -->
             <li class="more btn-quicknext"
                 v-if="config.showNextMore"
-                @click="jumpTo(5)">
+                @click="pageTo(config.page + 5)">
                 <a>...</a>
             </li>
             <!-- 下五页按钮 -->
@@ -84,7 +84,11 @@ export default {
     },
     watch: {
         page(){
-            this.$emit("pageChange" , this.config.page, this.config);
+            if(!this.firstLoad){
+                this.$emit("pageChange" , this.config.page, this.config);
+            }else{
+                this.firstLoad = !this.firstLoad;
+            }
         }
     },
     computed: {
@@ -117,14 +121,6 @@ export default {
             if (page !== this.page) {
                 this.config.page = page;
             }
-        },
-        /**
-         * 当前页跳转指定页
-         * @param {number} step 页码
-         */
-        jumpTo(step){
-            const nextPage = this.config.page + step;
-            this.config.page = nextPage < 1 ? 1 : nextPage > this.config.totalPages ? this.config.totalPages : nextPage;
         },
         /**
          * 下一页

@@ -142,7 +142,11 @@ export default {
 
         // 状态栏右部
         .top-nav-right{
+            position: relative;
+
             >img.avatar{
+                position: absolute;
+                right: 0px;
                 width: 50px;
                 margin-top: 5px;
                 cursor: pointer;

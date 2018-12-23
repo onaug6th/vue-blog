@@ -58,7 +58,7 @@ Router.beforeEach((to, from, next) => {
 	//	进度条开始
     NProgress.start();
     
-    if(["home"].includes(from.name)){
+    if(["home", "archive"].includes(from.name) && to.name == "article"){
         //  记录上一个页面滚动的距离
         store.commit("updateLastPageScrollY", window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop);
     }
@@ -69,7 +69,7 @@ Router.beforeEach((to, from, next) => {
 //	监听路由跳转后事件
 Router.afterEach((to, from) => {
 
-    if(["home"].includes(to.name) || ["article"].includes(from.name)){
+    if(["home", "archive"].includes(to.name) || ["article"].includes(from.name)){
         sessionStorage.setItem("scrollLastPage", true);
     }else{
         //	回到顶部
