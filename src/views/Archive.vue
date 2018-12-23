@@ -41,6 +41,12 @@
                     </a>
                 </div>
 
+                <div class="clearfix form-group">
+                    <div class="col-sm-4 row pull-right">
+                        <input type="text" class="form-control" placeholder="搜索内容" @input="fuzzySearch($event.target.value)">
+                    </div>
+                </div>
+
                 <div class="article-list" v-for="(item, attr, index) in articleList" :key="index">
                     <h3 class="year">
                         {{ item.year }}
@@ -67,7 +73,7 @@
                     </div>
                 </div>
                 <div v-if="!articleList.length">
-                    <h3 class="text-center">暂无符合条件文章</h3>
+                    <h3 class="text-center">没有符合条件的内容</h3>
                 </div>
 
                 <pagination :config="paginationConfig" @pageChange="pageChange"></pagination>
@@ -227,6 +233,31 @@ export default {
             this.initArticleList();
         },
         /**
+         * 模糊搜索
+         * @param {string} 文本框内容
+         */
+        fuzzySearch(value){
+            value = value.trim().toLowerCase().split(/[\s\-]+/);
+            const resultArr = [];
+            if(value.length > 0){
+                this.$store.state.allArticleList.forEach((item) =>{
+                    const title = item.title.trim().toLowerCase();
+                    const content = item.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+
+                    value.forEach((val) =>{
+                        const inTitle = title.indexOf(val) >= 0;
+                        const inContent = content.indexOf(val) >= 0;
+                        if(inTitle || inContent){
+                            resultArr.push(item);
+                        }
+                    });
+                });
+            }else{
+                this.initArticleList(this.$store.state.allArticleList);
+            }
+            resultArr.length &&  this.initArticleList(resultArr);
+        },
+        /**
          * 我在那个数组中吗？
          * @param {array} arr1
          * @param {array} arr2
@@ -239,10 +270,10 @@ export default {
             }).length == arr2.length ? true : false;
         },
         //  参数筛选文章列表
-        paramsInitArticleList(){
+        paramsInitArticleList(list){
             const params = this.params;
 
-            return this.$store.state.allArticleList.filter(item =>{
+            return list.filter(item =>{
                 const typeCorrect = (!params.articleType ? true : item.type == params.articleType);
                 const tagInclude = (!params.tag.length ? true : this.Array2isInArray1(item.tag, params.tag));
                 if(typeCorrect && tagInclude){
@@ -277,11 +308,15 @@ export default {
                 }
             });
         },
-        //  生成展示的文章列表
-        initArticleList(){
+        /**
+         * 生成展示的文章列表，默认取全部文章数据进行过滤
+         * @param {array} list 基础数据
+         */
+        initArticleList(list){
+            list = list || this.$store.state.allArticleList;
             return new Promise(resolve =>{
 
-                const afterParams = this.paramsInitArticleList();
+                const afterParams = this.paramsInitArticleList(list);
                 
                 const afterPagination = this.paginationArticleList(afterParams);
 
@@ -426,7 +461,6 @@ main.container{
             transition-timing-function: ease;
             border: none;
             line-height: 28px;
-            margin: 0 2px;
             margin-bottom: 8px;
             background: #f3f5f5;
             border-radius: 5px;

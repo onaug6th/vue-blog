@@ -82,17 +82,20 @@ export default {
             firstLoad : true
         };
     },
+    watch: {
+        page(){
+            this.$emit("pageChange" , this.config.page, this.config);
+        }
+    },
     computed: {
+        page(){
+            return this.config.page;
+        },
         pageList(){
             if(!this.config.totalPages){
                 return [];
             }
             const pageList = this.makePagers(this.config.page, this.config.totalPages);
-            if(!this.firstLoad){
-                this.$emit("pageChange" , this.config.page, this.config);
-            }else{
-                this.firstLoad = !this.firstLoad;
-            }
             return pageList;
         }
     },

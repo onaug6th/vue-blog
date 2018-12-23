@@ -14,7 +14,7 @@
                                 </div>
                                 <div class="col-xs-8">
                                     <p style="color: #616161;font-weight:bold; margin:0px;">onaug6th</p>
-                                    <span>2016-11-05</span>
+                                    <span>2017-11-05</span>
                                 </div>
                             </div>
 

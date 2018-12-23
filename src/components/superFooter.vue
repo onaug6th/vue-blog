@@ -32,7 +32,7 @@ export default {
          * 进入新世界
          */
         newWorld(){
-            this.$swal("你好，没事多点点我");
+            this.$swal("你好，没事多点点其他地方");
         }
     }
 }
