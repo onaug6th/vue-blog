@@ -59,7 +59,13 @@ export default {
     data() {
         return {
             //  分页配置
-            paginationConfig: {},
+            paginationConfig: {
+                page : 1,
+                pageSize : 10,
+                prevText : "前页",
+                nextText : "后页",
+                totalPages : 0
+            },
             //  背景图片地址
             homeBgUrl: "",
             //  当前文章列表
@@ -81,26 +87,12 @@ export default {
         }
     },
     mounted() {
-        //  设置分页组件属性
-        this.setPagination();
         //  获取url上可能存在的hash
         this.getUrlQuery();
         //  获取文章列表
         this.getArticleList();
     },
     methods: {
-        /**
-         * 设置分页组件属性
-         */
-        setPagination(){
-            this.paginationConfig = {
-                page : 1,
-                pageSize : 10,
-                prevText : "前页",
-                nextText : "后页",
-                totalPages : 0
-            }
-        },
         /**
          * 文章类型中文名称转义
          * @param {string} id id

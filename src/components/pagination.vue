@@ -84,11 +84,7 @@ export default {
     },
     watch: {
         page(){
-            if(!this.firstLoad){
-                this.$emit("pageChange" , this.config.page, this.config);
-            }else{
-                this.firstLoad = !this.firstLoad;
-            }
+            this.$emit("pageChange" , this.config.page, this.config);
         }
     },
     computed: {

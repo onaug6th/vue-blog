@@ -274,7 +274,13 @@ export default {
                 pageSize: 10
             },
             //  分页配置
-            paginationConfig: {},
+            paginationConfig: {
+                prevText : "前页",
+                nextText : "后页",
+                page : 1,
+                count : 0,
+                totalPages : 0
+            },
             //  文章信息
             article: {
                 id: "",
@@ -306,8 +312,6 @@ export default {
                 that.article = result.data;
                 //  获取url上可能存在的hash
                 that.getUrlQuery();
-                //  设置分页组件属性
-                that.setPagination();
                 //  获取评论列表并渲染
                 that.rendeReplyList();
             }).catch(()=>{
@@ -449,21 +453,9 @@ export default {
         getUrlQuery(){
             const query = this.$route.query;
             const params = this.params;
-            
-            query.page && (params.page = +query.page);
+
+            query.page && (params.page = this.pagination.page = +query.page);
             query.pageSize && (params.pageSize = +query.pageSize);
-        },
-        /**
-         * 设置分页组件属性
-         */
-        setPagination(){
-            this.paginationConfig = {
-                prevText : "前页",
-                nextText : "后页",
-                page : this.params.page,
-                count : 0,
-                totalPages : 0
-            }
         },
         /**
          * 获取回复列表

@@ -108,7 +108,13 @@ export default {
                 tag: []
             },
             //  分页配置
-            paginationConfig: {},
+            paginationConfig: {
+                page : 1,
+                pageSize : 10,
+                prevText : "前页",
+                nextText : "后页",
+                totalPages : 0
+            },
             //  当前文章列表
             articleList: []
         }
@@ -124,8 +130,6 @@ export default {
         }
     },
     mounted() {
-        //  设置分页组件属性
-        this.setPagination();
         //  获取url上可能存在的参数
         this.getUrlQuery();
 
@@ -139,18 +143,6 @@ export default {
         }
     },
     methods:{
-        /**
-         * 设置分页组件属性
-         */
-        setPagination(){
-            this.paginationConfig = {
-                page : 1,
-                pageSize : 10,
-                prevText : "前页",
-                nextText : "后页",
-                totalPages : 0
-            }
-        },
         getUrlQuery(){
             const query = this.$route.query;
 
