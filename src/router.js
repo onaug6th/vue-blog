@@ -69,7 +69,7 @@ Router.beforeEach((to, from, next) => {
 //	监听路由跳转后事件
 Router.afterEach((to, from) => {
 
-    if(["home", "archive"].includes(to.name) || ["article"].includes(from.name)){
+    if(["home", "archive"].includes(to.name) && ["article"].includes(from.name)){
         sessionStorage.setItem("scrollLastPage", true);
     }else{
         //	回到顶部
