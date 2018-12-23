@@ -60,7 +60,7 @@ const methods = {
         const mm = yymmdd.split("-")[1];
         const dd = yymmdd.split("-")[2];
         
-        return (en ? `${dd}  ${monthEN[+mm]}  ${yy}` : `${yy}.${mm}.${dd}`);
+        return (en ? `${monthEN[+mm]}  ${dd}, ${yy}` : `${yy}.${mm}.${dd}`);
     },
     /**
      * 标签格式化
