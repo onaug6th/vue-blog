@@ -29,7 +29,7 @@
                 </header>
                 <!-- 标签信息 -->
                 <!-- 正文开始 -->
-                <article class="col-sm-12" v-html="article.content">
+                <article class="article col-sm-12" v-html="article.content">
                 </article>
                 <!-- 正文结束 -->
                 <!-- 日期及结尾语 -->
@@ -935,4 +935,9 @@ export default {
         }
     }
 
+</style>
+<style>
+    article.article img {
+        max-width: 100%;
+    }
 </style>
