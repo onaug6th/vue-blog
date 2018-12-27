@@ -50,6 +50,13 @@ export default {
     },
     mounted() {
 
+        console.log(`%c 你好 😄 %c 开发者 💻`,
+            "background:#014983 ; font-size : 13px;color : white; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff",
+            "background:#ccc ; font-size : 13px; color : #014983; padding: 1px; border-radius: 0 3px 3px 0;");
+
+        console.log(`%c很高兴在这里看到你，have a nice day~`,
+            "background:#fff ; color : #014983;font-size : 13px; padding: 1px; border-radius: 0 3px 3px 0;");
+
         this.$refs.contentRef.style.minHeight = document.documentElement.clientHeight + "px";
 
         //  监听导航栏滚动状态
