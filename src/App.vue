@@ -107,39 +107,6 @@ export default {
         z-index:3;
         transition: all .3s;
 
-        // 状态栏中部
-        .top-nav-mid{
-            .menuNav{
-                font-weight: bold;
-                float:left;
-                margin:0;
-                padding:0;
-                box-sizing: border-box;
-                display: block;
-                text-shadow: 1px 1px 8px #444;
-
-                li{
-                    display: block;
-                    padding:20px 20px 20px 0px;
-                    float:left;
-                }
-
-                a{
-                    padding:15px;
-                    line-height:20px;
-                    text-decoration: none;
-                    color: white;
-                    font-size: 16px;
-                    transition:all;
-
-                    &:hover{
-                        color:#0083cb;
-                    }
-                }
-
-            }
-        }
-
         // 状态栏右部
         .top-nav-right{
             position: relative;
