@@ -7,7 +7,7 @@
                 <h5 class="date">{{ dateFormat(article.createdAt, true) }} / <a @click="goArchive('type', article.type)">{{ fliterTypeName(article.type) }}</a></h5>
                 <h1>{{ article.title }}</h1>
             </div>
-            <figure v-if="article.bgUrl" :style="{ 'background-image' : 'url('+ (article.bgUrl) +')' }"></figure>
+            <figure v-if="article.bgUrl" :style="{'background-image': 'url('+ (article.bgUrl) +')'}"></figure>
         </header>
         <!-- 页面头部 -->
         <!-- 页面内容 -->
@@ -53,7 +53,7 @@
                 <div class="reply col-sm-12">
                     <div class="reply-avatar col-sm-1 col-xs-2">
                         <div>
-                            <img alt="目前只有这个头像啦" :src="replyObj.avatar" />
+                            <img title="目前只有这个头像" alt="用户头像" :src="replyObj.avatar" />
                         </div>
                         <button class="btn btn-primary btn-xs hide" @click="changeAvatar()">更换头像</button>
                     </div>
@@ -66,7 +66,7 @@
                             </div>
                             <div class="form-group clearfix">
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" placeholder="您的邮箱（不会告诉别人）" v-model="replyObj.email">
+                                    <input type="text" class="form-control" placeholder="您的邮箱" v-model="replyObj.email">
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -91,7 +91,7 @@
                 <div class="reply-list col-sm-12">
                     <div class="reply-box" v-for="(item,index) in replyList" :key="index">
                         <!-- 回复人信息 -->
-                        <div class="user-info">
+                        <div class="user-info clearfix">
                             <div class="user-avatar col-sm-1 col-xs-2">
                                 <img alt="用户头像" :src="item.avatar" />
                             </div>
@@ -108,19 +108,19 @@
                         <div class="like-and-reply col-sm-12">
                             <div class="like" @click="replyNewLike(item, index)">
                                 <template v-if="item.like == 0">
-                                    <span class="glyphicon glyphicon-thumbs-up"></span> 点赞
+                                    <span class="glyphicon glyphicon-thumbs-up"></span> 赞
                                 </template>
                                 <template v-else>
                                     <span class="glyphicon glyphicon-thumbs-up"></span> {{item.like}}个人赞
                                 </template>
                             </div>
                             <div class="reply" @click="toggleReplytBox(item)">
-                                <span class="glyphicon glyphicon-comment"></span><font>评论</font>
+                                <span class="glyphicon glyphicon-comment"></span> 评论
                             </div>
                         </div>
                         <!-- 点赞或评论此楼 -->
                         <!-- 评论此楼控件 -->
-                        <transition name="fade">
+                        <transition name="fadefast">
                             <div class="col-sm-12" v-if="item.boxShow">
                                 <div class="row">
                                     <div class="form-group clearfix">
@@ -147,39 +147,39 @@
                         </transition>
                         <!-- 评论此楼控件 -->
                         <!-- 展开评论列表 -->
-                        <div class="col-sm-12 form-group clearfix" v-if="item.subList">
-                            <button class="btn btn-success btn-xs" @click="toggleReplyList(item)">
+                        <!-- <div class="col-sm-12 form-group clearfix" v-if="item.subList">
+                            <button class="btn btn-xs" @click="toggleReplyList(item)">
                                 {{ item.listShow ? '隐藏评论列表' : '展开评论列表' }}
                             </button>
-                        </div>
+                        </div> -->
                         <!-- 展开评论列表 -->
                         <!-- 此楼的楼中楼评论列表 -->
                         <template v-if="item.subList">
                             
-                            <transition name="fade">
+                            <transition name="fadefast">
                                 <div v-if="item.listShow" class="inside-reply-list col-xs-12">
                                     <!-- 楼中楼评论 -->
                                     <div class="clearfix" v-for="(inside,i) in item.subList" :key="i">
 
                                         <template v-if="item.name == inside.replyName">
-                                            <p>{{inside.name}} 说：{{inside.content}}</p>
+                                            <p>{{inside.name}} ：{{inside.content}}</p>
                                         </template>
 
                                         <template v-else>
-                                            <p>{{inside.name}} 对 {{inside.replyName}} 说：{{inside.content}}</p>
+                                            <p>{{inside.name}} 回复 {{inside.replyName}}：{{inside.content}}</p>
                                         </template>
 
                                         <div class="form-group clearfix">
                                             <div class="date">
                                                 <p>{{inside.createdAt}}</p>
                                             </div>
-                                            <div class="reply" @click="toggleInsideReplytBox(inside)">
-                                                <span class="glyphicon glyphicon-comment"></span><font>回复</font>
+                                            <div class="reply" @click="toggleInsideReplyBox(inside)">
+                                                <span class="glyphicon glyphicon-comment"></span> 回复
                                             </div>
                                         </div>
 
-                                        <transition name="fade">
-                                            <div v-if="inside.boxShow" class="row">
+                                        <transition name="fadefast">
+                                            <div v-if="inside.boxShow">
                                                 <div class="form-group clearfix">
                                                     <div class="col-sm-4">
                                                         <h5>正在回复{{inside.name}}</h5>
@@ -195,7 +195,7 @@
                                                     <textarea class="form-control" placeholder="发表回复" rows="3" v-model="inside.replyObj.content"></textarea>
                                                 </div>
                                                 <div class="col-sm-6 col-sm-offset-6 text-right" style="padding:10px 15px;">
-                                                    <button class="btn btn-success" @click="insideReplyClick(item.floor, inside)">提交</button>
+                                                    <button class="btn btn-success" @click="insideReplyClick(item, inside)">提交</button>
                                                 </div>
                                             </div>
                                         </transition>
@@ -203,7 +203,7 @@
                                     </div>
                                     <!-- 楼中楼评论 -->
                                     <!--底部分页按钮-->
-                                    <pagination :config="item.pagination" @pageChange="renderInsideReplyList(item)"></pagination>
+                                    <pagination v-show="item.pagination.totalPages > 1" :config="item.pagination" @pageChange="renderInsideReplyList(item)"></pagination>
                                     <!--底部分页按钮-->
                                 </div>
                             </transition>
@@ -216,7 +216,7 @@
                     <pagination v-if="paginationConfig.totalPages" :config="paginationConfig" @pageChange="pageChange"></pagination>
                     <!--底部分页按钮-->
                     <div class="form-group" v-if="!replyList.length">
-                        <h5 class="text-center">还没有人评论哦~</h5>
+                        <h5 class="text-center">还没有人评论</h5>
                     </div>
                 </div>
                 <!-- 回复列表 -->
@@ -236,7 +236,7 @@ import "../../public/dependence/prism/prism.css";
 import "../../public/dependence/prism/prism.js";
 
 export default {
-    name: 'article-c',
+    name: 'articleDetail',
     components: {
         pagination
     },
@@ -261,13 +261,15 @@ export default {
     updated(){
 
         //  代码高亮
-        this.$nextTick(()=>{
+        this.$nextTick(() =>{
             window["Prism"].highlightAll();
         });
 
     },
     data(){
         return {
+            //  回复冷却时间
+            replyColdDown: null,
             //  查询条件
             params: {
                 page: 1,
@@ -275,11 +277,11 @@ export default {
             },
             //  分页配置
             paginationConfig: {
-                prevText : "前页",
-                nextText : "后页",
-                page : 1,
-                count : 0,
-                totalPages : 0
+                prevText: "前页",
+                nextText: "后页",
+                page: 1,
+                count: 0,
+                totalPages: 0
             },
             //  文章信息
             article: {
@@ -314,14 +316,14 @@ export default {
                 that.getUrlQuery();
                 //  获取评论列表并渲染
                 that.rendeReplyList();
-            }).catch(()=>{
+            }).catch(() =>{
                 that.goHome();
             });
         },
         //  回家
         goHome(){
             const that = this;
-            that.$swal("找不到这篇文章", "看看其他的吧").then(()=>{
+            that.$swal("找不到这篇文章", "看看其他的吧").then(() =>{
                 that.$router.push({
                     path : "/"
                 });
@@ -421,7 +423,7 @@ export default {
         emptyReplyObj(){
             for(let i in this.replyObj){
                 if(i == "avatar"){
-                   continue; 
+                   continue;
                 }
                 this.replyObj[i] = "";
             }
@@ -430,7 +432,7 @@ export default {
          * 评论计时
          */
         replyCountTime(){
-
+            
         },
         /**
          * 新赞！
@@ -439,7 +441,7 @@ export default {
             const that = this;
 
             that.$http.put("article/like/" + that.article.id)
-                .then( (result) =>{
+                .then((result) =>{
                     
                     that.$swal(result.detailMsg, "", "success");
                     if(result.data.id){
@@ -515,15 +517,15 @@ export default {
             const that = this;
 
             that.$http.put("reply/like/" + item.id)
-                .then( (result) =>{
+                .then((result) =>{
                     that.$swal(result.detailMsg, "", "success");
-                    if(result.data.id){
-                        that.replyList[index].like ++ ;
+                    if(result.data){
+                        that.replyList[index].like++ ;
                     }
                 });
         },
         /**
-         * 切换显示回复盒子
+         * 切换显示一级楼的回复盒子
          * @param {any} index 行号
          */
         toggleReplytBox(item){
@@ -531,50 +533,46 @@ export default {
             this.$forceUpdate();
         },
         /**
-         * 楼中楼回复提交
-         * @param {number} floorId 楼号
-         * @param {object} item 行对象
+         * 楼中楼回复按钮点击
+         * @param {number} floor 楼
+         * @param {object} inside 楼中楼
          */
-        insideReplyClick(floor, item){
-            this.insideReplySubmit(floor, item).then(()=>{
-                //  隐藏留言盒子
-                this.toggleInsideReplytBox(item);
+        insideReplyClick(floor, inside){
+            
+            if(!inside.replyObj.content || !inside.replyObj.name){
+                return this.$swal("名称和内容是必须的", "", "warning");
+            }
 
-                const obj =  this.replyList.filter((floorObj, index)=>{
-                    if(floorObj.id == floor){
-                        return floorObj;
-                    }
-                })[0];
-                
-                obj && obj.pagination && (this.$set(obj.pagination, "page", obj.pagination.totalPages));
+            this.insideReplySubmit(floor.id, inside).then(() =>{
+                //  隐藏留言盒子
+                this.toggleInsideReplyBox(inside);
+
+                //  自动翻页
+                floor && floor.pagination && (this.$set(floor.pagination, "page", floor.pagination.totalPages));
             });
         },
         /**
          * 内部评论回复
-         * @param {number} floorId 楼号
-         * @param {object} item 行对象
+         * @param {number} floor 楼号
+         * @param {object} inside 行对象
          */
-        insideReplySubmit(floorId, item){
-
-            if(!item.replyObj.content || !item.replyObj.name){
-                return this.$swal("名称和内容是必须的", "", "warning");
-            }
+        insideReplySubmit(floor, inside){
 
             const params = {
                 articleId : this.article.id,
-                floorId : floorId,
-                replyId : item.id,
-                replyName : item.name,
-                ...item.replyObj
+                floorId : floor.id,
+                replyId : inside.id,
+                replyName : inside.name,
+                ...inside.replyObj
             };
 
             return new Promise((resolve, reject)=>{
-                this.$http.post("insideReply", params).then( (result)=>{
+                this.$http.post("insideReply", params).then((result) =>{
                     this.$swal(result.detailMsg, "", "success");
                     
                     if(result.code == 0){
-                        this.emptyInsideReplyObj(item);
-                        this.renderInsideReplyList(false, floorId);
+                        this.emptyInsideReplyObj(inside);
+                        this.renderInsideReplyList(floor);
                         resolve(result);
                     }
 
@@ -592,13 +590,13 @@ export default {
         /**
          * 根据对象属性来渲染某个楼的楼中楼评论列表，如果没有第一个参数，则根据第二个参数寻找对象。
          * @param {object} item 行对象
-         * @param {object} floor 行号
+         * @param {object} floorId 行号
          */
-        renderInsideReplyList(item, floor){
+        renderInsideReplyList(item, floorId){
             
             //  寻找item，如果不存在，根据floor号码进行寻找。
             item = item || this.replyList.filter((item) =>{
-                if(item.id == floor){
+                if(item.id == floorId){
                     return item;
                 }
             })[0];
@@ -649,7 +647,7 @@ export default {
          * 切换显示楼中楼回复盒子
          * @param {any} index 行对象
          */
-        toggleInsideReplytBox(item){
+        toggleInsideReplyBox(item){
             this.$set(item, "boxShow", !item.boxShow);
             this.$forceUpdate();
         },
@@ -699,11 +697,11 @@ export default {
             padding: 0px;
         }
         .inside-reply-list{
-            margin: 10px;
+            padding-left: 0px !important;
         }
         .article-body{
             .content{
-                header.tags, article, div.date{
+                & > header.tags,& > article,& > div.date{
                     padding: 5px 15px !important;
                     padding-top: 10px !important;
                 }
@@ -846,6 +844,7 @@ export default {
                             overflow: hidden;
                             >img{
                                 width: inherit;
+                                border-radius: 5px;
                             }
                         }
                         > button{
@@ -866,6 +865,7 @@ export default {
                             padding: 5px;
                             text-align: center;
                             > img{
+                                border-radius: 5px;
                                 width: 40px;
                                 float:right;
                             }
@@ -909,6 +909,11 @@ export default {
                         border-left: 2px solid #ccc;
 
                         &>div{
+
+                            &:first-child{
+                                margin-top: 20px;
+                            }
+
                             margin: 0px 0px 0px 20px;
                             
                             .date{

@@ -2,7 +2,7 @@
     <footer class="container-fluid">
         <div class="row">
             <p>
-                <span class="glyphicon glyphicon-piggy-bank" @click="newWorld()"></span>
+                <span class="glyphicon glyphicon-piggy-bank" title="你好啊" @click="newWorld()"></span>
             </p>
             <h5>2017-2018 onaug6th.com</h5>
         </div>
@@ -17,17 +17,17 @@ export default {
     components: {
         
     },
-    mounted(){
+    mounted() {
     },
-    data(){
+    data() {
         return {
             
         }
     },
-    computed:{
+    computed: {
 
     },
-    methods : {
+    methods: {
         /**
          * 进入新世界
          */
