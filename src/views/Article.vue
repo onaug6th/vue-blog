@@ -519,7 +519,7 @@ export default {
             that.$http.put("reply/like/" + item.id)
                 .then((result) =>{
                     that.$swal(result.detailMsg, "", "success");
-                    if(result.data){
+                    if(result.data.id){
                         that.replyList[index].like++ ;
                     }
                 });
