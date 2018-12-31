@@ -241,14 +241,14 @@ export default {
 
 <style lang="scss">
     .wall-container{
-        background-image:url('http://pjd5crrcu.bkt.clouddn.com/images/common/tiebgbg.jpg');
+        background-image:url('https://onaug6th-1253668581.cos.ap-guangzhou.myqcloud.com/wall/tiebgbg.jpg');
         background-size: 100% 100%; 
         padding-top:4em;
 
         //  纸片样式
         .sticky-note{
             height:400px;
-            background:url('http://pjd5crrcu.bkt.clouddn.com/images/common/tiebg.png') no-repeat;
+            background:url('https://onaug6th-1253668581.cos.ap-guangzhou.myqcloud.com/wall/tiebg.png') no-repeat;
             padding: 6em 3em;
             background-size:100% 85%;
             background-position: center;
@@ -278,7 +278,7 @@ export default {
         //  模态框，内容区域
         #new-stickyNote {
             .modal-content{
-                background: url('http://pjd5crrcu.bkt.clouddn.com/images/common/tieeditbg.png') no-repeat;
+                background: url('https://onaug6th-1253668581.cos.ap-guangzhou.myqcloud.com/wall/tieeditbg.png') no-repeat;
                 background-position: center;
                 box-shadow: none;
                 border: none;

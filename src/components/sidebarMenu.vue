@@ -4,7 +4,7 @@
             <div v-if="!isMenuFixed" class="modal-backdrop fade in" @click="menuToggle()"></div>
             <div class="sidebar-main" :class="{'short': isMenuFixed}">
                 <div class="sidebar-header header-cover"
-                    :style="{'background-image' : `url(${imgCdnUrl}/hope.png)`}"
+                    :style="{'background-image' : `url(${imgCdnUrl}common/hope.png)`}"
                     >
                     <div class="top-bar"></div>
                     <div class="sidebar-image">

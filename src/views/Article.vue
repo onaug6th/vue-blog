@@ -4,7 +4,10 @@
         <!-- 页面头部 -->
         <header class="article-bg container">
             <div class="title">
-                <h5 class="date">{{ dateFormat(article.createdAt, true) }} / <a @click="goArchive('type', article.type)">{{ fliterTypeName(article.type) }}</a></h5>
+                <h5
+                    class="date"
+                    :title="dateFormat(article.createdAt)"
+                >{{ dateFormat(article.createdAt, true) }} / <a @click="goArchive('type', article.type)">{{ fliterTypeName(article.type) }}</a></h5>
                 <h1>{{ article.title }}</h1>
             </div>
             <figure v-if="article.bgUrl" :style="{'background-image': 'url('+ (article.bgUrl) +')'}"></figure>

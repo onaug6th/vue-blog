@@ -81,9 +81,9 @@ export default {
     created() {
         const nowHour = new Date().getHours();
         if(nowHour <= 18){
-            this.homeBgUrl = this.imgCdnUrl + `/hope.png`;
+            this.homeBgUrl = this.imgCdnUrl + `common/hope.png`;
         }else{
-            this.homeBgUrl = this.imgCdnUrl + `/hope1.png`;
+            this.homeBgUrl = this.imgCdnUrl + `common/hope1.png`;
         }
     },
     mounted() {
