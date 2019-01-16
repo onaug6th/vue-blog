@@ -441,14 +441,11 @@ export default {
          * 新赞！
          */
         newLike(){
-            const that = this;
-
-            that.$http.put("article/like/" + that.article.id)
+            this.$http.put("article/like/" + this.article.id)
                 .then((result) =>{
-                    
-                    that.$swal(result.detailMsg, "", "success");
+                    this.$swal(result.detailMsg, "", "success");
                     if(result.data.id){
-                        that.article.like ++ ;
+                        this.article.like ++ ;
                     }
                 });
         },
@@ -546,7 +543,7 @@ export default {
                 return this.$swal("名称和内容是必须的", "", "warning");
             }
 
-            this.insideReplySubmit(floor.id, inside).then(() =>{
+            this.insideReplySubmit(floor, inside).then(() =>{
                 //  隐藏留言盒子
                 this.toggleInsideReplyBox(inside);
 
@@ -556,14 +553,14 @@ export default {
         },
         /**
          * 内部评论回复
-         * @param {number} floor 楼号
+         * @param {number} floor 楼层对象
          * @param {object} inside 行对象
          */
         insideReplySubmit(floor, inside){
 
             const params = {
                 articleId : this.article.id,
-                floorId : floor,
+                floor: floor.floor,
                 replyId : inside.id,
                 replyName : inside.name,
                 ...inside.replyObj
@@ -575,7 +572,7 @@ export default {
                     
                     if(result.code == 0){
                         this.emptyInsideReplyObj(inside);
-                        this.renderInsideReplyList(inside);
+                        this.renderInsideReplyList(floor);
                         resolve(result);
                     }
 
@@ -593,13 +590,12 @@ export default {
         /**
          * 根据对象属性来渲染某个楼的楼中楼评论列表，如果没有第一个参数，则根据第二个参数寻找对象。
          * @param {object} item 行对象
-         * @param {object} floorId 行号
+         * @param {object} floor 行号
          */
-        renderInsideReplyList(item, floorId){
-            
-            //  寻找item，如果不存在，根据floor号码进行寻找。
+        renderInsideReplyList(item, floor){
+            //  寻找item，如果不存在，根据floorId进行寻找。
             item = item || this.replyList.filter((item) =>{
-                if(item.id == floorId){
+                if(item.id == floor){
                     return item;
                 }
             })[0];
@@ -634,7 +630,7 @@ export default {
                 articleId: that.article.id,
                 page: item.pagination.page,
                 pageSize: item.pagination.pageSize,
-                floorId: item.floor || item.floorId
+                floor: item.floor
             };
 
             return new Promise((resolve, reject) =>{
