@@ -563,7 +563,7 @@ export default {
 
             const params = {
                 articleId : this.article.id,
-                floorId : floor.id,
+                floorId : floor,
                 replyId : inside.id,
                 replyName : inside.name,
                 ...inside.replyObj
@@ -575,7 +575,7 @@ export default {
                     
                     if(result.code == 0){
                         this.emptyInsideReplyObj(inside);
-                        this.renderInsideReplyList(floor);
+                        this.renderInsideReplyList(inside);
                         resolve(result);
                     }
 
