@@ -20,7 +20,7 @@
                 <!-- 搜索框 -->
                 <div class="clearfix form-group">
                     <div class="col-sm-4 no-padding pull-right">
-                        <input type="text" class="form-control" placeholder="搜索内容" @input="fuzzySearch($event.target.value)">
+                        <input type="text" class="form-control" placeholder="搜索内容" @input="fuzzySearch($event.target.value)" v-model="params.fuzzyText">
                     </div>
                 </div>
                 <!-- 搜索框 -->
@@ -104,6 +104,7 @@ export default {
             homeBgUrl: `https://static.ghost.org/v2.0.0/images/app-integrations.jpg`,
             //  查询条件
             params: {
+                fuzzyText: "",
                 articleType: "",
                 tag: []
             },
@@ -192,8 +193,9 @@ export default {
         switchParams(type, obj){
             const params = this.params;
             const articleType = params["articleType"];
+            params.fuzzyText = "";
             this.paginationConfig.page = 1;
-
+            
             if(type == "articleType"){
                 
                 //  如果没有选择或不一样，赋值
@@ -329,12 +331,14 @@ export default {
 
                 this.$nextTick(() =>{
                     
-                    if(sessionStorage.getItem("scrollLastPage")){
-                        sessionStorage.removeItem("scrollLastPage");
-                        setTimeout(() =>{
+                    setTimeout(() =>{
+                        if(sessionStorage.getItem("scrollLastPage") == "archive"){
+                            sessionStorage.removeItem("scrollLastPage");
                             window.scrollTo(0, this.$store.state.lastPageScrollY);
-                        }, 0);
-                    }
+                        }else{
+                            window.scrollTo(0, 0);
+                        }  
+                    }, 0);
 
                     resolve(true);
                 });

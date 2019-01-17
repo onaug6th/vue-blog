@@ -146,9 +146,11 @@ export default {
                             
                             this.$nextTick(() =>{
                                 resolve(result);
-                                if(sessionStorage.getItem("scrollLastPage")){
+                                if(sessionStorage.getItem("scrollLastPage") == "home"){
                                     sessionStorage.removeItem("scrollLastPage");
                                     window.scrollTo(0, this.$store.state.lastPageScrollY);
+                                }else{
+                                    window.scrollTo(0, 0);
                                 }
                             });
                             

@@ -50,35 +50,36 @@ const routes = [
     }
 ];
 
-const Router = new Vue_router({routes});
+const Router = new Vue_router({ routes });
 
 //	监听路由跳转前事件
 Router.beforeEach((to, from, next) => {
-	
-	//	进度条开始
+
+    //	进度条开始
     NProgress.start();
-    
-    if(["home", "archive"].includes(from.name) && to.name == "article"){
+    //  如果从 首页，归档 前往 文章页
+    if (["home", "archive"].includes(from.name) && to.name == "article") {
         //  记录上一个页面滚动的距离
         store.commit("updateLastPageScrollY", window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop);
     }
-    
-	next();
+
+    next();
 });
 
 //	监听路由跳转后事件
 Router.afterEach((to, from) => {
-
-    if(["home", "archive"].includes(to.name) && ["article"].includes(from.name)){
-        sessionStorage.setItem("scrollLastPage", true);
-    }else{
+    //  如果从 文章 前往 首页，归档
+    if (["article"].includes(from.name) && ["home", "archive"].includes(to.name)) {
+        //  标记需要滚动回到标记位置
+        sessionStorage.setItem("scrollLastPage", to.name);
+    } else {
         //	回到顶部
         window.scrollTo(0, 0);
     }
-    
-	//	是时候结束了吧
+
+    //	是时候结束了吧
     NProgress.done();
-    
+
 });
 
 export default Router;
