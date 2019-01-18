@@ -63,6 +63,10 @@ Router.beforeEach((to, from, next) => {
         store.commit("updateLastPageScrollY", window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop);
     }
 
+    if (from.name == "article" && to.name !== "archive") {
+        store.commit("recordLastPageParams", {});
+    }
+
     next();
 });
 

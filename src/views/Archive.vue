@@ -130,9 +130,14 @@ export default {
             return this.$store.state.tagList;
         }
     },
-    mounted() {
+    created() {
         //  获取url上可能存在的参数
         this.getUrlQuery();
+
+        //  获取vuex中可能存在的参数
+        this.getStoreParmas();
+    },
+    mounted() {
 
         if(!this.$store.state.allArticleList.length){
             //  获取全部文章列表
@@ -151,6 +156,14 @@ export default {
 
             query.tag && (this.params["tag"].push(+query.tag), this.params["articleType"] = query.type);
         },
+        getStoreParmas(){
+            const lastPageParams = this.$store.state.lastPageParams;
+            
+            if(lastPageParams.params && lastPageParams.paginationConfig){
+                this.params = lastPageParams.params;
+                this.paginationConfig = lastPageParams.paginationConfig;
+            }
+        },
         /**
          * 根据文章类型，过滤出对应标签
          * @param {string} articleType 文章类型
@@ -167,7 +180,10 @@ export default {
          * @param {string} id id
          */
         readDetail(id){
-
+            this.$store.commit("recordLastPageParams", {
+                params: this.params,
+                paginationConfig: this.paginationConfig
+            });
             this.$router.push({
                 path : `/article/${id}`
             });
