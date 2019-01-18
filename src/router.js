@@ -66,7 +66,7 @@ const routes = [
         path: "*",
         component: () => import("./views/NotFound.vue"),
         meta: {
-            title: "未知领域"
+            title: "未知的世界"
         }
     }
 ];

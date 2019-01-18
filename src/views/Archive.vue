@@ -131,11 +131,11 @@ export default {
         }
     },
     created() {
-        //  获取url上可能存在的参数
-        this.getUrlQuery();
 
         //  获取vuex中可能存在的参数
         this.getStoreParmas();
+        //  获取url上可能存在的参数
+        this.getUrlQuery();
     },
     mounted() {
 
