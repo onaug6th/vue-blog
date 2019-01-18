@@ -313,8 +313,8 @@ export default {
         initArticlePage(params){
             const that = this;
             that.getArticle(params.id).then((result) =>{
-
                 that.article = result.data;
+                document.title = that.article.title;
                 //  获取url上可能存在的hash
                 that.getUrlQuery();
                 //  获取评论列表并渲染

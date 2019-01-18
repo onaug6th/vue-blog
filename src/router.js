@@ -12,41 +12,62 @@ const routes = [
     {
         path: "/",
         name: "home",
-        component: () => import("./views/Home.vue")
+        component: () => import("./views/Home.vue"),
+        meta: {
+            title: "onaug6th"
+        }
     },
     //  文章页
     {
         path: "/article/:id",
         name: "article",
-        component: () => import("./views/Article.vue")
+        component: () => import("./views/Article.vue"),
+        meta: {
+            title: "文章"
+        }
     },
     //  归档
     {
         path: "/archive",
         name: "archive",
-        component: () => import("./views/Archive.vue")
+        component: () => import("./views/Archive.vue"),
+        meta: {
+            title: "归档"
+        }
     },
     //  印象
     {
         path: "/memory",
         name: "memory",
-        component: () => import("./views/Memory.vue")
+        component: () => import("./views/Memory.vue"),
+        meta: {
+            title: "印象"
+        }
     },
     //  墙
     {
         path: "/wall",
         name: "wall",
-        component: () => import("./views/Wall.vue")
+        component: () => import("./views/Wall.vue"),
+        meta: {
+            title: "墙"
+        }
     },
     //  关于
     {
         path: "/about",
         name: "about",
-        component: () => import("./views/About.vue")
+        component: () => import("./views/About.vue"),
+        meta: {
+            title: "关于"
+        }
     },
     {
         path: "*",
-        component: () => import("./views/NotFound.vue")
+        component: () => import("./views/NotFound.vue"),
+        meta: {
+            title: "未知领域"
+        }
     }
 ];
 
@@ -57,6 +78,7 @@ Router.beforeEach((to, from, next) => {
 
     //	进度条开始
     NProgress.start();
+    document.title = to.meta.title;
     //  如果从 首页，归档 前往 文章页
     if (["home", "archive"].includes(from.name) && to.name == "article") {
         //  记录上一个页面滚动的距离
