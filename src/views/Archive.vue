@@ -145,6 +145,19 @@ export default {
         }else{
             this.initArticleList();
         }
+
+        this.$nextTick(() =>{
+                    
+            setTimeout(() =>{
+                if(sessionStorage.getItem("scrollLastPage") == "archive"){
+                    sessionStorage.removeItem("scrollLastPage");
+                    window.scrollTo(0, this.$store.state.lastPageScrollY);
+                }else{
+                    window.scrollTo(0, 0);
+                }  
+            }, 0);
+
+        });
     },
     methods:{
         getUrlQuery(){
@@ -335,28 +348,12 @@ export default {
          */
         initArticleList(list){
             list = list || this.$store.state.allArticleList;
-            return new Promise(resolve =>{
 
-                const afterParams = this.paramsInitArticleList(list);
-                
-                const afterPagination = this.paginationArticleList(afterParams);
+            const afterParams = this.paramsInitArticleList(list);
+            
+            const afterPagination = this.paginationArticleList(afterParams);
 
-                this.articleList = this.sortArticleListByYear(afterPagination);
-
-                this.$nextTick(() =>{
-                    
-                    setTimeout(() =>{
-                        if(sessionStorage.getItem("scrollLastPage") == "archive"){
-                            sessionStorage.removeItem("scrollLastPage");
-                            window.scrollTo(0, this.$store.state.lastPageScrollY);
-                        }else{
-                            window.scrollTo(0, 0);
-                        }  
-                    }, 0);
-
-                    resolve(true);
-                });
-            });
+            this.articleList = this.sortArticleListByYear(afterPagination);
         },
         /**
          * 页码改变事件
@@ -367,15 +364,8 @@ export default {
 
             paginationConfig.page = page;
 
-            // let hash = `#/archive?page=${page}`;
-            
-            // this.articleType && (hash += `&type=${this.articleType}`);
-
-            // window.location.hash = hash;
-
-            this.initArticleList().then(() =>{
-                this.srcollToListHead();
-            });
+            this.initArticleList();
+            this.srcollToListHead();
         },
         //  滚动到列表顶部
         srcollToListHead(){

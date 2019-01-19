@@ -85,12 +85,20 @@ export default {
         }else{
             this.homeBgUrl = this.imgCdnUrl + `common/hope1.png`;
         }
-    },
-    mounted() {
         //  获取url上可能存在的hash
         this.getUrlQuery();
+    },
+    mounted() {
         //  获取文章列表
         this.getArticleList();
+        this.$nextTick(() =>{
+            if(sessionStorage.getItem("scrollLastPage") == "home"){
+                sessionStorage.removeItem("scrollLastPage");
+                window.scrollTo(0, this.$store.state.lastPageScrollY);
+            }else{
+                window.scrollTo(0, 0);
+            }
+        });
     },
     methods: {
         /**
@@ -137,26 +145,13 @@ export default {
                 }
             };
 
-            return new Promise(resolve =>{
-                this.$http.post("article/list", params)
-                    .then((result) =>{
-                        if(result.code == 0){
-                            this.paginationConfig.totalPages = result.data.totalPages;
-                            this.articleList = result.data.rows;
-                            
-                            this.$nextTick(() =>{
-                                resolve(result);
-                                if(sessionStorage.getItem("scrollLastPage") == "home"){
-                                    sessionStorage.removeItem("scrollLastPage");
-                                    window.scrollTo(0, this.$store.state.lastPageScrollY);
-                                }else{
-                                    window.scrollTo(0, 0);
-                                }
-                            });
-                            
-                        }
-                    });
-            });
+            this.$http.post("article/list", params)
+                .then((result) =>{
+                    if(result.code == 0){
+                        this.paginationConfig.totalPages = result.data.totalPages;
+                        this.articleList = result.data.rows;
+                    }
+                });
         },
         /**
          * 查看文章
@@ -201,9 +196,8 @@ export default {
 
             window.location.hash = hash;
 
-            this.getArticleList().then(() =>{
-                this.srcollToListHead();
-            });
+            this.getArticleList();
+            this.srcollToListHead();
         }
     }
 }
