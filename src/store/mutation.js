@@ -16,12 +16,12 @@ export default {
 		state.isMenuFixed = value;
 	},
 	/**
-	 * 记录上一个列表页面的查询条件
+	 * 记录归档页面的查询条件
 	 * @param {*} state 
 	 * @param {string} value 
 	 */
-	recordLastPageParams(state, value) {
-		state.lastPageParams = value;
+	recordArchiveParams(state, value) {
+		state.archiveParams = value;
 	},
 	/**
 	 * 更新文章类型列表

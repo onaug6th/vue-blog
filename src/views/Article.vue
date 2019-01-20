@@ -334,6 +334,7 @@ export default {
         },
         //  前往档案标签分类
         goArchive(type, value){
+            this.$store.commit("recordArchiveParams", {});
             const query = {
                 type: this.article.type
             };

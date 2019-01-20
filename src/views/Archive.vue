@@ -168,11 +168,13 @@ export default {
             query.tag && (this.params["tag"].push(+query.tag), this.params["articleType"] = query.type);
         },
         getStoreParmas(){
-            const lastPageParams = this.$store.state.lastPageParams;
+            const archiveParams = this.$store.state.archiveParams;
             
-            if(lastPageParams.params && lastPageParams.paginationConfig){
-                this.params = lastPageParams.params;
-                this.paginationConfig = lastPageParams.paginationConfig;
+            if(archiveParams.params && archiveParams.paginationConfig){
+                this.params = archiveParams.params;
+                this.paginationConfig = archiveParams.paginationConfig;
+            }else{
+                this.getUrlQuery();
             }
         },
         /**
@@ -191,7 +193,7 @@ export default {
          * @param {string} id id
          */
         readDetail(id){
-            this.$store.commit("recordLastPageParams", {
+            this.$store.commit("recordArchiveParams", {
                 params: this.params,
                 paginationConfig: this.paginationConfig
             });

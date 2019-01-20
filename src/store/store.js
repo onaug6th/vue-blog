@@ -11,7 +11,11 @@ const state = {
 	//	全部文章
 	allArticleList: [],
 	//	归档页面查询条件
-	lastPageParams: {},
+	archiveParams: {
+		fuzzyText: "",
+		articleType: "",
+		tag: []
+	},
 	//	文章类型列表
 	articleTypeList: [],
 	//	标签类型列表

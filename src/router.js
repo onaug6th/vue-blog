@@ -86,7 +86,7 @@ Router.beforeEach((to, from, next) => {
     }
 
     if (from.name == "article" && to.name !== "archive") {
-        store.commit("recordLastPageParams", {});
+        store.commit("recordArchiveParams", {});
     }
 
     next();
