@@ -271,8 +271,8 @@ export default {
     },
     data(){
         return {
-            //  回复冷却时间
-            replyColdDown: null,
+            //  回复冷却
+            replyColdDown: false,
             //  查询条件
             params: {
                 page: 1,
@@ -401,25 +401,29 @@ export default {
 
             const that = this;
 
-            if(!that.replyObj.content || !that.replyObj.name){
-                return that.$swal("名称和内容是必须的", "", "warning");
-            }
-
-            const params = {
-                articleId : that.article.id,
-                ...that.replyObj
-            }
-
-            that.$http.post("reply", params).then((result) =>{
-                that.$swal(result.detailMsg, "", "success");
-                
-                if(result.code == 0){
-                    that.emptyReplyObj();
-                    that.rendeReplyList();
-                    //  自动跳转到最后一页。
-                    that.$set(that.paginationConfig, "page" , that.paginationConfig.totalPages);
+            if(that.checkCanReply()){
+                if(!that.replyObj.content || !that.replyObj.name){
+                    return that.$swal("名称和内容是必须的", "", "warning");
                 }
-            });
+
+                const params = {
+                    articleId : that.article.id,
+                    ...that.replyObj
+                }
+
+                that.$http.post("reply", params).then((result) =>{
+                    that.$swal(result.detailMsg, "", "success");
+                    
+                    if(result.code == 0){
+                        that.replyCountTime();
+                        that.emptyReplyObj();
+                        that.rendeReplyList();
+                        //  自动跳转到最后一页。
+                        that.$set(that.paginationConfig, "page" , that.paginationConfig.totalPages);
+                    }
+                });
+            }
+            
         },
         /**
          * 清空留言表单信息
@@ -432,11 +436,23 @@ export default {
                 this.replyObj[i] = "";
             }
         },
+        checkCanReply(){
+            if(typeof this.replyColdDown == "number"){
+                this.$swal("你回复的速度太快了！", "请休息一下再回复");
+                return false;
+            }else{
+                return true;
+            }
+        },
         /**
          * 评论计时
          */
         replyCountTime(){
-            
+            const that = this;
+            that.replyColdDown = setTimeout(function(){
+                clearTimeout(that.replyColdDown);
+                that.replyColdDown = false;
+            }, 3000);
         },
         /**
          * 新赞！
@@ -539,10 +555,6 @@ export default {
          * @param {object} inside 楼中楼
          */
         insideReplyClick(floor, inside){
-            
-            if(!inside.replyObj.content || !inside.replyObj.name){
-                return this.$swal("名称和内容是必须的", "", "warning");
-            }
 
             this.insideReplySubmit(floor, inside).then(() =>{
                 //  隐藏留言盒子
@@ -559,26 +571,34 @@ export default {
          */
         insideReplySubmit(floor, inside){
 
-            const params = {
-                articleId : this.article.id,
-                floor: floor.floor,
-                replyId : inside.id,
-                replyName : inside.name,
-                ...inside.replyObj
-            };
+            if(that.checkCanReply()){
 
-            return new Promise((resolve, reject)=>{
-                this.$http.post("insideReply", params).then((result) =>{
-                    this.$swal(result.detailMsg, "", "success");
-                    
-                    if(result.code == 0){
-                        this.emptyInsideReplyObj(inside);
-                        this.renderInsideReplyList(floor);
-                        resolve(result);
-                    }
+                if(!inside.replyObj.content || !inside.replyObj.name){
+                    return this.$swal("名称和内容是必须的", "", "warning");
+                }
 
+                const params = {
+                    articleId : this.article.id,
+                    floor: floor.floor,
+                    replyId : inside.id,
+                    replyName : inside.name,
+                    ...inside.replyObj
+                };
+
+                return new Promise((resolve, reject)=>{
+                    this.$http.post("insideReply", params).then((result) =>{
+                        this.$swal(result.detailMsg, "", "success");
+                        
+                        if(result.code == 0){
+                            that.replyCountTime();
+                            this.emptyInsideReplyObj(inside);
+                            this.renderInsideReplyList(floor);
+                            resolve(result);
+                        }
+
+                    });
                 });
-            });
+            }
         },
         /**
          * 清空内部评论表单信息
