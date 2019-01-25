@@ -571,7 +571,7 @@ export default {
          */
         insideReplySubmit(floor, inside){
 
-            if(that.checkCanReply()){
+            if(this.checkCanReply()){
 
                 if(!inside.replyObj.content || !inside.replyObj.name){
                     return this.$swal("名称和内容是必须的", "", "warning");
@@ -590,7 +590,7 @@ export default {
                         this.$swal(result.detailMsg, "", "success");
                         
                         if(result.code == 0){
-                            that.replyCountTime();
+                            this.replyCountTime();
                             this.emptyInsideReplyObj(inside);
                             this.renderInsideReplyList(floor);
                             resolve(result);
