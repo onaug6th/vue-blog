@@ -143,7 +143,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6 col-sm-offset-6 text-right" style="padding:10px 15px;">
-                                        <button class="btn btn-success" @click="insideReplySubmit(item.floor, item)">提交</button>
+                                        <button class="btn btn-success" @click="insideReplySubmit(item, item)">提交</button>
                                     </div>
                                 </div>
                             </div>
