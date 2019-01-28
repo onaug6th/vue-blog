@@ -1,8 +1,8 @@
 <template>
 
-    <div class="app">
+    <div class="app" :class="{'short': needShort()}">
 
-        <sidebarMenu ref="sidebarMenu"></sidebarMenu>
+        <sidebarMenu ref="sidebarMenu" :menuShow="menuShow" @close="menuShow = false"></sidebarMenu>
 
         <!-- 页面顶部导航栏 -->
         <nav class="top-nav container-fluid" :class="{'scroll' : navShow}">
@@ -36,7 +36,8 @@ import sidebarMenu from "./components/sidebarMenu";
 export default {
     data(){
         return {
-            navShow: false
+            navShow: false,
+            menuShow: false
         }
     },
     computed: {
@@ -65,6 +66,12 @@ export default {
             this.$store.commit("updateTagList", result.data.rows);
         });
 
+        //  屏幕足够大时，自动打开菜单
+        document.documentElement.clientWidth > 1430 && (
+            this.menuShow = true,
+            this.$store.commit("toggleMenuFixed", true)
+        );
+
     },
     methods:{
 
@@ -89,7 +96,15 @@ export default {
 
         //  切换显示sideBarMenu
         togglesideBarMenu(){
-            this.$refs.sidebarMenu.menuToggle();
+            this.menuShow = !this.menuShow;
+        },
+
+        needShort(){
+            let answer = false;
+            if(this.$store.state.isMenuFixed && this.menuShow){
+                answer = true;
+            }
+            return answer;
         }
 
     }
@@ -98,6 +113,12 @@ export default {
 
 
 <style lang="scss" scoped>
+    .app{
+        transition: all 1s;
+        &.short{
+            padding-left: 200px;
+        }   
+    }
     // 顶部状态栏
     .top-nav{
         width: 100%;

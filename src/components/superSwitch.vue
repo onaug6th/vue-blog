@@ -5,8 +5,8 @@
         >
         <div class="switch-animate"
             :class="{
-                'switch-on': isChecked,
-                'switch-off': !isChecked
+                'switch-on': config.isChecked,
+                'switch-off': !config.isChecked
             }"
             @click="toggleSwitch()">
             <span class="switch-left">{{ config.onText }}</span>
@@ -32,18 +32,9 @@ export default {
             }
         }
     },
-    data(){
-        return {
-            isChecked: this.$store.state.isMenuFixed || false
-        }
-    },
     methods:{
         toggleSwitch(){
-            this.isChecked = !this.isChecked;
-            this.$emit("switchChange", this.isChecked);
-        },
-        setSwitch(stauts){
-            this.isChecked = stauts;
+            this.$emit("switchChange", !this.config.isChecked);
         },
         otherSize(size){
             return ['sm','xs'].includes(size) ? size : '';

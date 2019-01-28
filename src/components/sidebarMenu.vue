@@ -1,7 +1,7 @@
 <template>
     <transition name="fadefast">
-        <div v-if="isShowMenu" class="side-menu">
-            <div v-if="!isMenuFixed" class="modal-backdrop fade in" @click="menuToggle()"></div>
+        <div v-show="menuShow" class="side-menu">
+            <div v-if="!isMenuFixed" class="modal-backdrop fade in" @click="closeMenu()"></div>
             <div class="sidebar-main" :class="{'short': isMenuFixed}">
                 <div class="sidebar-header header-cover"
                     :style="{'background-image' : `url(${imgCdnUrl}common/hope.png)`}"
@@ -17,7 +17,7 @@
                 </div>
                 <ul class="nav sidebar-nav">
                     <li v-for="(item, index) in sidebarList" :key="index">
-                        <a @click="other(item)"><i class="glyphicon" :class="item.icon"></i>  {{item.label}}</a>
+                        <a @click="pageTo(item)"><i class="glyphicon" :class="item.icon"></i>  {{item.label}}</a>
                     </li>
                     <li>
                         <a href="https://github.com/onaug6th" target="_blank" title="github">
@@ -27,7 +27,7 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a @click="other({path: 'about'})">关于</a>
+                        <a @click="pageTo({path: 'about'})">关于</a>
                     </li>
                 </ul>
                 <div class="sidebar-footer">
@@ -47,12 +47,16 @@ import superSwitch from "./superSwitch.vue";
 
 export default {
     name: "sidebarMenu",
+    props: {
+        menuShow: {
+            type: Boolean
+        }
+    },
     components: {
         superSwitch
     },
     data(){
         return {
-            isShowMenu: false,
             sidebarList: [
                 {
                     "path": "",
@@ -77,7 +81,8 @@ export default {
             ],
             switchConfig: {
                 onText: "on",
-                offText: "off"
+                offText: "off",
+                isChecked: false
             }
         }
     },
@@ -86,12 +91,21 @@ export default {
             return this.$store.state.isMenuFixed;
         }
     },
+    watch: {
+        isMenuFixed(){
+            this.switchConfig.isChecked = this.isMenuFixed;
+        }
+    },
     methods:{
-        menuToggle(){
-            this.isShowMenu = !this.isShowMenu;
+        closeMenu(){
+            this.$emit("close", true);
         },
-        other(item){
-            !this.isMenuFixed && this.menuToggle();
+        /**
+         * 切换其他页面
+         * @param {object} item 页面
+         */
+        pageTo(item){
+            !this.isMenuFixed && this.closeMenu();
             this.$router.push({
                 path : `/${item.path}`
             });
