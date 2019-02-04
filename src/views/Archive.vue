@@ -274,13 +274,14 @@ export default {
                     const title = item.title.trim().toLowerCase();
                     const intro = item.intro.trim().toLowerCase();
                     const content = item.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-
+                    let withoutPush = true;
                     value.forEach((val) =>{
                         const inTitle = title.indexOf(val) >= 0;
                         const inIntro = intro.indexOf(val) >= 0;
                         const inContent = content.indexOf(val) >= 0;
-                        if(inTitle || inTitle || inContent){
+                        if((inTitle || inTitle || inContent) && withoutPush){
                             resultArr.push(item);
+                            withoutPush = false;
                         }
                     });
                 });

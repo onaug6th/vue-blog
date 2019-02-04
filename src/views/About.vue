@@ -8,19 +8,10 @@
             <div class="content">
                 <div class="gray">
                         <div class="col-sm-6">
-                            <div class="clearfix" style="margin-bottom:25px;">
-                                <div class="pull-left">
-                                    <img class="img-circle" src="https://avatars1.githubusercontent.com/u/24285577?s=460&v=4" style="max-width: 44px;">
-                                </div>
-                                <div class="col-xs-8">
-                                    <p style="color: #616161;font-weight:bold; margin:0px;">onaug6th</p>
-                                    <span>2017-11-05</span>
-                                </div>
-                            </div>
-
-                            <p>
+                            
+                            <h4>
                                 <span>onaug6th</span>
-                            </p>
+                            </h4>
 
                             <p>
                                 <span>意思是在八月的六号</span>
@@ -37,7 +28,7 @@
                             <p>
                                 <span>
                                     喜欢钻研事物<br>
-                                    喜欢做些有成就的事情
+                                    喜欢做些有趣的事情
                                 </span>
                             </p>
 

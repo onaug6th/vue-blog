@@ -300,8 +300,8 @@ export default {
             //  评论信息
             replyObj: {
                 content: "",
-                name: "",
-                email:"",
+                name: localStorage.getItem("replyName") || "",
+                email: localStorage.getItem("replyEmail") || "",
                 avatar: this.defaultAvatar
             },
             //  评论列表
@@ -415,6 +415,7 @@ export default {
                     that.$swal(result.detailMsg, "", "success");
                     
                     if(result.code == 0){
+                        that.recordReplyInfo(that.replyObj);
                         that.replyCountTime();
                         that.emptyReplyObj();
                         that.rendeReplyList();
@@ -424,6 +425,13 @@ export default {
                 });
             }
             
+        },
+        /**
+         * 记录回复资料信息
+         */
+        recordReplyInfo({name, email}){
+            localStorage.setItem("replyName", name);
+            localStorage.setItem("replyEmail", email);
         },
         /**
          * 清空留言表单信息
