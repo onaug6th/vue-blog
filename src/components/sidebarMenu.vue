@@ -21,7 +21,7 @@
                     </li>
                     <li>
                         <a href="https://github.com/onaug6th" target="_blank" title="github">
-                            <img class="emoji" alt="github" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/octocat.png">
+                            <img class="emoji" alt="github" height="20" width="20" src="https://github.githubassets.com/images/icons/emoji/octocat.png">
                             <span class="relative">onaug6th</span>
                         </a>
                     </li>

@@ -67,7 +67,7 @@ export default {
         });
 
         //  屏幕足够大时，自动打开菜单
-        document.documentElement.clientWidth > 1430 && (
+        document.documentElement.clientWidth >= 1170 && (
             this.menuShow = true,
             this.$store.commit("toggleMenuFixed", true)
         );
@@ -103,6 +103,7 @@ export default {
             let answer = false;
             if(this.$store.state.isMenuFixed && this.menuShow){
                 answer = true;
+                document.documentElement.clientWidth < 1170 && (answer = false);
             }
             return answer;
         }

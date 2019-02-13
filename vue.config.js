@@ -21,8 +21,6 @@
 
 //  node.js 路径模块
 const path = require("path");
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const webpack = require("webpack");
 
 /**
  * 返回当前目录路径加目录名称的完整路径
@@ -45,9 +43,9 @@ const resolve = (dir) => {
  * 需要将它改为"/blog/"
  * 如果是用于本地预览，可以改为 "./"
  */
-const BASE_URL =  {
-    "development" : "/",
-    "production" : "/"
+const BASE_URL = {
+    "development": "/",
+    "production": "/"
 };
 
 /**
@@ -74,19 +72,9 @@ module.exports = {
      * ####   即使你没有配置任何copy plugin，vue-cli都会默认会将根目录的public中所有的文件打包到根目录
      */
     chainWebpack: config => {
-
         //  设置路径别名，方便项目中缩写引用
         config.resolve.alias
             .set("@", resolve("src"))
-            .set("_c", resolve("src/components"));
-
-        // config.plugin("example").use(CopyWebpackPlugin, [
-        //     [{
-        //         from: resolve("src/assets"),
-        //         to: resolve("dist/example"),
-        //         toType: "dir"
-        //     }]
-        // ])
     },
 
     /**
@@ -97,29 +85,12 @@ module.exports = {
      * #####    注意！！！这个配置是配置webpack的，而上述的chainWebpack能更加细粒度的调整内部cli-webpack配置
      */
     configureWebpack: {
-
-        plugins: [
-            // new CopyWebpackPlugin([
-            //     {
-            //         from: resolve("src/assets"),
-            //         to: resolve("dist/example"),
-            //         toType: "dir"
-            //     },
-            //     // {
-            //     //     from: resolve('static/dependence/prism'),
-            //     //     to: resolve("dist/example"),
-            //     //     toType: "dir"
-            //     // }
-            // ])
-        ]
+        plugins: []
     },
 
     // 打包时生成.map文件
     productionSourceMap: false,
 
     // 这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 "" ，即空字符串
-    devServer: {
-        // host: "0.0.0.0",
-        // proxy: "localhost:3000"
-    }
+    devServer: {}
 }

@@ -45,7 +45,7 @@
                     <button class="like-btn btn btn-lg btn-default" title="我觉得可以" @click="newLike()">
                         <p class="like-icon">
                             &nbsp;&nbsp;
-                            <img class="emoji" alt="+1" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" />
+                            <img class="emoji" alt="+1" height="20" width="20" src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png" />
                             &nbsp;&nbsp;
                         </p>
                         <p>{{ article.like }}</p>

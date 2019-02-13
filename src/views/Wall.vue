@@ -13,7 +13,7 @@
                     <h5 class="name">{{ item.name }}</h5>
                     <h5 class="intro">{{ item.intro }}</h5>
                     <h5 class="reply text-right">
-                        <span v-if="item.reply"><img class="emoji" alt="star2" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/speech_balloon.png"></span>
+                        <span v-if="item.reply"><img class="emoji" alt="star2" height="20" width="20" src="https://github.githubassets.com/images/icons/emoji/speech_balloon.png"></span>
                     </h5>
                     <h5 class="text-right">{{ item.createdAt }}</h5>
                 </div>
