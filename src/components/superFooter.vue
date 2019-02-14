@@ -4,7 +4,7 @@
             <p>
                 <span class="glyphicon glyphicon-piggy-bank" title="你好啊" @click="newWorld()"></span>
             </p>
-            <h5>2017-2018 onaug6th.com</h5>
+            <h5>2017-{{new Date().getFullYear()}} onaug6th.com</h5>
         </div>
     </footer>
 </template>
