@@ -1,21 +1,24 @@
 # onaug6th
+<img src="./screenshot/home.png" alt="home" />
 
-个人博客网站系统
+基于vue搭建的响应式个人博客
 
-已切换到 vue-cli 3.0分支上开发，master分支用于知识备份！
+博客管理系统：https://github.com/onaug6th/onaug6th-admin
 
-后端代码 : https://github.com/onaug6th/onaug6th-backEnd
+服务端代码: https://github.com/onaug6th/onaug6th-backEnd
 
-## 概况
+### 概况
 
-用vue搭建的一个个人博客网站，其中包含所有博客拥有的功能。附带一个后台管理系统。
+前端框架    vue.js
 
 服务端语言   node.js
+
 数据库       mysql
+
 对象关系模型  sequelize
 
 
-### 用法
+### 启动
 
 ```
 git clone https://github.com/onaug6th/onaug6th
@@ -30,7 +33,21 @@ npm run serve
 
 ### 构建
 
-Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+```
+npm run build
+```
+构建完毕的压缩代码，会在 `/dist` 文件夹中。
+
+## 部分截图
+
+<img src="./screenshot/archive.png" alt="archive" />
+<img src="./screenshot/article.png" alt="article" />
+<img src="./screenshot/article1.png" alt="article1" />
+<img src="./screenshot/wall.png" alt="wall" />
+<img src="./screenshot/wall1.png" alt="wall1" />
+<img src="./screenshot/m-home.png" alt="home" />
+<img src="./screenshot/m-archive.png" alt="archive" />
+<img src="./screenshot/m-article.png" alt="article" />
 
 ## 开源许可证
 

@@ -8,7 +8,7 @@
                 <h3>纪念，毕业生</h3>
                 <h5>像做了一场梦</h5>
                 <hr>
-                <button class="btn btn-default" @click="wacthMemory()">Read Detail</button>
+                <button class="btn btn-default" @click="watchMemory()">Read Detail</button>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@ export default {
     mounted () {
     },
     methods: {
-        wacthMemory(){
+        watchMemory(){
             this.$swal("印象还没准备好");
         }
     }
