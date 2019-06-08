@@ -87,7 +87,7 @@
         </transition>
 
         <!--底部分页按钮-->
-        <pagination :config="paginationConfig" @pageChange="pageChange"></pagination>
+        <pagination class="clearfix" :config="paginationConfig" @pageChange="pageChange"></pagination>
         <!--底部分页按钮-->
     </div>
 </template>

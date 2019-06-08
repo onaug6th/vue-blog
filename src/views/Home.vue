@@ -18,6 +18,23 @@
 
             <div class="row main-content">
 
+                <div class="card-box">
+                    <a class="card-image">
+                        <div style="background: url('http://wx3.sinaimg.cn/mw690/9311b2daly8fmd9jsd598j20bd0goq3e.jpg') no-repeat;" class="dont-delete-me"></div>
+                    </a>
+                    <div class="card-content">
+                        <div class="content">
+                            <span>奇思妙想</span>
+                            <h3>onaug6th</h3>
+                            <p>趁我还记得</p>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-default" @click="readDetail(27)">Read Detail</button>
+                            <span class="date">2017.10.30</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card-box" v-for="(item, index) in articleList" :key="index">
                     <a class="card-image">
                         <div
@@ -91,14 +108,6 @@ export default {
     mounted() {
         //  获取文章列表
         this.getArticleList();
-        this.$nextTick(() =>{
-            if(sessionStorage.getItem("scrollLastPage") == "home"){
-                sessionStorage.removeItem("scrollLastPage");
-                window.scrollTo(0, this.$store.state.lastPageScrollY);
-            }else{
-                window.scrollTo(0, 0);
-            }
-        });
     },
     methods: {
         /**
@@ -150,6 +159,15 @@ export default {
                     if(result.code == 0){
                         this.paginationConfig.totalPages = result.data.totalPages;
                         this.articleList = result.data.rows;
+
+                        this.$nextTick(() =>{
+                            if(sessionStorage.getItem("scrollLastPage") == "home"){
+                                sessionStorage.removeItem("scrollLastPage");
+                                window.scrollTo(0, this.$store.state.lastPageScrollY);
+                            }else{
+                                window.scrollTo(0, 0);
+                            }
+                        });
                     }
                 });
         },
