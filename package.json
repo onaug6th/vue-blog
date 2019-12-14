@@ -15,7 +15,7 @@
     "blog"
   ],
   "dependencies": {
-    "axios": "0.18.0",
+    "axios": "0.18.1",
     "nprogress": "0.2.0",
     "sweetalert": "2.1.0",
     "vue": "^2.5.17",
