@@ -54,7 +54,7 @@
                             <p>一个很纯粹的人</p>
                         </div>
                         <div class="col-sm-6 hidden-sm hidden-xs">
-                            <img src="http://wx3.sinaimg.cn/mw690/9311b2daly8fmd9jsd598j20bd0goq3e.jpg" style="float: right; width: 280px;">
+                            <img src="https://onaug6th-1253668581.cos.ap-guangzhou.myqcloud.com/common/92249761857029110.jpg" style="float: right; width: 280px;">
                         </div>
                 </div>
             </div>

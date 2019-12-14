@@ -17,11 +17,11 @@ const projectConfig = {
     articleDefaultBg: "https://avatars1.githubusercontent.com/u/24285577?s=460&amp;v=4",
 
     //  回复文章默认头像，胖虎
-    defaultAvatar: `http://wx2.sinaimg.cn/mw690/9311b2dagy1fxk3xwv3gij20fz0dft90.jpg`,
+    defaultAvatar: `https://onaug6th-1253668581.cos.ap-guangzhou.myqcloud.com/common/head.jpg`,
 
     //  回复文章头像列表
     avatarArr: [
-        `http://wx2.sinaimg.cn/mw690/9311b2dagy1fxk3xwv3gij20fz0dft90.jpg`
+        `https://onaug6th-1253668581.cos.ap-guangzhou.myqcloud.com/common/head.jpg`
     ]
 }
 

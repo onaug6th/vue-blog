@@ -20,7 +20,7 @@
 
                 <div class="card-box">
                     <a class="card-image">
-                        <div style="background: url('http://wx3.sinaimg.cn/mw690/9311b2daly8fmd9jsd598j20bd0goq3e.jpg') no-repeat;" class="dont-delete-me"></div>
+                        <div style="background: url('https://onaug6th-1253668581.cos.ap-guangzhou.myqcloud.com/common/92249761857029110.jpg') no-repeat;" class="dont-delete-me"></div>
                     </a>
                     <div class="card-content">
                         <div class="content">
