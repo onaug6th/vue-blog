@@ -1,11 +1,11 @@
-# onaug6th
+# vue-blog
 <img src="./screenshot/home.png" alt="home" />
 
 基于vue搭建的响应式个人博客
 
-博客管理系统：https://github.com/onaug6th/onaug6th-admin
+博客管理系统：https://github.com/onaug6th/vue-blog-admin
 
-服务端代码: https://github.com/onaug6th/onaug6th-backEnd
+服务端代码: https://github.com/onaug6th/vue-blog-backEnd
 
 ### 概况
 
@@ -21,9 +21,9 @@
 ### 启动
 
 ```
-git clone https://github.com/onaug6th/onaug6th
+git clone https://github.com/onaug6th/vue-blog
 
-cd onaug6th
+cd vue-blog
 
 npm install 
 
